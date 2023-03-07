@@ -11,17 +11,20 @@
 
 </div>
 <script>
+   
     fetch('./actions/listar.php')
             .then(res => res.json())
             .then(data => {
-                let str = '<tbody>';
+                
+                    let str = '<tbody>';
                 console.log(data);
                 data.map(item => {
                     str += `<tr>
-        <td>${item.id}</td><td>${item.usuario}</td><td>${item.password}</td></tr>                        
+        <td>${item.id}</td><td>${item.usuario}</td><td>${item.contraseña}</td></tr>                        
                     `;
                 });
                 str += "</tbody>";
                 document.getElementById("datos-usuario").innerHTML += str;
+                
             });
 </script>

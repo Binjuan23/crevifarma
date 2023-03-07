@@ -1,7 +1,7 @@
 <?php
 
 function conexionBD() {
-    $dsn     = "mysql:host=localhost;port=3307;dbname=prueba";
+    $dsn     = "mysql:host=localhost;port=3307;dbname=crevi_farma";
     $usuario = "root";
     $pass    = "";
     try {
