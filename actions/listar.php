@@ -28,7 +28,9 @@ try {
                 'direccion'      => $row->direccion
             ];
         }
-        echo json_encode($datos);
+        
+        cerrarBD($con);
+    echo json_encode($datos);
     
 } catch (PDOException $ex) {
     echo $ex->getMessage();
