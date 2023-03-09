@@ -27,5 +27,6 @@ $lang = array(
     "login-acuerdo"     => "Estic d'acord amb els termes i les condicions",
     "login-siCuenta"    => "¿Tens compte?",
     "login-eliminado"   => "Usuari eliminat",
-    "login-noEliminado" => "Error en eliminar l'usuari"
+    "login-noEliminado" => "Error en eliminar l'usuari",
+    "listado-orden" => "Ordre"
 );

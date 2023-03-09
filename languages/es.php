@@ -27,6 +27,7 @@ $lang = array(
     "login-acuerdo"     => "Estoy de acuerdo con los tréminos y condiciones",
     "login-siCuenta"    => "¿Tienes cuenta?",
     "login-eliminado"   => "Usuario eliminado",
-    "login-noEliminado" => "Error al eliminar el usuario"
+    "login-noEliminado" => "Error al eliminar el usuario",
+    "listado-orden" => "Orden"
 );
 

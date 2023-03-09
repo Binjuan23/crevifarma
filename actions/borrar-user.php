@@ -1,17 +1,16 @@
 <?php
 
 include_once '../utiles/funciones.php';
-include_once "../utiles/configuracion.php";
-//
+//Archivo para borrar
 try {
     $conexion = conexionBD();
     $id_user  = htmlspecialchars($_POST['user-id-del']);
 
-    $sql = "DELETE FROM usuarios WHERE id=0";
-
-    $resul = $conexion->prepare($sql) or die(print($conexion->errorInfo()));
-    $resul->execute();
-    if ($resul->rowCount() > 0) {
+    $resul = $conexion->exec("DELETE FROM usuarios WHERE id= 0");
+    //$resul = $conexion->prepare("DELETE FROM usuarios WHERE id= :id") or die(print($conexion->errorInfo()));
+    //$resul->bindParam(':id', $id_user, PDO::PARAM_INT);
+    //$resul->execute();
+    if ($resul) {
         cerrarBD($con);
         header("Location: ../index.php?id=listado&eliminado=1");
     } else {

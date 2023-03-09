@@ -20,3 +20,23 @@ function cerrarBD(&$con) {
     $con = null;
 }
 
+function filtro($bbdd) {
+    $resultado = [];
+    try {
+        $conexion = conexionBD();
+        $resul    = $conexion->prepare("SELECT * FROM " . $bbdd) or die(print($conexion->errorInfo()));
+        //$resul->bindParam(1, $bbdd, PDO::PARAM_STR);
+        $resul->execute();
+        
+        $row = $resul->fetch(PDO::FETCH_OBJ);
+        foreach($row as $key => $value){
+            if($key === 'imagen'){
+                continue;
+            }
+            $resultado [] = $key;
+        }
+        return $resultado;
+    } catch (PDOException $ex) {
+        echo $ex->getMessage();
+    }
+}
