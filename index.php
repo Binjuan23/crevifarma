@@ -2,7 +2,7 @@
 session_start();
 include_once "./utiles/configuracion.php";
 include_once "./utiles/funciones.php";
-$id       = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
+$id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 include_once "./utiles/rutas.php";
 include_once "./paginas/encabezado.php";
 ?>
@@ -12,6 +12,8 @@ include_once "./paginas/encabezado.php";
         case "login": include_once "./includes/login.php";
             break;
         case "listado": include_once "./paginas/listado.php";
+            break;
+        case "buscar": include_once "./paginas/buscar_medicamento.php";
             break;
         default: include_once "./paginas/inicio.php";
     }

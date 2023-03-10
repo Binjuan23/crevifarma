@@ -1,12 +1,16 @@
 <!-- Este archivo muestra al admin un listado de datos de la tabla usuarios -->
 <div>
-    <div>
-        <span><?= $lang['listado-orden']; ?></span>   
+    <div class="filtro-busqueda"> 
         <select name="filtro" id="filtro">
             <?php
             $columnas = filtro("usuarios");
             foreach ($columnas as $value) {
-                echo "<option value='" . $lang[$value] . "'>" . $lang[$value] . "</option>";
+                if ($value === "ID") {
+                    echo "<option value='' disabled selected>" . $lang['listado-orden'] . "</option>";
+                    echo "<option value='$value'>" . $value . "</option>";
+                } else {
+                    echo "<option value='$value'>" . $lang[$value] . "</option>";
+                }
             }
             ?>
         </select>
@@ -26,7 +30,7 @@
                 ?>
             </tr>
         </thead>
-        <tbody></tbody>
+
     </table>
 
 
@@ -34,53 +38,73 @@
 <script>
     //Obtengo los datos de la tabla usuarios
     const select = document.querySelector("#filtro");
-    const tbody = document.querySelector("#datos-usuario tbody");
-    let valor = select.addEventListener('change',
-            function () {
-                const selectedOption = this.options[select.selectedIndex];
-                let orden = new FormData();
-                orden.append("orden", selectedOption);
-            });
-    //AQUI HAY QUE HACER ALGO
-    try {
-        fetch('./actions/listar.php', {method: 'POST', body: orden})
-                .then(res => res.json())
-                .then(data => {
+    const table = document.getElementById("datos-usuario");
 
-                    data.map(item => {
-                        let row = document.createElement("tr");
-                        let contador = 0;
-                        for (const key in item) {
-                            if (item[key] === 'imagen')
-                                continue;
-                            let dato = document.createElement("td");
-                            dato.innerText = (item[key] === null) ? "Null" : item[key];
-                            row.appendChild(dato);
-                            contador++;
-                        }
-                        //row.appendChild("<td><form action="./actions/borrar-user.php" method="post"><input type="hidden" name="user-id-del" value="${item.id}"><input type="submit" name"delete" value="Eliminar"></form></td>");
-                        let dato_form = document.createElement("td");
-                        let form = document.createElement("form");
-                        form.action = "./actions/borrar-user.php";
-                        form.method = "post";
-                        let input = document.createElement("input");
-                        input.type = "hidden";
-                        input.name = "user-id-del";
-                        input.value = item.id;
-                        let input2 = document.createElement("input");
-                        input2.type = "submit";
-                        input2.name = "delete";
-                        input2.value = "Eliminar";
-                        form.appendChild(input);
-                        form.appendChild(input2);
-                        dato_form.appendChild(form);
-                        row.appendChild(dato_form);
-                        tbody.appendChild(row);
-                    });
-                });
-    } catch (error) {
-        console.log("Error al listar usuarios " + error.message());
+    const mostrarUsuarios = async (varOrden) => {
+        let orden = new FormData();
+        orden.append("orden", varOrden);
+        console.log(orden.get("orden"));
+        try {
+            const response = await fetch('./actions/listar.php', {method: 'POST', body: orden});
+
+            return response.json();
+
+        } catch (error) {
+            console.log("Error al listar usuarios " + error.message());
+        }
+    };
+
+    select.addEventListener('change',
+            function () {
+                const tableBody = document.querySelector("#datos-usuario tbody");
+                const opcionSelecionada = this.options[select.selectedIndex];
+                table.removeChild(tableBody);
+                mostrarUsuarios(opcionSelecionada.value)
+                        .then(data => {
+                            crearTbody(data);
+                        });
+
+            });
+
+    mostrarUsuarios("nada")
+            .then(data => {
+                crearTbody(data);
+            });
+
+    function crearTbody(data) {
+        let tbody = document.createElement("tbody");
+        data.map(item => {
+
+            let row = document.createElement("tr");
+            for (const key in item) {
+                if (item[key] === 'imagen')
+                    continue;
+                let dato = document.createElement("td");
+                dato.innerText = (item[key] === null) ? "Null" : item[key];
+                row.appendChild(dato);
+            }
+
+            let dato_form = document.createElement("td");
+            let form = document.createElement("form");
+            form.action = "./actions/borrar-user.php";
+            form.method = "post";
+            let input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "user-id-del";
+            input.value = item.id;
+            let input2 = document.createElement("input");
+            input2.type = "submit";
+            input2.name = "delete";
+            input2.value = "Eliminar";
+            form.appendChild(input);
+            form.appendChild(input2);
+            dato_form.appendChild(form);
+            row.appendChild(dato_form);
+            tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
     }
+
 
     const userDel = document.createElement("p");
     const body = document.getElementsByTagName("body");
@@ -89,7 +113,7 @@
 if (isset($_GET['eliminado'])) {
     if (htmlspecialchars($_GET['eliminado'])) {
         ?>
-            userDel.setAttribute("class", "aviso verde");
+            userDel.className = "aviso verde";
         <?php
         echo "userDel.innerHTML ='" . $lang['login-eliminado'] . "';";
         ?>
@@ -97,7 +121,7 @@ if (isset($_GET['eliminado'])) {
         <?php
     } else {
         ?>
-            userDel.setAttribute("class", "aviso rojo");
+            userDel.className = "aviso rojo";
         <?php
         echo "userDel.innerHTML =\"" . $lang['login-noEliminado'] . "\";";
         ?>

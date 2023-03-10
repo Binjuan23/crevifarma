@@ -19,7 +19,7 @@
                         <li><a href="<?= $ruta['login']; ?>"><?= $lang['cabecera-login'] ?></a></li>
                         <li><a href="<?= $ruta['login']; ?>">foro</a></li>
                         <li><a href="<?= $ruta['login']; ?>">FAQ</a></li>
-                        <li><a href="<?= $ruta['login']; ?>">Buscar medicamento</a></li>
+                        <li><a href="<?= $ruta['buscar']; ?>"><?= $lang['buscar-medicamento'] ?></a></li>
                     </ul>
                 </nav>
                 <div class="burguer fa-solid fa-bars">

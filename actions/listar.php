@@ -3,9 +3,10 @@
 include_once '../utiles/funciones.php';
 
 try {
-    $conexion = conexionBD();
-    $orden    = htmlspecialchars($_POST['orden']);
-    $sql      = "SELECT * FROM usuarios ";// . ($orden === 'nada') ? "" : "ORDER BY " . $orden;
+    $conexion  = conexionBD();
+    $orden     = htmlspecialchars($_POST['orden']);
+    $condicion = ($orden === 'nada') ? "" : "ORDER BY " . $orden;
+    $sql       = "SELECT * FROM usuarios ".$condicion;
 
     $resul = $conexion->query($sql) or die(print($conexion->errorInfo()));
 
@@ -29,8 +30,9 @@ try {
         ];
     }
 
-    cerrarBD($con);
     echo json_encode($datos);
 } catch (PDOException $ex) {
     echo $ex->getMessage();
+}finally {
+    cerrarBD($conexion);
 }
