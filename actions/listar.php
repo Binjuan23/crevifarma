@@ -11,7 +11,6 @@ try {
     $resul = $conexion->query($sql) or die(print($conexion->errorInfo()));
 
     $datos = [];
-    $error = ["data" => false];
 
     while ($row = $resul->fetch(PDO::FETCH_OBJ)) {
         $datos[] = [

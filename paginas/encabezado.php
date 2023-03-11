@@ -4,7 +4,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= $lang['title']; ?></title>
-        <link rel="stylesheet" href="<?= $ruta['css']; ?>"/>  
+        <link rel="stylesheet" href="<?= $ruta['css']; ?>"/>
+        <script src="<?= $ruta['jquery']; ?>"></script>
     </head>
     <body>
         <header>

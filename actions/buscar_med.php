@@ -8,11 +8,10 @@ try {
     $error     = ["data" => false];
     $datos     = [];
 
-    $resul = $conexion->prepare("SELECT u.nombre, u.apellidos, u.direccion, u.email, u.imagen, m.nombre_med, m.stock FROM medicamentos m inner join usuarios u on m.id_farmacia=u.id WHERE m.nombre_med LIKE '%:condicion%'") or die(print($conexion->errorInfo()));
-    $resul->bindParam(':condicion', $condicion, PDO::PARAM_INT);
+    $resul = $conexion->prepare("SELECT u.nombre, u.apellidos, u.direccion, u.email, u.imagen, m.nombre_med, m.stock FROM medicamentos m inner join usuarios u on m.id_farmacia=u.id WHERE UPPER(m.nombre_med) LIKE '%" . $condicion . "%'") or die(print($conexion->errorInfo()));
     $resul->execute();
-    $count = $resul->fetch(PDO::FETCH_OBJ);
-    if ($count) {
+    $row   = $resul->fetch(PDO::FETCH_OBJ);
+    if ($row) {
         do {
             $datos [] = [
                 'nombre'      => $row->nombre,
@@ -20,7 +19,8 @@ try {
                 'email'       => $row->email,
                 'direccion'   => $row->direccion,
                 'medicamento' => $row->nombre_med,
-                'stock'       => $row->stock
+                'stock'       => $row->stock,
+                'imagen'      => $row->imagen
             ];
             $row      = $resul->fetch(PDO::FETCH_OBJ);
         } while ($row);

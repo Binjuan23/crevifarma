@@ -3,19 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp/htdocs/www.crevifarma.es/actions/buscar_med.php</file>
             <file>file:/C:/xampp/htdocs/www.crevifarma.es/utiles/rutas.php</file>
-            <file>file:/C:/xampp/htdocs/www.crevifarma.es/utiles/configuracion.php</file>
             <file>file:/C:/xampp/htdocs/www.crevifarma.es/includes/login.php</file>
             <file>file:/C:/xampp/htdocs/www.crevifarma.es/languages/val.php</file>
             <file>file:/C:/xampp/htdocs/www.crevifarma.es/paginas/listado.php</file>
-            <file>file:/C:/xampp/htdocs/www.crevifarma.es/paginas/pie.php</file>
-            <file>file:/C:/xampp/htdocs/www.crevifarma.es/utiles/funciones.php</file>
-            <file>file:/C:/xampp/htdocs/www.crevifarma.es/assets/javascript/script.js</file>
-            <file>file:/C:/xampp/htdocs/www.crevifarma.es/actions/listar.php</file>
             <file>file:/C:/xampp/htdocs/www.crevifarma.es/paginas/encabezado.php</file>
             <file>file:/C:/xampp/htdocs/www.crevifarma.es/languages/es.php</file>
             <file>file:/C:/xampp/htdocs/www.crevifarma.es/index.php</file>
-            <file>file:/C:/xampp/htdocs/www.crevifarma.es/actions/borrar-user.php</file>
+            <file>file:/C:/xampp/htdocs/www.crevifarma.es/paginas/buscar_medicamento.php</file>
+            <file>file:/C:/xampp/htdocs/www.crevifarma.es/utiles/funciones.php</file>
         </group>
     </open-files>
 </project-private>
