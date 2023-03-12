@@ -32,5 +32,7 @@ $lang = array(
     "buscar-medicamento"           => "Cercar medicament",
     "buscar-medicamento-nombre"    => "Introdueix medicament...",
     "buscar-medicamento-h1"        => "Busca el medicament que necessites",
-    "buscar-medicamento-imagenDef" => "Image per defecte"
+    "buscar-medicamento-imagenDef" => "Image per defecte",
+    "buscar-medicamento-noEsta"    => "No existeix o no es troba el medicament",
+    "buscar-medicamento-falloServidor" => "Fallada en obtenir resposta del servidor"
 );
