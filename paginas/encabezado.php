@@ -6,6 +6,7 @@
         <title><?= $lang['title']; ?></title>
         <link rel="stylesheet" href="<?= $ruta['css']; ?>"/>
         <script src="<?= $ruta['jquery']; ?>"></script>
+        <script src="<?= $ruta['validate']; ?>"></script>
     </head>
     <body>
         <header>
