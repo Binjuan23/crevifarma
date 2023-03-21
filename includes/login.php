@@ -6,7 +6,7 @@
             <h2><?= $lang['login-identifica']; ?></h2>
         </div>
 
-        <div class="login-texto-form">
+        <div class="login-texto-form" style="display:none">
             <p><?= $lang['login-avisoAcceso']; ?></p>
         </div>
 
@@ -39,7 +39,7 @@
             <h2><?= $lang['login-registrate'] ?></h2>
         </div>
 
-        <div class="login-texto-form">
+        <div class="login-texto-form" style="display:none">
             <p><?= $lang['login-avisoAcceso']; ?></p>
         </div>
 
@@ -56,8 +56,7 @@
             </div>
 
             <div class="input-box">
-                <p><?= $lang['login-contraseña-requisitos']; ?></p>
-                <label for="password-register"><?= $lang['contraseña']; ?></label>
+                <label for="password-register" title="<?= $lang['login-contraseña-requisitos']; ?>"><?= $lang['contraseña']; ?></label>
                 <input type="password" name="password-register" id="password-register" placeholder="<?= $lang['contraseña']; ?>">
             </div>  
 
@@ -106,7 +105,6 @@
         });
 
 
-
         $('#register-form').validate({
             focusCleanup: true,
             errorPlacement: function (error, element) {
@@ -118,11 +116,13 @@
                 },
                 email: {
                     required: true,
-                    email: true
+                    email: true,
+                    remote: "./actions/comprobar_login_email.php"
                 },
                 "password-register": {
                     required: true,
-                    range: [6, 8]
+                    minlength: 6,
+                    pattern: /^(?=(?:.*\d+))(?=(?:.*[a-z]+))(?=(?:.*[A-Z]+))(?=(?:.*\W+))\S{6,}$/
                 },
                 "password-register2": {
                     required: true,
@@ -139,20 +139,24 @@
                 }
             },
             messages: {
-                name: 'Please enter Name.',
+                "user-register": '<?= $lang['registro-user'] ?>',
                 email: {
-                    required: 'Please enter Email Address.',
-                    email: 'Please enter a valid Email Address.',
-                    pattern: 'no cumple con lo especificado'
+                    required: '<?= $lang['registro-email'] ?>',
+                    email: '<?= $lang['registro-email2'] ?>',
+                    remote: "<?= $lang['registro-email3'] ?>"
                 },
                 "password-register": {
-                    required: 'Please enter Password.',
-                    minlength: 'Password must be at least 8 characters long.',
+                    required: '<?= $lang['registro-contraseña'] ?>',
+                    minlength: '<?= $lang['registro-contraseña2'] ?>',
+                    pattern: '<?= $lang['registro-contraseña3'] ?>'
                 },
                 "password-register2": {
-                    required: 'Please enter Confirm Password.',
-                    equalTo: 'Confirm Password do not match with Password.',
-                }
+                    required: '<?= $lang['registro-repite'] ?>',
+                    equalTo: '<?= $lang['registro-repite2'] ?>',
+                },
+                tipo: "<?= $lang['registro-tipo'] ?>",
+                code: '<?= $lang['registro-codigo'] ?>',
+                remember2: '<?= $lang['registro-politica'] ?>'
             }
 
 

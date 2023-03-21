@@ -5,8 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= $lang['title']; ?></title>
         <link rel="stylesheet" href="<?= $ruta['css']; ?>"/>
-        <script src="<?= $ruta['jquery']; ?>"></script>
+        <script src="<?= $ruta['jquery']; ?>"></script>        
         <script src="<?= $ruta['validate']; ?>"></script>
+        <script src="<?= $ruta['validate2']; ?>"></script>
     </head>
     <body>
         <header>
