@@ -78,7 +78,7 @@
             </div>
 
             <div class="remember-box">
-                <input type="checkbox" name="remember2" id="remember2">
+                <input type="checkbox" name="remember2" id="remember2">com
                 <label for="remember2"><?= $lang['login-acuerdo'] ?></label>                
             </div> 
 
