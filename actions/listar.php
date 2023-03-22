@@ -30,6 +30,7 @@ try {
     }
 
     echo json_encode($datos);
+    
 } catch (PDOException $ex) {
     echo $ex->getMessage();
 }finally {

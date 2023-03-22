@@ -43,7 +43,7 @@
             <p><?= $lang['login-avisoAcceso']; ?></p>
         </div>
 
-        <form action="" method="post" id="register-form">
+        <form action="./actions/registrar_user.php" method="post" id="register-form">
 
             <div class="input-box">
                 <label for="user-register"><?= $lang['usuario']; ?></label>
@@ -57,19 +57,19 @@
 
             <div class="input-box">
                 <label for="password-register" title="<?= $lang['login-contraseña-requisitos']; ?>"><?= $lang['contraseña']; ?></label>
-                <input type="password" name="password-register" id="password-register" placeholder="<?= $lang['contraseña']; ?>">
+                <input type="password" name="password-register" id="password-register" placeholder="<?= $lang['contraseña']; ?>" required>
             </div>  
 
             <div class="input-box">
                 <label for="password-register2"><?= $lang['login-contraseña']; ?></label>
-                <input type="password" name="password-register2" id="password-register2" placeholder="<?= $lang['login-contraseña']; ?>">
+                <input type="password" name="password-register2" id="password-register2" placeholder="<?= $lang['login-contraseña']; ?>" required>
             </div>   
 
             <div class="input-box">
                 <label for="normal">Normal</label>
-                <input type="radio" name="tipo" id="normal" value='normal'>
+                <input type="radio" name="tipo" id="normal" value='normal' required>
                 <label for="farmacia"><?= $lang['login-farmacia']; ?></label>
-                <input type="radio" name="tipo" id="farmacia" value='farmacia'>
+                <input type="radio" name="tipo" id="farmacia" value='farmacia' required>
             </div> 
 
             <div class="input-box cod" style="display:none">
@@ -78,10 +78,11 @@
             </div>
 
             <div class="remember-box">
-                <label><input type="checkbox" name="remember2" id="remember2"><?= $lang['login-acuerdo'] ?></label>
+                <input type="checkbox" name="remember2" id="remember2">
+                <label for="remember2"><?= $lang['login-acuerdo'] ?></label>                
             </div> 
 
-            <input type="submit" value="Registrar" name="form-boton">
+            <input type="submit" id="submit_registro" value="Registrar" name="form-boton">
 
             <div class="login-no-cuenta">
                 <p><?= $lang['login-siCuenta'] ?> <a href="#"><?= $lang['login-identifica']; ?></a></p>
@@ -96,7 +97,6 @@
 
         $("input[type=radio]").click(function () {
             const radio = $(this).val();
-            console.log(radio);
             if (radio === "farmacia") {
                 $(".input-box.cod").show();
             } else {
@@ -104,6 +104,11 @@
             }
         });
 
+        jQuery.validator.addMethod("checkbos", function (value) {
+            $("#submit_registro").click(function(){
+                return value;
+            });
+        }, "Acepta");
 
         $('#register-form').validate({
             focusCleanup: true,
@@ -117,7 +122,7 @@
                 email: {
                     required: true,
                     email: true,
-                    remote: "./actions/comprobar_login_email.php"
+                    remote: "./actions/comprobar_email_login.php"
                 },
                 "password-register": {
                     required: true,
@@ -129,13 +134,15 @@
                     equalTo: "#password-register"
                 },
                 remember2: {
-                    required: true
+                    required: true,
+                    checkbos: true
                 },
                 tipo: {
                     required: true
                 },
                 code: {
-                    required: true
+                    required: true,
+                    remote: "./actions/comprobar_licencia.php"
                 }
             },
             messages: {
@@ -152,19 +159,26 @@
                 },
                 "password-register2": {
                     required: '<?= $lang['registro-repite'] ?>',
-                    equalTo: '<?= $lang['registro-repite2'] ?>',
+                    equalTo: '<?= $lang['registro-repite2'] ?>'
                 },
                 tipo: "<?= $lang['registro-tipo'] ?>",
-                code: '<?= $lang['registro-codigo'] ?>',
+                code: {
+                    required: '<?= $lang['registro-codigo'] ?>',
+                    remote: '<?= $lang['registro-codigo2'] ?>'
+                },
                 remember2: '<?= $lang['registro-politica'] ?>'
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    url: form.action,
+                    type: form.method,
+                    data: $(form).serialize(),
+                    success: function (response) {
+                        alert(response);
+                        //$('#answers').html(response);
+                    }
+                });
             }
-
-
-
-            /*,
-             submitHandler: function (form) {
-             form.submit();
-             }*/
         });
     });
 

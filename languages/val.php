@@ -23,7 +23,7 @@ $lang = array(
     "login-identifica"                 => "Identifica't",
     "login-recordar"                   => "Recorda'm",
     "login-farmacia"                   => "Farmàcia",
-    "login-codigo"                     => "Codi",
+    "login-codigo"                     => "Llicència",
     "login-acuerdo"                    => "Estic d'acord amb els termes i les condicions",
     "login-siCuenta"                   => "¿Tens compte?",
     "login-contraseña"                 => "Confirma contrasenya",
@@ -47,6 +47,7 @@ $lang = array(
     "registro-repite"                  => "Confirma contrasenya",
     "registro-repite2"                 => "Contrasenya no coincideix",
     "registro-tipo"                    => "Trieu tipus d'usuari",
-    "registro-codigo"                  => "Introdueix codi",
+    "registro-codigo"                  => "Introdueix llicència",
+    "registro-codigo2"                 => "Llicència no vàlida",
     "registro-politica"                => "Accepta termes i condicions"
 );

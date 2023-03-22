@@ -23,7 +23,7 @@ $lang = array(
     "login-identifica"                 => "Identificate",
     "login-recordar"                   => "Recuerdame",
     "login-farmacia"                   => "Farmacia",
-    "login-codigo"                     => "Código",
+    "login-codigo"                     => "Licencia",
     "login-acuerdo"                    => "Estoy de acuerdo con los términos y condiciones",
     "login-siCuenta"                   => "¿Tienes cuenta?",
     "login-contraseña"                 => "Confirma contraseña",
@@ -47,7 +47,8 @@ $lang = array(
     "registro-repite"                  => "Confirma contraseña",
     "registro-repite2"                 => "Contraseña no coincide",
     "registro-tipo"                    => "Elige tipo de usuario",
-    "registro-codigo"                  => "Introduce código",
+    "registro-codigo"                  => "Introduce licencia",
+    "registro-codigo2"                 => "Licencia no válida",
     "registro-politica"                => "Acepta términos y condiciones"
 );
 

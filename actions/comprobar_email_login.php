@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 include_once '../utiles/funciones.php';
 
 try {
@@ -22,9 +23,12 @@ try {
     if ($row) {
         echo json_encode(false);
     } else {
+        if ($email && $nick) {
+            $_SESSION['usuario'] = $row->usuario;
+            $_SESSION['tipo']    = $row->tipo;
+        }
         echo json_encode(true);
     }
-
 } catch (PDOException $ex) {
     echo $ex->getMessage();
 } finally {
