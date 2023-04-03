@@ -15,6 +15,8 @@ include_once "./paginas/encabezado.php";
             break;
         case "buscar": include_once "./paginas/buscar_medicamento.php";
             break;
+        case "foro": include_once "./paginas/foro.php";
+            break;
         default: include_once "./paginas/inicio.php";
     }
     ?>    

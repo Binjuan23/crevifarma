@@ -93,8 +93,8 @@
                     console.log(error);
                     controlError(error)
                 });
-    }
-    ;
+    };
+    
 
     function controlError(err) {
         error.style.display = 'block';

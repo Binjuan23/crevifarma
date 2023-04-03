@@ -3,14 +3,22 @@
 include_once '../utiles/funciones.php';
 
 try {
-    $conexion   = conexionBD();
-    $email      = htmlspecialchars($_POST['email']);
-    $nick       = htmlspecialchars($_POST['user-register']);
-    $contraseña = md5(htmlspecialchars($_POST['password-register']));
-    $tipo       = htmlspecialchars($_POST['tipo']);
-    $codigo     = (isset($_POST['code'])) ? htmlspecialchars($_POST['code']) : 0;
+    $conexion = conexionBD();
 
-    $resul = $conexion->prepare("INSERT INTO usuarios ('usuario','contraseña','tipo','email') VALUES (:usu,:con,:tip,:em)") or die(print($conexion->errorInfo()));
+    $datos  = explode("&", $_POST['register']);
+    $datos1 = [];
+    foreach ($datos as $value) {
+        $val             = explode("=", $value);
+        $datos1[$val[0]] = $val[1];
+    }
+    
+    $email      = urldecode($datos1['email']);
+    $nick       = $datos1['user-register'];
+    $contraseña = md5($datos1['password-register']);
+    $tipo       = $datos1['tipo'];
+    $codigo     = (isset($_POST['code'])) ? $datos1['code'] : 0;
+
+    $resul = $conexion->prepare("INSERT INTO usuarios (usuario,contraseña,tipo,email) VALUES (:usu,:con,:tip,:em)") or die(print($conexion->errorInfo()));
     $resul->bindValue(':usu', "$nick");
     $resul->bindValue(':con', "$contraseña");
     $resul->bindValue(':tip', "$tipo");
@@ -24,9 +32,10 @@ try {
         $resul2 = $conexion->prepare("INSERT INTO licencias (ID_usuario) VALUE (:id) WHERE Numero=:cod") or die(print($conexion->errorInfo()));
         $resul2->bindValue(':id', "$row->ID", PDO::PARAM_INT);
         $resul2->bindValue(':cod', "$codigo");
+        $resul2->execute();
     }
 
-    $resul2->execute();
+
 
     if ($tipo === "normal") {
         if ($resul) {

@@ -44,11 +44,16 @@ $lang = array(
     "registro-contraseña"              => "Introduce contraseña",
     "registro-contraseña2"             => "Longitud mínima 6 carácteres",
     "registro-contraseña3"             => "La contraseña no cumple con los parámetros dados",
+    "registro-contraseña4"             => "La contraseña existe",
     "registro-repite"                  => "Confirma contraseña",
     "registro-repite2"                 => "Contraseña no coincide",
     "registro-tipo"                    => "Elige tipo de usuario",
     "registro-codigo"                  => "Introduce licencia",
     "registro-codigo2"                 => "Licencia no válida",
-    "registro-politica"                => "Acepta términos y condiciones"
+    "registro-politica"                => "Acepta términos y condiciones",
+    "user-login"                       => "Introduce usuario",
+    "password-login"                   => "Introduce contraseña",
+    "cabecera-foro"                    => "Foro",
+    "foro-noPreguntas"                 => "No hay preguntas"
 );
 

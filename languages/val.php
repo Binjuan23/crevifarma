@@ -44,10 +44,15 @@ $lang = array(
     "registro-contraseña"              => "Introdueix contrasenya",
     "registro-contraseña2"             => "Longitud mínima 6 caràcters",
     "registro-contraseña3"             => "La contrasenya no compleix els paràmetres donats",
+    "registro-contraseña4"             => "La contrasenya existeix",
     "registro-repite"                  => "Confirma contrasenya",
     "registro-repite2"                 => "Contrasenya no coincideix",
     "registro-tipo"                    => "Trieu tipus d'usuari",
     "registro-codigo"                  => "Introdueix llicència",
     "registro-codigo2"                 => "Llicència no vàlida",
-    "registro-politica"                => "Accepta termes i condicions"
+    "registro-politica"                => "Accepta termes i condicions",
+    "user-login"                       => "Introdueix usuari",
+    "password-login"                   => "Introdueix contrasenya",
+    "cabecera-foro"                    => "Fòrum",
+    "foro-noPreguntas"                 => "No hi han preguntes"
 );

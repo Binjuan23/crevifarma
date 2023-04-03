@@ -10,7 +10,7 @@
             <p><?= $lang['login-avisoAcceso']; ?></p>
         </div>
 
-        <form action="" method="post" id="login-form">
+        <form action="./actions/comprobar_email_login.php" method="post" id="login-form">
 
             <div class="input-box">
                 <label for="user-login"><?= $lang['usuario']; ?></label>
@@ -78,7 +78,7 @@
             </div>
 
             <div class="remember-box">
-                <input type="checkbox" name="remember2" id="remember2">com
+                <input type="checkbox" name="remember2" id="remember2">
                 <label for="remember2"><?= $lang['login-acuerdo'] ?></label>                
             </div> 
 
@@ -104,12 +104,6 @@
             }
         });
 
-        jQuery.validator.addMethod("checkbos", function (value) {
-            $("#submit_registro").click(function(){
-                return value;
-            });
-        }, "Acepta");
-
         $('#register-form').validate({
             focusCleanup: true,
             errorPlacement: function (error, element) {
@@ -127,15 +121,15 @@
                 "password-register": {
                     required: true,
                     minlength: 6,
-                    pattern: /^(?=(?:.*\d+))(?=(?:.*[a-z]+))(?=(?:.*[A-Z]+))(?=(?:.*\W+))\S{6,}$/
+                    pattern: /^(?=(?:.*\d+))(?=(?:.*[a-z]+))(?=(?:.*[A-Z]+))(?=(?:.*\W+))\S{6,}$/,
+                    remote: "./actions/comprobar_email_login.php"
                 },
                 "password-register2": {
                     required: true,
                     equalTo: "#password-register"
                 },
                 remember2: {
-                    required: true,
-                    checkbos: true
+                    required: true
                 },
                 tipo: {
                     required: true
@@ -146,39 +140,80 @@
                 }
             },
             messages: {
-                "user-register": '<?= $lang['registro-user'] ?>',
+                "user-register": '<?= $lang['registro-user']; ?>',
                 email: {
-                    required: '<?= $lang['registro-email'] ?>',
-                    email: '<?= $lang['registro-email2'] ?>',
-                    remote: "<?= $lang['registro-email3'] ?>"
+                    required: '<?= $lang['registro-email']; ?>',
+                    email: '<?= $lang['registro-email2']; ?>',
+                    remote: "<?= $lang['registro-email3']; ?>"
                 },
                 "password-register": {
-                    required: '<?= $lang['registro-contraseña'] ?>',
-                    minlength: '<?= $lang['registro-contraseña2'] ?>',
-                    pattern: '<?= $lang['registro-contraseña3'] ?>'
+                    required: '<?= $lang['registro-contraseña']; ?>',
+                    minlength: '<?= $lang['registro-contraseña2']; ?>',
+                    pattern: '<?= $lang['registro-contraseña3']; ?>',
+                    remote: '<?= $lang['registro-contraseña4']; ?>'
                 },
                 "password-register2": {
-                    required: '<?= $lang['registro-repite'] ?>',
-                    equalTo: '<?= $lang['registro-repite2'] ?>'
+                    required: '<?= $lang['registro-repite']; ?>',
+                    equalTo: '<?= $lang['registro-repite2']; ?>'
                 },
-                tipo: "<?= $lang['registro-tipo'] ?>",
+                tipo: "<?= $lang['registro-tipo']; ?>",
                 code: {
-                    required: '<?= $lang['registro-codigo'] ?>',
-                    remote: '<?= $lang['registro-codigo2'] ?>'
+                    required: '<?= $lang['registro-codigo']; ?>',
+                    remote: '<?= $lang['registro-codigo2']; ?>'
                 },
-                remember2: '<?= $lang['registro-politica'] ?>'
-            },
-            submitHandler: function (form) {
-                $.ajax({
-                    url: form.action,
-                    type: form.method,
-                    data: $(form).serialize(),
-                    success: function (response) {
-                        alert(response);
-                        //$('#answers').html(response);
-                    }
-                });
+                remember2: '<?= $lang['registro-politica']; ?>'
             }
+        });
+
+        $('#login-form').validate({
+            focusCleanup: true,
+            errorPlacement: function (error, element) {
+                error.appendTo(element.parent());
+            },
+            rules: {
+                "user-login": {
+                    required: true
+                },
+                "password-login": {
+                    required: true
+                }
+            },
+            messages: {
+                "user-login": '<?= $lang['user-login']; ?>',
+                "password-login": '<?= $lang["password-login"]; ?>'
+            }
+        });
+
+        $('#login-form').submit(function (event) {
+            event.preventDefault();
+
+            let $formLogin = $(this);
+            if (!$formLogin.valid)
+                return false;
+
+            console.log($formLogin.serialize());
+            $.ajax({
+                type: 'POST',
+                url: './actions/comprobar_email_login.php',
+                data: {register1: $formLogin.serialize()},
+                success: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+        $('#register-form').submit(function (event) {
+            event.preventDefault();
+            let $formRegister = $(this);
+            if (!$form.valid)
+                return false;
+            $.ajax({
+                type: 'POST',
+                url: './actions/registrar_user.php',
+                data: {register: $formRegister.serialize()},
+                success: function (response) {
+                    console.log(response);
+                }
+            });
         });
     });
 
