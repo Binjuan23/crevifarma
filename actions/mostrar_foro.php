@@ -13,7 +13,8 @@ try {
     while ($row = $resul->fetch(PDO::FETCH_OBJ)) {
         $datos [] = [
             'id' => $row->foro,
-            'pregunta' =>$row->pregunta
+            'pregunta' =>$row->pregunta,
+            'fechaPre' =>$row->fecha
         ];       
     }
     

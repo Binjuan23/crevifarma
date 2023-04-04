@@ -1,9 +1,9 @@
 <div>
 
     <div id="contenedor-preguntas">
-        
+
     </div>   
-    
+
     <p class="noPreguntas" style="display:none"></p>
 
 </div>
@@ -12,16 +12,18 @@
 
     const contPre = document.getElementById("contenedor-preguntas");
     const error = document.querySelector(".noPreguntas");
-    
-    
-    
+
+
+
     const preguntas = async () => {
         try {
             const response = await fetch('./actions/mostrar_foro.php');
             if (response.status === 200 && response.ok) {
                 return response.json();
             } else {
-<?php echo "throw new Error('" . $lang['buscar-medicamento-falloServidor'] . "')"; ?>
+<?php echo "throw new Error('" . $lang['buscar-medicamento-falloServidor'] . "');"; ?>
+                $(".noPreguntas").empty();
+                error.innerText = "<?= $lang['buscar-medicamento-falloServidor']; ?>";
             }
         } catch (error) {
             console.log(error.message);
@@ -33,45 +35,37 @@
                 .then(datos => {
                     $("#contenedor-preguntas").empty();
                     if (typeof datos !== 'undefined' && !datos) {
-<?php echo "controlError(`" . $lang['foro-noPreguntas'] . "`)"; ?>
+<?php echo "controlError(`" . $lang['foro-noPreguntas'] . "`);"; ?>
                     } else {
                         console.log(datos);
-                        /*
-                         error.style.display = 'none';
-                         resultadoBusqueda.style.display = 'block';
-                         datos.map(item => {
-                         let div = document.createElement("div");
-                         let picture = document.createElement("picture");
-                         let source1 = document.createElement("source");
-                         source1.srcset = "";
-                         source1.media = "(min-width: 992px)";
-                         picture.appendChild(source1);
-                         let source2 = document.createElement("source");
-                         source2.srcset = "";
-                         source2.media = "(min-width: 768px)";
-                         picture.appendChild(source2);
-                         let source3 = document.createElement("source");
-                         source3.srcset = "";
-                         source3.media = "(min-width: 576px)";
-                         picture.appendChild(source3);
-                         let imagenDef = document.createElement("img");
-                         imagenDef.src = "";
-                         picture.appendChild(imagenDef);
-                         div.appendChild(picture);
-                         let parrafo1 = document.createElement("p");
-                         parrafo1.innerHTML = item.medicamento.toUpperCase().replace(medicamento, '<span class="rojo">$&</i>');
-                         div.appendChild(parrafo1);
-                         let parrafo2 = document.createElement("p");
-                         div.appendChild(parrafo2);
-                         let parrafo3 = document.createElement("p");
-                         div.appendChild(parrafo3);
-                         resultadoBusqueda.appendChild(div);
-                         });*/
+                        error.style.display = 'none';
+                        contPre.style.display = 'block';
+                        datos.map(item => {
+                            let divPrincipal = document.createElement("div");
+                            divPrincipal.classList.add("Pregunta");
+                            let divIn1 = document.createElement("div");
+                            let pIn1Id = document.createElement("p");
+                            pIn1Id.innerText = item.id;
+                            divIn1.appendChild(pIn1Id);
+                            let divIn2 = document.createElement("div");
+                            let pIn2Pregunta = document.createElement("p");
+                            pIn2Pregunta.innerText = item.pregunta;
+                            divIn2.appendChild(pIn2Pregunta);
+                            let divIn3 = document.createElement("div");
+                            let pIn3Fecha1 = document.createElement("p");
+                            let pIn3Fecha2 = document.createElement("p");
+                            let splitFecha = item.fechaPre.split(" ");
+                            pIn3Fecha1.innerText = splitFecha[0];
+                            pIn3Fecha2.innerText = splitFecha[1];
+                            divIn3.append(pIn3Fecha1, pIn3Fecha2);
+                            divPrincipal.append(divIn1, divIn2, divIn3);
+                            contPre.appendChild(divPrincipal);
+                        });
                     }
                 })
                 .catch(error => {
                     console.log(error);
-                    controlError(error)
+                    controlError(error);
                 });
     }
     ;
@@ -79,9 +73,20 @@
     function controlError(err) {
         error.style.display = 'block';
         contPre.style.display = 'none';
-        error.querySelector("p").innerHTML = err;
+        error.innerHTML = err;
     }
 
     mostrarPreguntas();
 
+    const pregunta = document.querySelector(".Pregunta");
+    if (pregunta) {
+        pregunta.addEventListener("click", mostrarMensajes);
+        
+    }
+
+    /*
+     function mostraMessajes() {
+     
+     }
+     */
 </script>
