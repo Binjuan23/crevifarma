@@ -13,8 +13,6 @@
     const contPre = document.getElementById("contenedor-preguntas");
     const error = document.querySelector(".noPreguntas");
 
-
-
     const preguntas = async () => {
         try {
             const response = await fetch('./actions/mostrar_foro.php');
@@ -37,7 +35,6 @@
                     if (typeof datos !== 'undefined' && !datos) {
 <?php echo "controlError(`" . $lang['foro-noPreguntas'] . "`);"; ?>
                     } else {
-                        console.log(datos);
                         error.style.display = 'none';
                         contPre.style.display = 'block';
                         datos.map(item => {
@@ -61,6 +58,10 @@
                             divPrincipal.append(divIn1, divIn2, divIn3);
                             contPre.appendChild(divPrincipal);
                         });
+                        const preguntas = document.querySelector(".Pregunta");
+                        if (preguntas) {
+                            preguntas.addEventListener("click", mostrarMensajes);
+                        }
                     }
                 })
                 .catch(error => {
@@ -78,15 +79,42 @@
 
     mostrarPreguntas();
 
-    const pregunta = document.querySelector(".Pregunta");
-    if (pregunta) {
-        pregunta.addEventListener("click", mostrarMensajes);
-        
-    }
+    function mostrarMensajes() {
 
-    /*
-     function mostraMessajes() {
-     
-     }
-     */
+        let id = $(this).children().eq(0).children().eq(0).text();
+
+        const respuestas = async () => {
+            try {
+                let idPregunta = new FormData();
+                idPregunta.append("id", id);
+                const response = await fetch('./actions/mostrar_foro_respuestas.php', {method: "POST", body: idPregunta});
+                if (response.status === 200 && response.ok) {
+                    return response.json();
+                } else {
+<?php echo "throw new Error('" . $lang['buscar-medicamento-falloServidor'] . "');"; ?>
+                    $(".noPreguntas").empty();
+                    error.innerText = "<?= $lang['buscar-medicamento-falloServidor']; ?>";
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
+        };
+        respuestas()
+                .then(datos => {
+                    if (typeof datos !== 'undefined' && !datos) {
+<?php echo "controlError(`" . $lang['foro-noPreguntas'] . "`);"; ?>
+                    } else {
+                        console.log(datos);
+                        $("#contenedor-preguntas div:odd").remove();
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    controlError(error);
+                });
+    }
+    ;
+        
+    
+
 </script>
