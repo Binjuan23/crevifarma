@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-03-2023 a las 21:05:11
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 8.1.2
+-- Tiempo de generación: 18-04-2023 a las 15:33:05
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,8 +31,17 @@ USE `crevi_farma`;
 
 CREATE TABLE `foro` (
   `foro` int(11) NOT NULL,
-  `pregunta` varchar(10000) COLLATE utf8mb4_spanish_ci NOT NULL
+  `pregunta` varchar(10000) NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT current_timestamp(),
+  `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `foro`
+--
+
+INSERT INTO `foro` (`foro`, `pregunta`, `fecha`, `usuario_id`) VALUES
+(1, '¿Funciona el foro?', '2023-04-16 18:32:55', 0);
 
 -- --------------------------------------------------------
 
@@ -43,7 +52,7 @@ CREATE TABLE `foro` (
 CREATE TABLE `guardias` (
   `ID` int(11) NOT NULL,
   `ID_farmacia` int(11) NOT NULL,
-  `dia` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL
+  `dia` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
@@ -63,7 +72,7 @@ INSERT INTO `guardias` (`ID`, `ID_farmacia`, `dia`) VALUES
 CREATE TABLE `licencias` (
   `ID` int(11) NOT NULL,
   `ID_usuario` int(11) DEFAULT NULL,
-  `Numero` varchar(45) COLLATE utf8mb4_spanish_ci NOT NULL
+  `Numero` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
@@ -85,7 +94,7 @@ INSERT INTO `licencias` (`ID`, `ID_usuario`, `Numero`) VALUES
 CREATE TABLE `medicamentos` (
   `ID` int(11) NOT NULL,
   `id_farmacia` int(11) NOT NULL,
-  `nombre_med` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `nombre_med` varchar(50) NOT NULL,
   `stock` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -113,7 +122,7 @@ CREATE TABLE `pedidos` (
   `id_pedido` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `fecha` datetime NOT NULL DEFAULT current_timestamp(),
-  `estado` varchar(25) COLLATE utf8mb4_spanish_ci NOT NULL
+  `estado` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
@@ -124,9 +133,9 @@ CREATE TABLE `pedidos` (
 
 CREATE TABLE `productos` (
   `ID` int(11) NOT NULL,
-  `nombre` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `categoria_es` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `categoria_val` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `categoria_es` varchar(50) NOT NULL,
+  `categoria_val` varchar(50) NOT NULL,
   `precio` decimal(5,2) NOT NULL,
   `stock` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
@@ -136,12 +145,12 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`ID`, `nombre`, `categoria_es`, `categoria_val`, `precio`, `stock`) VALUES
-(11247, 'Inmunoferon 90 Cápsulas', 'Suplementos', 'Suplements', '27.14', 15),
-(11424, 'Lacer Pasta Dental 2x125 ml', 'Higiene', 'Higiene', '8.69', 50),
-(11555, 'Lotigén Champú Anticaída 100 ml', 'Higiene', 'Higiene', '3.41', 100),
-(11748, 'NATURA Melatonina 1mg y Valeriana 60 Gummies', 'Suplementos', 'Suplements', '18.00', 25),
-(22168, 'Scottex Papel Higiénico Acolchado 32 uds', 'Hogar', 'Llar', '15.41', 1),
-(66214, 'Betres Ambientador Rosa Frutos Rojos 85 ml', 'Hogar', 'Llar', '5.20', 5);
+(11247, 'Inmunoferon 90 Cápsulas', 'Suplementos', 'Suplements', 27.14, 15),
+(11424, 'Lacer Pasta Dental 2x125 ml', 'Higiene', 'Higiene', 8.69, 50),
+(11555, 'Lotigén Champú Anticaída 100 ml', 'Higiene', 'Higiene', 3.41, 100),
+(11748, 'NATURA Melatonina 1mg y Valeriana 60 Gummies', 'Suplementos', 'Suplements', 18.00, 25),
+(22168, 'Scottex Papel Higiénico Acolchado 32 uds', 'Hogar', 'Llar', 15.41, 1),
+(66214, 'Betres Ambientador Rosa Frutos Rojos 85 ml', 'Hogar', 'Llar', 5.20, 5);
 
 -- --------------------------------------------------------
 
@@ -172,23 +181,48 @@ CREATE TABLE `reservas` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `respuestas`
+--
+
+CREATE TABLE `respuestas` (
+  `id` int(11) NOT NULL,
+  `foro_id` int(11) NOT NULL,
+  `respuesta` text NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT current_timestamp(),
+  `respuesta_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `respuestas`
+--
+
+INSERT INTO `respuestas` (`id`, `foro_id`, `respuesta`, `usuario_id`, `fecha`, `respuesta_id`) VALUES
+(1, 1, 'Parece ser que si', 2, '2023-04-16 18:45:49', NULL),
+(2, 1, 'Estoy contestando al anterior', 3, '2023-04-16 18:46:23', 1),
+(3, 1, 'Esta respuesta es para el anterior comentario de id 3', 4, '2023-04-17 11:10:39', 2),
+(4, 1, 'Yo soy un comentario sin referencia a nadie', 1, '2023-04-17 11:11:36', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
 CREATE TABLE `usuarios` (
   `ID` int(11) NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `apellidos` varchar(50) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `apellidos` varchar(50) DEFAULT NULL,
   `edad` int(11) DEFAULT NULL,
-  `usuario` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `contraseña` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `imagen` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `contraseña` varchar(100) NOT NULL,
+  `imagen` varchar(100) DEFAULT NULL,
   `fecha_creacion` datetime NOT NULL DEFAULT current_timestamp(),
   `ultimo_login` datetime NOT NULL,
   `dinero` decimal(7,2) DEFAULT NULL,
-  `tipo` varchar(20) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `direccion` varchar(100) COLLATE utf8mb4_spanish_ci DEFAULT NULL
+  `tipo` varchar(20) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `direccion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
@@ -209,7 +243,8 @@ INSERT INTO `usuarios` (`ID`, `nombre`, `apellidos`, `edad`, `usuario`, `contras
 -- Indices de la tabla `foro`
 --
 ALTER TABLE `foro`
-  ADD PRIMARY KEY (`foro`);
+  ADD PRIMARY KEY (`foro`),
+  ADD KEY `usuario_id` (`usuario_id`);
 
 --
 -- Indices de la tabla `guardias`
@@ -258,6 +293,15 @@ ALTER TABLE `reservas`
   ADD KEY `id_farmacia` (`id_farmacia`,`id_usuario`,`id_medicamento`);
 
 --
+-- Indices de la tabla `respuestas`
+--
+ALTER TABLE `respuestas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `respuesta_id` (`respuesta_id`),
+  ADD KEY `foro_id` (`foro_id`),
+  ADD KEY `usuario_id` (`usuario_id`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -271,7 +315,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `foro`
 --
 ALTER TABLE `foro`
-  MODIFY `foro` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `foro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `guardias`
@@ -290,6 +334,12 @@ ALTER TABLE `licencias`
 --
 ALTER TABLE `medicamentos`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `respuestas`
+--
+ALTER TABLE `respuestas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

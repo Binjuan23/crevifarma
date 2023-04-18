@@ -2,8 +2,7 @@
 
     <div id="contenedor-preguntas">
 
-    </div>   
-
+    </div>
     <p class="noPreguntas" style="display:none"></p>
 
 </div>
@@ -55,7 +54,7 @@
                         });
                         const preguntas = document.querySelector(".Pregunta");
                         if (preguntas) {
-                            preguntas.addEventListener("click", mostrarMensajes);
+                            preguntas.addEventListener("click", mostrarMensajes());
                         }
                     }
                 })
@@ -72,9 +71,15 @@
     }
 
     mostrarPreguntas();
-    function mostrarMensajes() {
+    function mostrarMensajes(idPregunta) {
 
         let id = $(this).children().eq(0).children().eq(0).text();
+        const divRespuestas = document.querySelector(".PrincipalRespuestas");
+      
+        if (divRespuestas) {
+            $(".PrincipalRespuestas").remove();
+        }
+
         const respuestas = async () => {
             try {
                 let idPregunta = new FormData();
@@ -97,61 +102,47 @@
 <?php echo "controlError(`" . $lang['foro-noPreguntas'] . "`);"; ?>
                     } else {
                         console.log(datos);
-                        $("#contenedor-preguntas div:odd").remove();
-                        let divPrincipalrespuestas = document.createElement("div");
+                        let divPrincipalRespuestas = document.createElement("div");
+                        divPrincipalRespuestas.classList.add("PrincipalRespuestas");
                         for (let index = 0; index < datos.length; index++) {
                             let divRespuesta = document.createElement("div");
                             let divUsuario = document.createElement("div");
+                            divUsuario.classList.add("Usuario");
                             let pUsuario = document.createElement("p");
                             pUsuario.innerText = datos[index].usuario;
                             divUsuario.appendChild(pUsuario);
                             let divFecha = document.createElement("div");
+                            divFecha.classList.add("Fecha");
                             let pFecha = document.createElement("p");
                             pFecha.innerText = datos[index].fecha;
                             divFecha.appendChild(pFecha);
                             let divMensaje = document.createElement("div");
+                            divMensaje.classList.add("Mensaje");
                             let pMensaje = document.createElement("p");
                             if (index > 0) {
                                 if (datos[index - 1].secundaria !== null) {
                                     let pSecundario = document.createElement("p");
-                                    pSecundario.innerText = datos[index - 1].principal;
+                                    pSecundario.innerText = `"${datos[index - 1].principal}"`;
                                     divMensaje.appendChild(pSecundario);
                                 }
                             }
                             pMensaje.innerText = datos[index].principal;
                             divMensaje.appendChild(pMensaje);
-                            divRespuesta.append(divUsuario, divFecha, divMensaje);
-                            divPrincipalrespuestas.appendChild(divRespuesta);
+                            let hiddenID = document.createElement("input");
+                            hiddenID.type = "hidden";
+                            hiddenID.value = datos[index].id;
+                            hiddenID.name = "respuestaID" + datos[index].id;
+                            let hiddenforoID = document.createElement("input");
+                            hiddenforoID.type = "hidden";
+                            hiddenforoID.value = datos[index].foro_id;
+                            hiddenforoID.name = "foroID" + datos[index].foro_id;
+                            /*Este botón en cada mensaje aparece solo para los usuarios con privilegios*/
+                            let responder = document.createElement("button");
+                            responder.innerText = "<?= $lang['foro-boton-referenciar']; ?>";
+                            divRespuesta.append(divUsuario, divFecha, divMensaje, hiddenID, hiddenforoID, responder);
+                            divPrincipalRespuestas.appendChild(divRespuesta);
                         }
-                        /*
-                         datos.map((item, index) => {
-                         let divRespuesta = document.createElement("div");
-                         let divUsuario = document.createElement("div");
-                         let pUsuario = document.createElement("p");
-                         pUsuario.innerText = item.usuario;
-                         divUsuario.appendChild(pUsuario);
-                         let divFecha = document.createElement("div");
-                         let pFecha = document.createElement("p");
-                         pFecha.innerText = item.fecha;
-                         divFecha.appendChild(pFecha);
-                         let divMensaje = document.createElement("div");
-                         let pMensaje = document.createElement("p");
-                         console.log(datos[2].secundaria);
-                         if (index !== 0) {
-                         if (datos[--index].secundario !== null) {
-                         let pSecundario = document.createElement("p");
-                         console.log(datos[index].secundaria);
-                         pSecundario.innerText = '"' + datos[index].secundaria + '"';
-                         pMensaje.appendChild(pSecundario);
-                         }
-                         }
-                         pMensaje.innerText = item.principal;
-                         divMensaje.appendChild(pMensaje);
-                         divRespuesta.append(divUsuario, divFecha, divMensaje);
-                         divPrincipalrespuestas.appendChild(divRespuesta);
-                         });
-                         */
-                        $(this).after(divPrincipalrespuestas);
+                        $(this).after(divPrincipalRespuestas);
                     }
                 })
                 .catch(error => {

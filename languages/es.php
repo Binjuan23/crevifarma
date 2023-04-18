@@ -54,6 +54,7 @@ $lang = array(
     "user-login"                       => "Introduce usuario",
     "password-login"                   => "Introduce contraseña",
     "cabecera-foro"                    => "Foro",
-    "foro-noPreguntas"                 => "No hay preguntas"
+    "foro-noPreguntas"                 => "No hay preguntas",
+    "foro-boton-referenciar"           => "Referenciar"
 );
 
