@@ -5,7 +5,9 @@ include_once '../utiles/funciones.php';
 try {
     $conexion = conexionBD();
 
-    $resul = $conexion->prepare("INSERT INTO respuestas (foro_id,respuesta,usuario_id,respuesta_id) VALUES (:foro,:respuesta,:usuario,:referencia)") or die(print($conexion->errorInfo()));
+    $resul = $conexion->prepare("INSERT INTO respuestas (foro_id,respuesta,usuario_id,respuesta_id) VALUES "
+            . "(:foro,:respuesta,:usuario,:referencia)") or die(print($conexion->errorInfo()));
+    
     $resul->bindValue(':foro', "$foro");
     $resul->bindValue(':respuesta', "$respuesta");
     $resul->bindValue(':usuario', "$usuario");

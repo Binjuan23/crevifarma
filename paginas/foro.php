@@ -37,6 +37,7 @@
                         datos.map(item => {
                             let divPrincipal = document.createElement("div");
                             divPrincipal.classList.add("Pregunta");
+                            divPrincipal.setAttribute("onclick", `mostrarMensajes(${item.id})`);
                             let divIn1 = document.createElement("div");
                             let pIn1Id = document.createElement("p");
                             pIn1Id.innerText = item.id;
@@ -49,13 +50,17 @@
                             let pIn3Fecha = document.createElement("p");
                             pIn3Fecha.innerText = item.fechaPre;
                             divIn3.append(pIn3Fecha);
-                            divPrincipal.append(divIn1, divIn2, divIn3);
+                            let divIn4 = document.createElement("div");
+                            let pIn4Usuario = document.createElement("p");
+                            pIn4Usuario.innerText = item.usuario;
+                            divIn4.append(pIn4Usuario);
+                            let divIn5 = document.createElement("div");
+                            let pIn5Cantidad = document.createElement("p");
+                            pIn5Cantidad.innerText = "Respuestas: " + item.numRespuestas;
+                            divIn5.append(pIn5Cantidad);
+                            divPrincipal.append(divIn1, divIn2, divIn3, divIn4, divIn5);
                             contPre.appendChild(divPrincipal);
                         });
-                        const preguntas = document.querySelector(".Pregunta");
-                        if (preguntas) {
-                            preguntas.addEventListener("click", mostrarMensajes());
-                        }
                     }
                 })
                 .catch(error => {
@@ -70,23 +75,41 @@
         error.innerHTML = err;
     }
 
-    mostrarPreguntas();
-    function mostrarMensajes(idPregunta) {
+    function controlError2(err, id) {
+        eliminar();
+        let errorParrafo = document.createElement("p");
+        let divError = document.createElement("div");
+        divError.classList.add("Norespuestas");
+        errorParrafo.innerHTML = err;
+        divError.appendChild(errorParrafo);
+        $(".Pregunta").eq((id - 1)).append(divError);
+    }
 
-        let id = $(this).children().eq(0).children().eq(0).text();
-        const divRespuestas = document.querySelector(".PrincipalRespuestas");
-      
-        if (divRespuestas) {
+    function eliminar() {
+        const div = document.querySelector(".Norespuestas");
+        if (div) {
+            $(".Norespuestas").remove();
+        }
+
+        const principalRespuestas = document.querySelector(".PrincipalRespuestas");
+        if (principalRespuestas) {
             $(".PrincipalRespuestas").remove();
         }
+    }
+
+    mostrarPreguntas();
+
+    function mostrarMensajes(id) {
+        console.log(id);
+        eliminar();
 
         const respuestas = async () => {
             try {
                 let idPregunta = new FormData();
                 idPregunta.append("id", id);
-                const response = await fetch('./actions/mostrar_foro_respuestas.php', {method: "POST", body: idPregunta});
-                if (response.status === 200 && response.ok) {
-                    return response.json();
+                const response2 = await fetch('./actions/mostrar_foro_respuestas.php', {method: "POST", body: idPregunta});
+                if (response2.status === 200 && response2.ok) {
+                    return response2.json();
                 } else {
 <?php echo "throw new Error('" . $lang['buscar-medicamento-falloServidor'] . "');"; ?>
                     $(".noPreguntas").empty();
@@ -99,7 +122,7 @@
         respuestas()
                 .then(datos => {
                     if (typeof datos !== 'undefined' && !datos) {
-<?php echo "controlError(`" . $lang['foro-noPreguntas'] . "`);"; ?>
+<?php echo "controlError2(`" . $lang['foro-noRespuestas'] . "`,id);"; ?>
                     } else {
                         console.log(datos);
                         let divPrincipalRespuestas = document.createElement("div");
@@ -142,7 +165,8 @@
                             divRespuesta.append(divUsuario, divFecha, divMensaje, hiddenID, hiddenforoID, responder);
                             divPrincipalRespuestas.appendChild(divRespuesta);
                         }
-                        $(this).after(divPrincipalRespuestas);
+                        console.log($(".Pregunta").eq((id - 1)));
+                        $(".Pregunta").eq((id - 1)).after(divPrincipalRespuestas);
                     }
                 })
                 .catch(error => {
@@ -150,7 +174,4 @@
                     controlError(error);
                 });
     }
-
-
-
 </script>

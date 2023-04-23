@@ -187,11 +187,10 @@
         $('#login-form').submit(function (event) {
             event.preventDefault();
 
-            let $formLogin = $(this);
-            if (!$formLogin.valid)
+            let $formLogin = $("#login-form");
+            if ($formLogin.valid) {
                 return false;
-
-            console.log($formLogin.serialize());
+            }
             $.ajax({
                 type: 'POST',
                 url: './actions/comprobar_email_login.php',
@@ -203,9 +202,12 @@
         });
         $('#register-form').submit(function (event) {
             event.preventDefault();
-            let $formRegister = $(this);
-            if (!$form.valid)
+            let $formRegister = $('#register-form');
+            
+            if ($formRegister.valid) {
                 return false;
+            }
+            
             $.ajax({
                 type: 'POST',
                 url: './actions/registrar_user.php',

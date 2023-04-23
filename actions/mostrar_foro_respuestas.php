@@ -17,8 +17,8 @@ try {
             'fecha'      => $row->fecha,
             'usuario'    => $row->usuario,
             'secundaria' => $row->respuesta_secundaria,
-            "id"         => $row->id,
-            "foro"    => $row->foro_id
+            'id'         => $row->id,
+            'foro'       => $row->foro_id
         ];
     }
 
