@@ -3,7 +3,23 @@
     <div id="contenedor-preguntas">
 
     </div>
+
     <p class="noPreguntas" style="display:none"></p>
+    <!--Ocultar botón sino se esta registrado-->
+    <div class="crearPregunta">
+        <button onclick="mostrarFormPregunta()"><?= $lang["foro-nuevaPregunta"]; ?></button>
+    </div>
+
+    <div class="formPregunta" style="display:none">
+        <form action="" method="POST">
+            <p>
+                <label for="pregunt">Pregunta</label>
+                <input type="text" name="pregunt" placeholder="<?= $lang["foro-nuevaPregunta-placeholder"] ?>">
+            </p>
+            <input type="hidden" name="idUsuario" value="">
+            <input type="submit" name="enviarPregunta" value="Enviar">
+        </form>
+    </div>
 
 </div>
 
@@ -37,7 +53,6 @@
                         datos.map(item => {
                             let divPrincipal = document.createElement("div");
                             divPrincipal.classList.add("Pregunta");
-                            divPrincipal.setAttribute("onclick", `mostrarMensajes(${item.id})`);
                             let divIn1 = document.createElement("div");
                             let pIn1Id = document.createElement("p");
                             pIn1Id.innerText = item.id;
@@ -45,6 +60,7 @@
                             let divIn2 = document.createElement("div");
                             let pIn2Pregunta = document.createElement("p");
                             pIn2Pregunta.innerText = item.pregunta;
+                            pIn2Pregunta.setAttribute("onclick", `mostrarMensajes(${item.id})`);
                             divIn2.appendChild(pIn2Pregunta);
                             let divIn3 = document.createElement("div");
                             let pIn3Fecha = document.createElement("p");
@@ -56,7 +72,7 @@
                             divIn4.append(pIn4Usuario);
                             let divIn5 = document.createElement("div");
                             let pIn5Cantidad = document.createElement("p");
-                            pIn5Cantidad.innerText = "Respuestas: " + item.numRespuestas;
+                            pIn5Cantidad.innerText = "<?= $lang['foro-respuestas-cantidad']; ?>: " + item.numRespuestas;
                             divIn5.append(pIn5Cantidad);
                             divPrincipal.append(divIn1, divIn2, divIn3, divIn4, divIn5);
                             contPre.appendChild(divPrincipal);
@@ -79,9 +95,10 @@
         eliminar();
         let errorParrafo = document.createElement("p");
         let divError = document.createElement("div");
+        let botonResponder = crearBotonReponder(id);
         divError.classList.add("Norespuestas");
         errorParrafo.innerHTML = err;
-        divError.appendChild(errorParrafo);
+        divError.append(errorParrafo, botonResponder);
         $(".Pregunta").eq((id - 1)).append(divError);
     }
 
@@ -102,7 +119,11 @@
     function mostrarMensajes(id) {
         console.log(id);
         eliminar();
+        const formPregunta = document.querySelector(".formPregunta");
 
+        if (formPregunta) {
+            formPregunta.style.display = "none";
+        }
         const respuestas = async () => {
             try {
                 let idPregunta = new FormData();
@@ -157,15 +178,18 @@
                             hiddenID.name = "respuestaID" + datos[index].id;
                             let hiddenforoID = document.createElement("input");
                             hiddenforoID.type = "hidden";
-                            hiddenforoID.value = datos[index].foro_id;
-                            hiddenforoID.name = "foroID" + datos[index].foro_id;
+                            hiddenforoID.value = datos[index].foro;
+                            hiddenforoID.name = "foroID" + datos[index].foro;
                             /*Este botón en cada mensaje aparece solo para los usuarios con privilegios*/
                             let responder = document.createElement("button");
+                            responder.classList.add("referenciar");
+                            responder.setAttribute("onclick", `mostrarFormResponder(${datos[index].id},${datos[index].foro})`);
                             responder.innerText = "<?= $lang['foro-boton-referenciar']; ?>";
                             divRespuesta.append(divUsuario, divFecha, divMensaje, hiddenID, hiddenforoID, responder);
                             divPrincipalRespuestas.appendChild(divRespuesta);
                         }
-                        console.log($(".Pregunta").eq((id - 1)));
+                        let boton = crearBotonReponder(id);
+                        divPrincipalRespuestas.appendChild(boton);
                         $(".Pregunta").eq((id - 1)).after(divPrincipalRespuestas);
                     }
                 })
@@ -174,4 +198,27 @@
                     controlError(error);
                 });
     }
+
+    function crearBotonReponder(id) {
+        let botonResponder = document.createElement("button");
+        botonResponder.classList.add("responder");
+        botonResponder.setAttribute("onclick", `mostrarFormResponder(0,${id})`);
+        botonResponder.textContent = "<?= $lang['foro-boton-responder']; ?>";
+        let divBotonResponder = document.createElement("div");
+        divBotonResponder.appendChild(botonResponder);
+
+        return divBotonResponder;
+    }
+    function mostrarFormPregunta() {
+        eliminar();
+        const formPregunta = document.querySelector(".formPregunta");
+        formPregunta.style.display = "block";
+    }
+
+    function mostrarFormResponder(idRespuesta, idForo) {
+        console.log(idRespuesta + " " + idForo);
+
+    }
+
+
 </script>

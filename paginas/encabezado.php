@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= $lang['title']; ?></title>
         <link rel="stylesheet" href="<?= $ruta['css']; ?>"/>
+        <link rel="stylesheet" href="<?= $ruta['fontawesome']; ?>"/>
         <script src="<?= $ruta['jquery']; ?>"></script>        
         <script src="<?= $ruta['validate']; ?>"></script>
         <script src="<?= $ruta['validate2']; ?>"></script>
@@ -25,7 +26,7 @@
                         <li><a href="<?= $ruta['buscar']; ?>"><?= $lang['buscar-medicamento'] ?></a></li>
                     </ul>
                 </nav>
-                <div class="burguer fa-solid fa-bars">
+                <div class="burguer fa-solid fa-bars" style="display:none">
 
                 </div>                
             </div>
@@ -34,6 +35,16 @@
                     <a href="<?= $ruta['castellano'] ?>">Cas</a>
                     <a href="<?= $ruta['valenciano'] ?>">Val</a>
                 </div>
+            </div>
+            <div class="navMovil" style="display:none">
+                <ul>
+                    <li><a href="<?= $ruta['listado']; ?>"><?= $lang['cabecera-listado'] ?></a></li>
+                    <li><a href="<?= $ruta['indice']; ?>"><?= $lang['cabecera-inicio'] ?></a></li>
+                    <li><a href="<?= $ruta['login']; ?>"><?= $lang['cabecera-login'] ?></a></li>
+                    <li><a href="<?= $ruta['foro']; ?>"><?= $lang['cabecera-foro'] ?></a></li>
+                    <li><a href="<?= $ruta['login']; ?>">FAQ</a></li>
+                    <li><a href="<?= $ruta['buscar']; ?>"><?= $lang['buscar-medicamento'] ?></a></li>
+                </ul>
             </div>
 
         </header>

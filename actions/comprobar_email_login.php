@@ -45,11 +45,15 @@ try {
     $resul->execute();
 
     $row = $resul->fetch(PDO::FETCH_OBJ);
+    
+    $resul = $conexion->prepare($sql) or die(print($conexion->errorInfo()));
 
     if ($row) {
-        if ($password && $nick) {            
-            //$_SESSION['usuario'] = $row->usuario;
+        if ($password && $nick) {   
+            //$_SESSION['usuario'] = $nick;
             //$_SESSION['tipo']    = $row->tipo;
+            //$_SESSION['id']    = $row->id;
+            //header("Location: ../index.php?loginSatisfactorio=1");
         }
         echo json_encode(false);
     } else {

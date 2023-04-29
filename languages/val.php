@@ -56,5 +56,9 @@ $lang = array(
     "cabecera-foro"                    => "Fòrum",
     "foro-noPreguntas"                 => "No hi han preguntes",
     "foro-boton-referenciar"           => "Referenciar",
-    "foro-noRespuestas"                => "No hi han respostes"
+    "foro-respuestas-cantidad"         => "Respostes",
+    "foro-noRespuestas"                => "No hi han respostes",
+    "foro-nuevaPregunta"               => "Nova pregunta",
+    "foro-nuevaPregunta-placeholder"   => "Realitza la teva pregunta",
+    "foro-boton-responder"             => "Respondre"
 );

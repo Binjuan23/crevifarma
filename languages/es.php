@@ -56,6 +56,10 @@ $lang = array(
     "cabecera-foro"                    => "Foro",
     "foro-noPreguntas"                 => "No hay preguntas",
     "foro-boton-referenciar"           => "Referenciar",
-    "foro-noRespuestas"                => "No hay respuestas"
+    "foro-respuestas-cantidad"         => "Respuestas",
+    "foro-noRespuestas"                => "No hay respuestas",
+    "foro-nuevaPregunta"               => "Nueva pregunta",
+    "foro-nuevaPregunta-placeholder"   => "Realiza tu pregunta",
+    "foro-boton-responder"             => "Responder"
 );
 
