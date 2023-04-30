@@ -60,5 +60,8 @@ $lang = array(
     "foro-noRespuestas"                => "No hi han respostes",
     "foro-nuevaPregunta"               => "Nova pregunta",
     "foro-nuevaPregunta-placeholder"   => "Realitza la teva pregunta",
-    "foro-boton-responder"             => "Respondre"
+    "foro-boton-responder"             => "Respondre",
+    "foro-respuesta"                   => "Realitza la teva resposta",
+    "foro-respuesta-placeholder"       => "Escriu alguna cosa...",
+    "foro-respuesta-cancelar"          => "Cancel·lar"
 );
