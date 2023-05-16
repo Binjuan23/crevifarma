@@ -63,6 +63,8 @@ $lang = array(
     "foro-boton-responder"             => "Responder",
     "foro-respuesta"                   => "Realiza tu respuesta",
     "foro-respuesta-placeholder"       => "Escribe algo...",
-    "foro-respuesta-cancelar"          => "Cancelar"
+    "foro-respuesta-cancelar"          => "Cancelar",
+    "foro-form-referencia"             => "Referencia a mensaje del usuario",
+    "foro_volver"                      => "Volver"
 );
 

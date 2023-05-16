@@ -8,7 +8,16 @@ include_once "../utiles/rutas.php";
 include_once "./encabezado.php";
 ?>
 <div>
-
+    <div>
+        <p>
+            <a href="<?= $ruta['foro']; ?>" ><i class="fa-solid fa-backward"></i><?= $lang['foro_volver']; ?></a>
+        </p>
+    </div>
+    <?php
+    if (isset($_GET["respuestaGuardada"])) {
+        echo "<p>Respuesta guardada</p>";
+    }
+    ?>
     <div id="contenedor-respuestas">
 
     </div>
@@ -46,6 +55,7 @@ include_once "./encabezado.php";
     function mostrar() {
         preguntas()
                 .then(datos => {
+                    console.log(datos);
                     $("#contenedor-preguntas").empty();
                     if (typeof datos !== 'undefined' && !datos) {
 <?php echo "controlError(`" . $lang['foro-noPreguntas'] . "`);"; ?>
@@ -90,11 +100,18 @@ include_once "./encabezado.php";
                                 let divMensaje = document.createElement("div");
                                 divMensaje.classList.add("Mensaje");
                                 let pMensaje = document.createElement("p");
-                                if (index > 1) {
-                                    if (datos[index - 1].referencia !== null) {
-                                        let pSecundario = document.createElement("p");
-                                        pSecundario.innerText = `"${datos[index - 1].respuesta}"`;
-                                        divMensaje.appendChild(pSecundario);
+                                if (datos[index].referencia !== null) {
+                                    let referencia = datos[index].referencia;
+                                    for (let inde = 1; inde < datos.length; inde++) {
+                                        if (datos[inde].idrespuesta === referencia) {
+                                            let pDatosReferencia = document.createElement("p");
+                                            pDatosReferencia.classList.add("datosReferencia");
+                                            pDatosReferencia.innerText = `Ref a ${datos[inde].usuario} el ${datos[inde].fecha}`;
+                                            let pSecundario = document.createElement("p");
+                                            pSecundario.classList.add("respuestaReferencia")
+                                            pSecundario.innerText = `"${datos[inde].respuesta}"`;
+                                            divMensaje.append(pDatosReferencia, pSecundario);
+                                        }
                                     }
                                 }
                                 pMensaje.innerText = datos[index].respuesta;
@@ -110,7 +127,7 @@ include_once "./encabezado.php";
                                 //Este botón en cada mensaje aparece solo para los usuarios con privilegios
                                 let responder = document.createElement("button");
                                 responder.classList.add("referenciar");
-                                responder.setAttribute("onclick", `mostrarFormRespuesta(${datos[index].idrespuesta}, "${datos[index].respuesta}")`);
+                                responder.setAttribute("onclick", `mostrarFormRespuesta(${datos[index].idrespuesta}, "${datos[index].respuesta}", "${datos[index].usuario}")`);
                                 responder.innerText = "<?= $lang['foro-boton-referenciar']; ?>";
                                 divRespuesta.append(divUsuario, divFecha, divMensaje, hiddenID, hiddenforoID, responder);
                                 divRespuestas.appendChild(divRespuesta);
@@ -143,11 +160,11 @@ include_once "./encabezado.php";
         contRes.appendChild(errorParrafo);
     }
 
-    function mostrarFormRespuesta(idMensaje, mensaje) {
+    function mostrarFormRespuesta(idMensaje, mensaje, usuario) {
         const formRespuesta = document.querySelector(".formRespuesta");
         const crear = document.querySelector(".crearRespuesta");
         $(".formRespuesta").empty();
-        crearFormRespuesta(idMensaje, mensaje);
+        crearFormRespuesta(idMensaje, mensaje, usuario);
         formRespuesta.style.display = "block";
         crear.style.display = "none";
     }
@@ -160,10 +177,10 @@ include_once "./encabezado.php";
         crear.style.display = "block";
     }
 
-    function crearFormRespuesta(idMensaje, mensaje) {
+    function crearFormRespuesta(idMensaje, mensaje, usuario) {
         const formRespuesta = document.querySelector(".formRespuesta");
         let etiquetaForm = document.createElement("form");
-        etiquetaForm.action = "";
+        etiquetaForm.action = "../actions/guardar_respuesta.php?pregunta=<?= $_GET['pregunta'] . "&idioma=" . $idioma; ?>";
         etiquetaForm.method = "POST";
         let etiquetaP = document.createElement("p");
         let etiquetaLabel = document.createElement("label");
@@ -178,14 +195,14 @@ include_once "./encabezado.php";
         let etiquetaInput = document.createElement("input");
         etiquetaInput.type = "hidden";
         etiquetaInput.name = "idUsuario";
-        etiquetaInput.value = "";
+        etiquetaInput.value = 1;
         let etiquetaInput2 = document.createElement("input");
         let etiquetaP2 = document.createElement("p");
         if (idMensaje !== 0) {
             etiquetaInput2.type = "hidden";
             etiquetaInput2.name = "idMensaje";
             etiquetaInput2.value = idMensaje;
-            etiquetaP2.innerHTML = "<span>Referencia a mensaje " + idMensaje + "</span>: <span>\"" + mensaje + "\"</span>";
+            etiquetaP2.innerHTML = "<span><?= $lang["foro-form-referencia"] ?> " + usuario + "</span>: <span>\"" + mensaje + "\"</span>";
             etiquetaForm.append(etiquetaInput2, etiquetaP2);
         }
         let etiquetaInput3 = document.createElement("input");
