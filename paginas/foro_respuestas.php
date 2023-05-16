@@ -10,14 +10,10 @@ include_once "./encabezado.php";
 <div>
     <div>
         <p>
-            <a href="<?= $ruta['foro']; ?>" ><i class="fa-solid fa-backward"></i><?= $lang['foro_volver']; ?></a>
+            <a href="<?= $ruta['foro']; ?>" ><i class="fa-solid fa-backward"></i><?= $lang['foro-volver']; ?></a>
         </p>
     </div>
-    <?php
-    if (isset($_GET["respuestaGuardada"])) {
-        echo "<p>Respuesta guardada</p>";
-    }
-    ?>
+
     <div id="contenedor-respuestas">
 
     </div>
@@ -31,7 +27,12 @@ include_once "./encabezado.php";
     <div class="formRespuesta" style="display:none">
 
     </div>
-
+    <?php
+    if (isset($_GET["respuestaGuardada"])) {
+        
+        echo "<p>Respuesta guardada</p>";
+    }
+    ?>
 </div>
 
 <script>
@@ -195,12 +196,14 @@ include_once "./encabezado.php";
         let etiquetaInput = document.createElement("input");
         etiquetaInput.type = "hidden";
         etiquetaInput.name = "idUsuario";
-        etiquetaInput.value = 1;
+        etiquetaInput.id=1;//HAY QUE PONER AQUI EL ID GUARDADO AL LOGUEARSE
+        etiquetaInput.value = 1;//HAY QUE PONER AQUI EL ID GUARDADO AL LOGUEARSE
         let etiquetaInput2 = document.createElement("input");
         let etiquetaP2 = document.createElement("p");
         if (idMensaje !== 0) {
             etiquetaInput2.type = "hidden";
             etiquetaInput2.name = "idMensaje";
+            etiquetaInput2.id="idMensaje";
             etiquetaInput2.value = idMensaje;
             etiquetaP2.innerHTML = "<span><?= $lang["foro-form-referencia"] ?> " + usuario + "</span>: <span>\"" + mensaje + "\"</span>";
             etiquetaForm.append(etiquetaInput2, etiquetaP2);

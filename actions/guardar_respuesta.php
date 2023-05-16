@@ -22,10 +22,8 @@ try {
 
     if ($resul) {
         header("Location: ../paginas/foro_respuestas.php?respuestaGuardada=1&id=foro_respuestas&idioma=" . htmlspecialchars($_GET['idioma']) . "&pregunta=" . $foro);
-        echo json_encode(true);
     } else {
         header("Location: ../paginas/foro_respuestas.php?respuestaGuardada=0&id=foro_respuestas&idioma=" . htmlspecialchars($_GET['idioma']) . "&pregunta=" . $foro);
-        echo json_encode(false);
     }
 } catch (PDOException $ex) {
     echo $ex->getMessage();

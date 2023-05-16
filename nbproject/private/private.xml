@@ -5,12 +5,13 @@
         <group>
             <file>file:/C:/xampp/htdocs/CreviFarma/languages/es.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/utiles/funciones.php</file>
+            <file>file:/C:/xampp/htdocs/CreviFarma/actions/comprobar_email_login.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/actions/mostrar_foro_respuestas2.php</file>
-            <file>file:/C:/xampp/htdocs/CreviFarma/paginas/foro.php</file>
+            <file>file:/C:/xampp/htdocs/CreviFarma/includes/login.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/actions/guardar_respuesta.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/paginas/foro_respuestas.php</file>
+            <file>file:/C:/xampp/htdocs/CreviFarma/utiles/rutas.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/languages/val.php</file>
-            <file>file:/C:/xampp/htdocs/CreviFarma/actions/mostrar_foro.php</file>
         </group>
     </open-files>
 </project-private>

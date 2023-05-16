@@ -24,6 +24,7 @@
                         <li><a href="<?= $ruta['foro']; ?>"><?= $lang['cabecera-foro'] ?></a></li>
                         <li><a href="<?= $ruta['login']; ?>">FAQ</a></li>
                         <li><a href="<?= $ruta['buscar']; ?>"><?= $lang['buscar-medicamento'] ?></a></li>
+                        <li><a href="<?= $ruta['tienda']; ?>"><?= $lang['cabecera-tienda'] ?></a></li>
                     </ul>
                 </nav>
                 <div class="burguer fa-solid fa-bars" style="display:none">

@@ -17,6 +17,8 @@ include_once "./paginas/encabezado.php";
             break;
         case "foro": include_once "./paginas/foro.php";
             break;
+        case "tienda": include_once "./paginas/tienda.php";
+            break;
         default: include_once "./paginas/inicio.php";
     }
     ?>    
