@@ -66,6 +66,8 @@ $lang = array(
     "foro-respuesta-cancelar"          => "Cancelar",
     "foro-form-referencia"             => "Referencia a mensaje del usuario",
     "foro-volver"                      => "Volver",
-    "cabecera-tienda"                  => "Tienda"
+    "cabecera-tienda"                  => "Tienda",
+    "tienda-noProductos"               => "No hay productos",
+    "tienda-boton-aniadir"             => "Añadir"
 );
 

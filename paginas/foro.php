@@ -41,6 +41,7 @@
             console.log(error.message);
         }
     };
+    
     function mostrarPreguntas() {
         preguntas()
                 .then(datos => {

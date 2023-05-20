@@ -11,7 +11,7 @@ $lang = array(
     "apellidos"                        => "Cognoms",
     "edad"                             => "Edat",
     "fecha_creacion"                   => "Data alta",
-    "ultimo_login"                     => "Última conexio",
+    "ultimo_login"                     => "Última connexió",
     "tipo"                             => "Tipus",
     "email"                            => "Email",
     "direccion"                        => "Direcció",
@@ -66,5 +66,7 @@ $lang = array(
     "foro-respuesta-cancelar"          => "Cancel·lar",
     "foro-form-referencia"             => "Referència a missatge de l'usuari",
     "foro-volver"                      => "Tornar",
-    "cabecera-tienda"                  => "Botiga"
+    "cabecera-tienda"                  => "Botiga",
+    "tienda-noProductos"               => "No hi han productes",
+    "tienda-boton-aniadir"             => "Afegir"
 );

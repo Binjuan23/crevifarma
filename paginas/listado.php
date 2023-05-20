@@ -43,7 +43,6 @@
     const mostrarUsuarios = async (varOrden) => {
         let orden = new FormData();
         orden.append("orden", varOrden);
-        console.log(orden.get("orden"));
         try {
             const response = await fetch('./actions/listar.php', {method: 'POST', body: orden});
 

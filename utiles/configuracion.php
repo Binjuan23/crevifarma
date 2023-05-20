@@ -5,6 +5,6 @@ $idioma             = isset($_GET['idioma']) ? $_SESSION['idioma'] = htmlspecial
 if (isset($_SESSION['idioma'])) {
     $idioma = $_SESSION['idioma'];
 }
-$pre = (isset($_GET['pregunta'])) ? "." : "";
+$pre = (isset($_GET['pregunta']) || isset($_GET['tienda'])) ? "." : "";
 include_once $pre . "./languages/" . $idioma . ".php";
 

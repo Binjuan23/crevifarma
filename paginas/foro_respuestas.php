@@ -196,7 +196,6 @@ include_once "./encabezado.php";
         let etiquetaInput = document.createElement("input");
         etiquetaInput.type = "hidden";
         etiquetaInput.name = "idUsuario";
-        etiquetaInput.id=1;//HAY QUE PONER AQUI EL ID GUARDADO AL LOGUEARSE
         etiquetaInput.value = 1;//HAY QUE PONER AQUI EL ID GUARDADO AL LOGUEARSE
         let etiquetaInput2 = document.createElement("input");
         let etiquetaP2 = document.createElement("p");

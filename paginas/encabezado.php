@@ -4,8 +4,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= $lang['title']; ?></title>
+        <link rel="stylesheet" href="<?= $ruta['bootstrap-css']; ?>"/>
         <link rel="stylesheet" href="<?= $ruta['css']; ?>"/>
         <link rel="stylesheet" href="<?= $ruta['fontawesome']; ?>"/>
+        <script src="<?= $ruta['bootstrap-script']; ?>"></script>
         <script src="<?= $ruta['jquery']; ?>"></script>        
         <script src="<?= $ruta['validate']; ?>"></script>
         <script src="<?= $ruta['validate2']; ?>"></script>
@@ -45,6 +47,7 @@
                     <li><a href="<?= $ruta['foro']; ?>"><?= $lang['cabecera-foro'] ?></a></li>
                     <li><a href="<?= $ruta['login']; ?>">FAQ</a></li>
                     <li><a href="<?= $ruta['buscar']; ?>"><?= $lang['buscar-medicamento'] ?></a></li>
+                    <li><a href="<?= $ruta['tienda']; ?>"><?= $lang['cabecera-tienda'] ?></a></li>
                 </ul>
             </div>
 
