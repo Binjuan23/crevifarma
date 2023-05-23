@@ -36,12 +36,11 @@
                         error.style.display = 'none';
                         contTienda.style.display = 'block';
                         console.log(datos);
-
                         datos.map(item => {
                             let divProducto = document.createElement("div");
                             divProducto.classList.add("Producto");
                             let divInterior = document.createElement("div");
-                            divInterior.setAttribute("onclick", "location.href='./paginas/tienda_producto.php?tienda=1&id=tienda_producto'");
+                            divInterior.setAttribute("onclick", `location.href='./paginas/tienda_producto.php?tienda=1&id=tienda_producto&producto=${item.id}'`);
                             let divIn1 = document.createElement("div");
                             let imagen = document.createElement("image");
                             imagen.style = "background-image: url(\"" + item.imagen + "\");";
@@ -52,11 +51,11 @@
                             divIn2.appendChild(pIn2Nombre);
                             let divIn3 = document.createElement("div");
                             let pIn3Precio = document.createElement("p");
-                            pIn3Precio.innerText = item.precio;
+                            pIn3Precio.innerText = parseFloat(item.precio).toFixed(2) + " €";
                             divIn3.append(pIn3Precio);
                             let comprar = document.createElement("button");
                             let producto = JSON.stringify(item);
-                            comprar.setAttribute("onclick", `aniadir(${producto})`);
+                            comprar.setAttribute("onclick", `aniadir(${producto},0)`);
                             comprar.innerText = "<?= $lang['tienda-boton-aniadir']; ?>";
                             divInterior.append(divIn1, divIn2, divIn3);
                             divProducto.append(divInterior, comprar);
@@ -78,7 +77,16 @@
 
     mostrarTienda();
 
-    function aniadir(item) {
-        console.log(item);
+    function aniadir(item, numero) {
+        try {
+            let nuevoItem = new FormData();
+            nuevoItem.append("item", Object.values(item));
+            let cantidad = numero || 0;
+            nuevoItem.append("cantidad",cantidad);
+            fetch('./actions/aniadir-carro.php', {method: "POST", body: nuevoItem});
+        } catch (error) {
+            console.log(error.message);
+        }
+
     }
 </script>

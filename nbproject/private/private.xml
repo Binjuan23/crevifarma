@@ -8,9 +8,10 @@
             <file>file:/C:/xampp/htdocs/CreviFarma/languages/es.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/utiles/funciones.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/paginas/encabezado.php</file>
-            <file>file:/C:/xampp/htdocs/CreviFarma/actions/mostrar_tienda.php</file>
-            <file>file:/C:/xampp/htdocs/CreviFarma/paginas/foro_respuestas.php</file>
+            <file>file:/C:/xampp/htdocs/CreviFarma/actions/aniadir-carro.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/utiles/rutas.php</file>
+            <file>file:/C:/xampp/htdocs/CreviFarma/actions/cargar_producto.php</file>
+            <file>file:/C:/xampp/htdocs/CreviFarma/paginas/buscar_medicamento.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/languages/val.php</file>
         </group>
     </open-files>

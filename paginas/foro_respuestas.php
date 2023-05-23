@@ -7,34 +7,35 @@ $pregunta = (isset($_GET['pregunta'])) ? htmlspecialchars($_GET['pregunta']) : "
 include_once "../utiles/rutas.php";
 include_once "./encabezado.php";
 ?>
-<div>
+<main>
     <div>
-        <p>
-            <a href="<?= $ruta['foro']; ?>" ><i class="fa-solid fa-backward"></i><?= $lang['foro-volver']; ?></a>
-        </p>
+        <div>
+            <p>
+                <a href="<?= $ruta['foro']; ?>" ><i class="fa-solid fa-backward"></i><?= $lang['foro-volver']; ?></a>
+            </p>
+        </div>
+
+        <div id="contenedor-respuestas">
+
+        </div>
+
+        <p class="noRespuestas" style="display:none"></p>
+        <!--Ocultar botón sino se esta registrado-->
+        <div class="crearRespuesta">
+            <button onclick="mostrarFormRespuesta(0, 0)"><?= $lang["foro-boton-responder"]; ?></button>
+        </div>
+
+        <div class="formRespuesta" style="display:none">
+
+        </div>
+        <?php
+        if (isset($_GET["respuestaGuardada"])) {
+
+            echo "<p>Respuesta guardada</p>";
+        }
+        ?>
     </div>
-
-    <div id="contenedor-respuestas">
-
-    </div>
-
-    <p class="noRespuestas" style="display:none"></p>
-    <!--Ocultar botón sino se esta registrado-->
-    <div class="crearRespuesta">
-        <button onclick="mostrarFormRespuesta(0, 0)"><?= $lang["foro-boton-responder"]; ?></button>
-    </div>
-
-    <div class="formRespuesta" style="display:none">
-
-    </div>
-    <?php
-    if (isset($_GET["respuestaGuardada"])) {
-        
-        echo "<p>Respuesta guardada</p>";
-    }
-    ?>
-</div>
-
+</main>
 <script>
 
     const contRes = document.getElementById("contenedor-respuestas");
@@ -202,7 +203,7 @@ include_once "./encabezado.php";
         if (idMensaje !== 0) {
             etiquetaInput2.type = "hidden";
             etiquetaInput2.name = "idMensaje";
-            etiquetaInput2.id="idMensaje";
+            etiquetaInput2.id = "idMensaje";
             etiquetaInput2.value = idMensaje;
             etiquetaP2.innerHTML = "<span><?= $lang["foro-form-referencia"] ?> " + usuario + "</span>: <span>\"" + mensaje + "\"</span>";
             etiquetaForm.append(etiquetaInput2, etiquetaP2);

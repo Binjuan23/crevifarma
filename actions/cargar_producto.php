@@ -4,7 +4,8 @@ include_once '../utiles/funciones.php';
 
 try {
     $conexion = conexionBD();
-    $sql      = "SELECT * FROM productos";
+    $id       = htmlspecialchars($_POST["id"]);
+    $sql      = "SELECT * FROM productos WHERE ID=" . $id;
 
     $resul = $conexion->query($sql) or die(print($conexion->errorInfo()));
 
@@ -12,13 +13,10 @@ try {
 
     while ($row = $resul->fetch(PDO::FETCH_OBJ)) {
         $datos [] = [
-            'id'                  => $row->ID,
-            'nombre'              => urldecode($row->nombre),
-            'categoriaEspañol'    => $row->categoria_es,
-            "categoriaCastellano" => $row->categoria_val,
-            "precio"              => $row->precio,
-            "stock"               => $row->stock,
-            "imagen"              => $row->imagen
+            'nombre' => urldecode($row->nombre),
+            'id'     => $row->ID,
+            'precio' => $row->precio,
+            "stock"  => $row->stock
         ];
     }
 

@@ -15,16 +15,16 @@ try {
         }
     }
 
-    $email     = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : 0;
-    $nick      = isset($_POST['register1']) ? $datos1['user-login'] : 0;
-    $password  = isset($_GET['password-register']) ? md5(htmlspecialchars($_GET['password-register'])) : (isset($_POST['register1']) ? md5($datos1['password-login']) : 0);
-    
+    $email    = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : 0;
+    $nick     = isset($_POST['register1']) ? $datos1['user-login'] : 0;
+    $password = isset($_GET['password-register']) ? md5(htmlspecialchars($_GET['password-register'])) : (isset($_POST['register1']) ? md5($datos1['password-login']) : 0);
+
     $sql = '';
     if ($password && $nick) {
         $sql = "SELECT * FROM usuarios WHERE usuario=:nick AND contraseña=:contra";
     } else if ($email) {
         $sql = "SELECT * FROM usuarios WHERE email=:email";
-    } else if($password) {
+    } else if ($password) {
         $sql = "SELECT * FROM usuarios WHERE contraseña=:contra";
     }
 
@@ -33,7 +33,7 @@ try {
     if ($email) {
         $resul->bindValue(':email', $email);
     }
-    
+
     if ($password) {
         $resul->bindValue(':contra', $password);
     }
@@ -45,19 +45,18 @@ try {
     $resul->execute();
 
     $row = $resul->fetch(PDO::FETCH_OBJ);
-    
+
     $resul = $conexion->prepare($sql) or die(print($conexion->errorInfo()));
 
     if ($row) {
-        if ($password && $nick) {   
-            //$_SESSION['usuario'] = $nick;
-            //$_SESSION['tipo']    = $row->tipo;
-            //$_SESSION['id']    = $row->id;
-            //header("Location: ../index.php?loginSatisfactorio=1");
+        if ($password && $nick) {
+            $_SESSION['usuario'] = $nick;
+            $_SESSION['tipo']    = $row->tipo;
+            $_SESSION['id']      = $row->id;
+            header("Location: ../index.php?loginSatisfactorio=1");
         }
-        echo json_encode(false);
     } else {
-        echo json_encode(true);
+        header("Location: ../index.php?id=login?loginSatisfactorio=0");
     }
 } catch (PDOException $ex) {
     echo $ex->getMessage();
