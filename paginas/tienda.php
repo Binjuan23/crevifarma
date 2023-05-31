@@ -11,14 +11,14 @@
 <script>
     const contTienda = document.getElementById("contenedor-tienda");
     const error = document.querySelector(".noObjetos");
-    const preguntas = async () => {
+    const productos = async () => {
         try {
             const response = await fetch('./actions/mostrar_tienda.php');
             if (response.status === 200 && response.ok) {
                 return response.json();
             } else {
 <?php echo "throw new Error('" . $lang['buscar-medicamento-falloServidor'] . "');"; ?>
-                $(".noPreguntas").empty();
+                $(".noObjetos").empty();
                 error.innerText = "<?= $lang['buscar-medicamento-falloServidor']; ?>";
             }
         } catch (error) {
@@ -27,9 +27,9 @@
     };
 
     function mostrarTienda() {
-        preguntas()
+        productos()
                 .then(datos => {
-                    $("#contenedor-preguntas").empty();
+                    $("#contenedor-tienda").empty();
                     if (typeof datos !== 'undefined' && !datos) {
 <?php echo "controlError(`" . $lang['tienda-noProductos'] . "`);"; ?>
                     } else {
@@ -54,8 +54,7 @@
                             pIn3Precio.innerText = parseFloat(item.precio).toFixed(2) + " €";
                             divIn3.append(pIn3Precio);
                             let comprar = document.createElement("button");
-                            let producto = JSON.stringify(item);
-                            comprar.setAttribute("onclick", `aniadir(${producto},0)`);
+                            comprar.setAttribute("onclick", `aniadir1(${item.id},${item.stock})`);
                             comprar.innerText = "<?= $lang['tienda-boton-aniadir']; ?>";
                             divInterior.append(divIn1, divIn2, divIn3);
                             divProducto.append(divInterior, comprar);
@@ -77,16 +76,5 @@
 
     mostrarTienda();
 
-    function aniadir(item, numero) {
-        try {
-            let nuevoItem = new FormData();
-            nuevoItem.append("item", Object.values(item));
-            let cantidad = numero || 0;
-            nuevoItem.append("cantidad",cantidad);
-            fetch('./actions/aniadir-carro.php', {method: "POST", body: nuevoItem});
-        } catch (error) {
-            console.log(error.message);
-        }
-
-    }
+    
 </script>

@@ -20,13 +20,13 @@
                 </div>
                 <nav class="lista-navegacion">
                     <ul>
-                        <li><a href="<?= $ruta['listado']; ?>"><?= $lang['cabecera-listado'] ?></a></li>
                         <li><a href="<?= $ruta['indice']; ?>"><?= $lang['cabecera-inicio'] ?></a></li>
-                        <li><a href="<?= $ruta['login']; ?>"><?= $lang['cabecera-login'] ?></a></li>
-                        <li><a href="<?= $ruta['foro']; ?>"><?= $lang['cabecera-foro'] ?></a></li>
-                        <li><a href="<?= $ruta['login']; ?>">FAQ</a></li>
                         <li><a href="<?= $ruta['buscar']; ?>"><?= $lang['buscar-medicamento'] ?></a></li>
+                        <li><a href="<?= $ruta['foro']; ?>"><?= $lang['cabecera-foro'] ?></a></li>
                         <li><a href="<?= $ruta['tienda']; ?>"><?= $lang['cabecera-tienda'] ?></a></li>
+                        <li><a href="<?= $ruta['carro']; ?>"><?= $lang['cabecera-carro'] ?></a></li>
+                        <li><a href="<?= $ruta['listado']; ?>"><?= $lang['cabecera-listado'] ?></a></li>
+                        <li><a href="<?= $ruta['login']; ?>"><?= $lang['cabecera-login'] ?></a></li>
                     </ul>
                 </nav>
                 <div class="burguer fa-solid fa-bars" style="display:none">

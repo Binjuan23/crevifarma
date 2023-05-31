@@ -9,6 +9,11 @@ include_once "./encabezado.php";
 <main>
     <div>
 
+        <div>
+            <p>
+                <a href="<?= $ruta['tienda']; ?>" ><i class="fa-solid fa-backward"></i><?= $lang['foro-volver']; ?></a>
+            </p>
+        </div>
 
         <div id="contenedor-producto">
 
@@ -16,10 +21,10 @@ include_once "./encabezado.php";
 
         <p class="noProducto" style="display:none"></p>
 
-
-
     </div>
+    <script src="<?= $ruta['script']; ?>"></script>
 </main>
+
 <script>
 
     const contProducto = document.getElementById("contenedor-producto");
@@ -33,14 +38,13 @@ include_once "./encabezado.php";
                 return response.json();
             } else {
 <?php echo "throw new Error('" . $lang['buscar-medicamento-falloServidor'] . "');"; ?>
-                $(".noPreguntas").empty();
+                $(".noProducto").empty();
                 error.innerText = "<?= $lang['buscar-medicamento-falloServidor']; ?>";
             }
         } catch (error) {
             console.log(error.message);
         }
     };
-
     function mostrarProducto() {
         producto()
                 .then(datos => {
@@ -51,6 +55,7 @@ include_once "./encabezado.php";
                         error.style.display = 'none';
                         contProducto.style.display = 'block';
                         console.log(datos);
+                        let id = 0;
                         datos.map(item => {
                             let divProducto = document.createElement("div");
                             divProducto.classList.add("ProductoSolo");
@@ -75,14 +80,14 @@ include_once "./encabezado.php";
                             let cantidad = document.createElement("div");
                             cantidad.classList.add("Cantidad");
                             let menos = document.createElement("button");
-                            menos.setAttribute("onclick", `cantidad("menos", ${item.stock})`);
+                            menos.setAttribute("onclick", `cantidad("menos", ${item.stock},${item.id})`);
                             menos.innerHTML = "<i class=\"fa-solid fa-minus\"></i>";
                             let mas = document.createElement("button");
-                            mas.setAttribute("onclick", `cantidad("mas")`);
+                            mas.setAttribute("onclick", `cantidad("mas",${item.stock},${item.id})`);
                             mas.innerHTML = "<i class=\"fa-solid fa-plus\"></i>";
                             let valor = document.createElement("input");
                             valor.type = "number";
-                            valor.id = "cantidadProducto";
+                            valor.classList.add("cantidadProducto" + item.id);
                             valor.min = 1;
                             valor.max = item.stock;
                             valor.step = 1;
@@ -90,8 +95,7 @@ include_once "./encabezado.php";
                             cantidad.append(menos, valor, mas);
                             let alCarro = document.createElement("div");
                             let comprar = document.createElement("button");
-                            let producto = JSON.stringify(item);
-                            comprar.setAttribute("onclick", `aniadir(${producto})`);
+                            comprar.setAttribute("onclick", `aniadir(${item.id},${item.stock})`);
                             comprar.classList.add("fa-sharp", "fa-solid", "fa-cart-plus");
                             comprar.innerText = "<?= $lang['tienda-boton-aniadir']; ?>";
                             alCarro.appendChild(comprar);
@@ -99,6 +103,14 @@ include_once "./encabezado.php";
                             divInterior.append(divIn1, divIn2, divIn3, divIn4);
                             divProducto.append(divInterior, divBotones);
                             contProducto.appendChild(divProducto);
+                            id = item.id;
+                        });
+                        let valor = document.querySelector(".cantidadProducto" + id);
+                        valor.addEventListener("input", event => {
+                            let max = valor.getAttribute("max");
+                            if (event.srcElement.value > max) {
+                                valor.value = max;
+                            }
                         });
                     }
                 })
@@ -115,37 +127,26 @@ include_once "./encabezado.php";
     }
 
     mostrarProducto();
-    let valor = document.querySelector("#cantidadProducto");
-    console.log(valor);
-    if (valor) {
-        console.log(valor);
-        document.getElementById("cantidadProducto").addEventListener("input", event => {
+
+
+    function aniadir(item, stock) {
+        try {
+            let valor = document.querySelector(".cantidadProducto");
             let max = valor.getAttribute("max");
-            console.log(max);
-            if (event > max) {
-                const stock = document.querySelector(".maxStock");
-                if (stock) {
-                    $(".maxStock").remove();
-                }
-                let maxStock = document.createElement("p");
-                maxStock.innerText = "No hay tanto stock";
-                maxStock.classList.add("maxStock");
-
-                setTimeout(() => {
-                    $(".maxStock").remove();
-                }, 3000);
+            console.log(item);
+            if (valor.value >= +max) {
+                return;
             }
-        });
-    }
-
-
-    function cantidad(tipo, stock) {
-        let valor = document.querySelector("#cantidadProducto");
-        if (tipo === "mas") {
-            valor.value = (+valor.value >= stock) ? stock : +valor.value + 1;
-        } else {
-            valor.value = (+valor.value <= 1) ? 1 : valor.value - 1;
+            console.log("pasa if");
+            let nuevoItem = new FormData();
+            nuevoItem.append("item", item);
+            nuevoItem.append("cantidad", valor.value);
+            nuevoItem.append("stock", stock);
+            fetch('../actions/aniadir-carro.php', {method: "POST", body: nuevoItem});
+        } catch (error) {
+            console.log(error.message);
         }
+
     }
 
 

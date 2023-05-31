@@ -68,6 +68,9 @@ $lang = array(
     "foro-volver"                      => "Volver",
     "cabecera-tienda"                  => "Tienda",
     "tienda-noProductos"               => "No hay productos",
-    "tienda-boton-aniadir"             => "Añadir"
+    "tienda-boton-aniadir"             => "Añadir",
+    "carro-noProductos"                => "No has añadido ningún producto",
+    "cabecera-carro"                   => "Carrito",
+    "carro-vaciar"                     => "Vaciar carrito"
 );
 
