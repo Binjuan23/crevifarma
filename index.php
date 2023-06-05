@@ -21,10 +21,14 @@ include_once "./paginas/encabezado.php";
             break;
         case "carro": include_once "./paginas/carrito.php";
             break;
+        case "aniadir": include_once "./paginas/aniadirObjetos.php";
+            break;
+        case "logout": include_once "./actions/logOut.php";
+            break;
         default: include_once "./paginas/inicio.php";
     }
     ?>    
-   <script src="<?= $ruta['script']; ?>"></script>
+
 </main>
 <?php
 include_once "./paginas/pie.php";

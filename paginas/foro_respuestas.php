@@ -21,10 +21,11 @@ include_once "./encabezado.php";
 
         <p class="noRespuestas" style="display:none"></p>
         <!--Ocultar botón sino se esta registrado-->
-        <div class="crearRespuesta">
-            <button onclick="mostrarFormRespuesta(0, 0)"><?= $lang["foro-boton-responder"]; ?></button>
-        </div>
-
+        <?php if (isset($_SESSION['usuario'])) { ?>
+            <div class="crearRespuesta">
+                <button onclick="mostrarFormRespuesta(0, 0)"><?= $lang["foro-boton-responder"]; ?></button>
+            </div>
+        <?php } ?>
         <div class="formRespuesta" style="display:none">
 
         </div>
@@ -127,11 +128,13 @@ include_once "./encabezado.php";
                                 hiddenforoID.value = datos[index].foroid;
                                 hiddenforoID.name = "foroID" + datos[index].foroid;
                                 //Este botón en cada mensaje aparece solo para los usuarios con privilegios
-                                let responder = document.createElement("button");
-                                responder.classList.add("referenciar");
-                                responder.setAttribute("onclick", `mostrarFormRespuesta(${datos[index].idrespuesta}, "${datos[index].respuesta}", "${datos[index].usuario}")`);
-                                responder.innerText = "<?= $lang['foro-boton-referenciar']; ?>";
-                                divRespuesta.append(divUsuario, divFecha, divMensaje, hiddenID, hiddenforoID, responder);
+<?php if (isset($_SESSION['usuario'])) { ?>
+                                    let responder = document.createElement("button");
+                                    responder.classList.add("referenciar");
+                                    responder.setAttribute("onclick", `mostrarFormRespuesta(${datos[index].idrespuesta}, "${datos[index].respuesta}", "${datos[index].usuario}")`);
+                                    responder.innerText = "<?= $lang['foro-boton-referenciar']; ?>";
+<?php } ?>
+                                divRespuesta.append(divUsuario, divFecha, divMensaje, hiddenID, hiddenforoID<?php if (isset($_SESSION['usuario'])) { ?>, responder<?php } ?>);
                                 divRespuestas.appendChild(divRespuesta);
                             }
                             contRes.appendChild(divRespuestas);

@@ -4,10 +4,10 @@ session_start();
 include_once '../utiles/funciones.php';
 
 try {
-    $condicion = " WHERE ";
+
 
     if (isset($_SESSION['carro']) && count($_SESSION['carro']) >= 1) {
-
+        $condicion = " WHERE ";
         foreach ($_SESSION['carro'] as $key => $value) {
             if ($key === array_key_last($_SESSION['carro'])) {
                 $condicion .= "ID=" . $key;

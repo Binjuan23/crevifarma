@@ -76,5 +76,16 @@
 
     mostrarTienda();
 
-    
+    function aniadir1(item, stock) {
+        try {
+            let nuevoItem = new FormData();
+            console.log(stock + " " + item);
+            nuevoItem.append("item", item);
+            nuevoItem.append("stock", stock);
+            fetch('./actions/aniadir-carro.php', {method: "POST", body: nuevoItem});
+        } catch (error) {
+            console.log(error.message);
+        }
+
+    }
 </script>

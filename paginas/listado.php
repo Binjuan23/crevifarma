@@ -1,4 +1,7 @@
 <!-- Este archivo muestra al admin un listado de datos de la tabla usuarios -->
+<?php
+    //comprobar_sesion("admin");
+?>
 <div>
     <div class="filtro-busqueda"> 
         <select name="filtro" id="filtro">

@@ -27,10 +27,10 @@ function filtro($bbdd) {
         $resul    = $conexion->prepare("SELECT * FROM " . $bbdd) or die(print($conexion->errorInfo()));
         //$resul->bindParam(1, $bbdd, PDO::PARAM_STR);
         $resul->execute();
-        
+
         $row = $resul->fetch(PDO::FETCH_OBJ);
-        foreach($row as $key => $value){
-            if($key === 'imagen'){
+        foreach ($row as $key => $value) {
+            if ($key === 'imagen') {
                 continue;
             }
             $resultado [] = $key;
@@ -40,3 +40,11 @@ function filtro($bbdd) {
         echo $ex->getMessage();
     }
 }
+
+//PROBAR
+function comprobar_sesion($tipo) {
+    if (!isset($_SESSION['usuario']) && $_SESSION['tipo'] !== $tipo) {
+        header("Location: ./index.php?id=login&aviso=1");
+    }
+}
+

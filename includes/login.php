@@ -188,34 +188,39 @@
             event.preventDefault();
 
             let $formLogin = $("#login-form");
-            if ($formLogin.valid) {
-                return false;
+            if ($formLogin.valid()) {
+                $.ajax({
+                    type: 'POST',
+                    url: './actions/comprobar_email_login.php',
+                    data: {register1: $formLogin.serialize()},
+                    success: function (response) {
+                        console.log(response);                        
+                        location.href = './index.php?id=inicio';
+                    }
+                });
+            } else {
+                console.log("Faltan campos");
             }
-            $.ajax({
-                type: 'POST',
-                url: './actions/comprobar_email_login.php',
-                data: {register1: $formLogin.serialize()},
-                success: function (response) {
-                    console.log(response);
-                }
-            });
+
         });
         $('#register-form').submit(function (event) {
             event.preventDefault();
             let $formRegister = $('#register-form');
-            
-            if ($formRegister.valid) {
-                return false;
+
+            if ($formRegister.valid()) {
+                $.ajax({
+                    type: 'POST',
+                    url: './actions/registrar_user.php',
+                    data: {register: $formRegister.serialize()},
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+            } else {
+                console.log("Faltan campos");
             }
-            
-            $.ajax({
-                type: 'POST',
-                url: './actions/registrar_user.php',
-                data: {register: $formRegister.serialize()},
-                success: function (response) {
-                    console.log(response);
-                }
-            });
+
+
         });
     });
 

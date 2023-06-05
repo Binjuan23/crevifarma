@@ -6,17 +6,22 @@
 
     <p class="noPreguntas" style="display:none"></p>
     <!--Ocultar botón sino se esta registrado-->
-    <div class="crearPregunta">
-        <button onclick="mostrarFormPregunta()"><?= $lang["foro-nuevaPregunta"]; ?></button>
-    </div>
-
+    <?php if (isset($_SESSION['usuario'])) { ?>
+        <div class="crearPregunta">
+            <button onclick="mostrarFormPregunta()"><?= $lang["foro-nuevaPregunta"]; ?></button>
+        </div>
+    <?php } ?>
     <div class="formPregunta" style="display:none">
         <form action="" method="POST">
             <p>
                 <label for="pregunt">Pregunta</label>
                 <input type="text" name="pregunt" placeholder="<?= $lang["foro-nuevaPregunta-placeholder"] ?>">
             </p>
-            <input type="hidden" name="idUsuario" value="">
+            <input type="hidden" name="idUsuario" value="<?php
+            if (isset($_SESSION['usuario'])) {
+                echo $_SESSION['id'];
+            }
+            ?>">
             <input type="submit" name="enviarPregunta" value="Enviar">
         </form>
     </div>
@@ -41,7 +46,7 @@
             console.log(error.message);
         }
     };
-    
+
     function mostrarPreguntas() {
         preguntas()
                 .then(datos => {

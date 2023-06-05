@@ -16,7 +16,7 @@ try {
     $nick       = $datos1['user-register'];
     $contraseña = md5($datos1['password-register']);
     $tipo       = $datos1['tipo'];
-    $codigo     = (isset($_POST['code'])) ? $datos1['code'] : 0;
+    $codigo     = (isset($datos1['code'])) ? $datos1['code'] : 0;
 
     $resul = $conexion->prepare("INSERT INTO usuarios (usuario,contraseña,tipo,email) VALUES (:usu,:con,:tip,:em)") or die(print($conexion->errorInfo()));
     $resul->bindValue(':usu', "$nick");

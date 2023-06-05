@@ -6,19 +6,18 @@
 
     <p class="noObjetos" style="display:none"></p>
 
-    <?php
-    foreach ($_SESSION['carro'] as $key => $value) {
-        echo "ID: " . $key . " Cantidad: " . $value . "<br>";
-    }
-    ?>
-
+    <?php if (isset($_SESSION['usuario'])) { ?>
+        <div>
+            <button onclick="comprar()">Comprar</button>
+        </div>
+    <?php } ?>
     <div>
-        <button onclick="">Comprar</button>
-    </div>
-    <div>
-        <button onclick="vaciar()"><?= $lang['carro-vaciar'] ?></button>
+        <button onclick="vaciar(0, 0)"><?= $lang['carro-vaciar']; ?></button>
     </div>
 
+    <p class="gracias" style="display:none"><?= $lang["carro-gracias"]; ?></p>
+    <p class="loSiento" style="display:none"><?= $lang["carro-siento"]; ?></p>
+    <p class="noFondos" style="display:none"><?= $lang['carro-fondos']; ?></p>
 </div>
 
 <script>
@@ -54,7 +53,7 @@
                             let linea = document.createElement("div");
                             let elemento1 = document.createElement("div");
                             elemento1.classList.add("productoFoto");
-                            elemento1.style.background = item.imagen;
+                            elemento1.style.backgroundImage = `url(${item.imagen})`;
                             let elemento2 = document.createElement("div");
                             let parrafoElemento2 = document.createElement("p");
                             parrafoElemento2.innerText = item.nombre;
@@ -76,15 +75,19 @@
                             mas.innerHTML = "<i class=\"fa-solid fa-plus\"></i>";
                             let valor = document.createElement("input");
                             valor.type = "number";
-                            valor.classList.add("cantidadProducto" + item.id);
+                            valor.classList.add(`cantidadProducto${item.id}`);
                             valor.min = 1;
                             valor.max = item.stock;
                             valor.step = 1;
                             valor.value = item.cantidad;
-                            elemento5.append(menos, valor, mas);
+                            let eliminar = document.createElement("span");
+                            eliminar.innerHTML = "<i class=\"fa-regular fa-xmark\"></i>";
+                            eliminar.setAttribute("onclick", `vaciar("eliminar",${item.id})`);
+                            elemento5.append(menos, valor, mas, eliminar);
                             let elemento6 = document.createElement("div");
                             let parrafoElemento6 = document.createElement("p");
                             parrafoElemento6.innerText = item.precio * item.cantidad + "€";
+                            parrafoElemento6.id = "total";
                             elemento6.appendChild(parrafoElemento6);
                             total += item.precio * item.cantidad;
                             linea.append(elemento1, elemento2, elemento3, elemento4, elemento5, elemento6);
@@ -111,24 +114,91 @@
 
     mostrarTienda();
 
-    function aniadir(item, stock) {
+    function vaciar(uno, item) {
         try {
             let nuevoItem = new FormData();
             nuevoItem.append("item", item);
-            nuevoItem.append("stock", stock);
-            fetch('./actions/aniadir-carro.php', {method: "POST", body: nuevoItem});
+            nuevoItem.append("uno", uno);
+            fetch('./actions/vaciar-carro.php', {method: "POST", body: nuevoItem});
+            location.reload();
         } catch (error) {
             console.log(error.message);
         }
     }
 
-    function vaciar() {
+    function cantidad(tipo, stock, item) {
+        let valor = document.querySelector(`.cantidadProducto${item}`);
+        if (tipo === "mas") {
+            valor.value = (+valor.value >= stock) ? stock : +valor.value + 1;
+        } else {
+            valor.value = (+valor.value <= 1) ? 1 : valor.value - 1;
+        }
         try {
-            let vaciar = new FormData();
-            vaciar.append("vaciar", "vaciar");
-            fetch('./actions/aniadir-carro.php', {method: "POST", body: vaciar});
+            let nuevoItem = new FormData();
+            nuevoItem.append("item", item);
+            nuevoItem.append("cantidad", valor.value);
+            nuevoItem.append("carrito", "carrito");
+            fetch('./actions/aniadir-carro.php', {method: "POST", body: nuevoItem});
+            location.reload();
         } catch (error) {
             console.log(error.message);
         }
+    }
+
+    function comprar() {
+        let totalPagar = document.querySelector("#total");
+        if (totalPagar) {
+            totalPagar = parseFloat(totalPagar.innerText);
+            let errorFondos = document.querySelector(".nofondos");
+            let gracias = document.querySelector(".gracias");
+            let siento = document.querySelector(".loSiento");
+
+            const total = async () => {
+                try {
+                    let nuevoItem = new FormData();
+                    nuevoItem.append("total", totalPagar);
+                    const response = await  fetch('./actions/comprar.php', {method: "POST", body: nuevoItem});
+                    if (response.status === 200 && response.ok) {
+                        return response.json();
+                    } else {
+<?php echo "throw new Error('" . $lang['buscar-medicamento-falloServidor'] . "');"; ?>
+                        $(".noObjetos").empty();
+                        error.innerText = "<?= $lang['buscar-medicamento-falloServidor']; ?>";
+                    }
+                } catch (error) {
+                    console.log(error.message);
+                }
+            };
+
+            total()
+                    .then(datos => {
+                        if (datos === "fondos") {
+                            errorFondos.style.display = "block";
+                            setTimeout(() => {
+                                errorFondos.style.display = "none";
+                            }, 4000);
+                        } else {
+                            if (datos === "gracias") {
+                                gracias.style.display = "block";
+                                setTimeout(() => {
+                                    gracias.style.display = "none";
+                                }, 4000);
+                            } else {
+                                siento.style.display = "block";
+                                setTimeout(() => {
+                                    siento.style.display = "none";
+                                }, 4000);
+                            }
+                        }
+                        setTimeout(() => {
+                            location.reload();
+                        }, 4000);
+                    })
+                    .catch(
+                            error => {
+                                console.log(error);
+                            });
+        }
+
     }
 </script>

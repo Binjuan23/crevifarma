@@ -22,7 +22,7 @@ include_once "./encabezado.php";
         <p class="noProducto" style="display:none"></p>
 
     </div>
-    <script src="<?= $ruta['script']; ?>"></script>
+
 </main>
 
 <script>
@@ -62,7 +62,7 @@ include_once "./encabezado.php";
                             let divInterior = document.createElement("div");
                             let divIn1 = document.createElement("div");
                             let imagen = document.createElement("image");
-                            imagen.style = "background-image: url(\"" + item.imagen + "\");";
+                            imagen.style.backgroundImage="url(\"" + item.imagen + "\");";
                             divIn1.appendChild(imagen);
                             let divIn2 = document.createElement("div");
                             let pIn2Nombre = document.createElement("p");
@@ -80,14 +80,14 @@ include_once "./encabezado.php";
                             let cantidad = document.createElement("div");
                             cantidad.classList.add("Cantidad");
                             let menos = document.createElement("button");
-                            menos.setAttribute("onclick", `cantidad("menos", ${item.stock},${item.id})`);
+                            menos.setAttribute("onclick", `cantidad("menos", ${item.stock}, ${item.id})`);
                             menos.innerHTML = "<i class=\"fa-solid fa-minus\"></i>";
                             let mas = document.createElement("button");
-                            mas.setAttribute("onclick", `cantidad("mas",${item.stock},${item.id})`);
+                            mas.setAttribute("onclick", `cantidad("mas",${item.stock}, ${item.id})`);
                             mas.innerHTML = "<i class=\"fa-solid fa-plus\"></i>";
                             let valor = document.createElement("input");
                             valor.type = "number";
-                            valor.classList.add("cantidadProducto" + item.id);
+                            valor.classList.add(`cantidadProducto${item.id}`);
                             valor.min = 1;
                             valor.max = item.stock;
                             valor.step = 1;
@@ -105,7 +105,7 @@ include_once "./encabezado.php";
                             contProducto.appendChild(divProducto);
                             id = item.id;
                         });
-                        let valor = document.querySelector(".cantidadProducto" + id);
+                        let valor = document.querySelector(`.cantidadProducto${id}`);
                         valor.addEventListener("input", event => {
                             let max = valor.getAttribute("max");
                             if (event.srcElement.value > max) {
@@ -131,13 +131,11 @@ include_once "./encabezado.php";
 
     function aniadir(item, stock) {
         try {
-            let valor = document.querySelector(".cantidadProducto");
+            let valor = document.querySelector(`.cantidadProducto${item}`);
             let max = valor.getAttribute("max");
-            console.log(item);
             if (valor.value >= +max) {
                 return;
             }
-            console.log("pasa if");
             let nuevoItem = new FormData();
             nuevoItem.append("item", item);
             nuevoItem.append("cantidad", valor.value);
@@ -149,5 +147,13 @@ include_once "./encabezado.php";
 
     }
 
+    function cantidad(tipo, stock, item) {
+        let valor = document.querySelector(`.cantidadProducto${item}`);
+        if (tipo === "mas") {
+            valor.value = (+valor.value >= stock) ? stock : +valor.value + 1;
+        } else {
+            valor.value = (+valor.value <= 1) ? 1 : valor.value - 1;
+        }
+    }
 
 </script>
