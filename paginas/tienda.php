@@ -19,6 +19,7 @@
             } else {
 <?php echo "throw new Error('" . $lang['buscar-medicamento-falloServidor'] . "');"; ?>
                 $(".noObjetos").empty();
+                error.style.display = "block";
                 error.innerText = "<?= $lang['buscar-medicamento-falloServidor']; ?>";
             }
         } catch (error) {
@@ -35,16 +36,17 @@
                     } else {
                         error.style.display = 'none';
                         contTienda.style.display = 'block';
-                        console.log(datos);
                         datos.map(item => {
                             let divProducto = document.createElement("div");
                             divProducto.classList.add("Producto");
                             let divInterior = document.createElement("div");
                             divInterior.setAttribute("onclick", `location.href='./paginas/tienda_producto.php?tienda=1&id=tienda_producto&producto=${item.id}'`);
                             let divIn1 = document.createElement("div");
-                            let imagen = document.createElement("image");
-                            imagen.style = "background-image: url(\"" + item.imagen + "\");";
-                            divIn1.appendChild(imagen);
+                            let imagen1 = new Image();
+                            imagen1.src = item.imagen;
+                            imagen1.width = 200;
+                            imagen1.alt = item.nombre;
+                            divIn1.appendChild(imagen1);
                             let divIn2 = document.createElement("div");
                             let pIn2Nombre = document.createElement("p");
                             pIn2Nombre.innerText = item.nombre;

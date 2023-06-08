@@ -21,7 +21,11 @@
                 <nav class="lista-navegacion" style="display:none">
                     <ul>
                         <li><a href="<?= $ruta['indice']; ?>"><?= $lang['cabecera-inicio'] ?></a></li>
-                        <li><a href="<?= $ruta['buscar']; ?>"><?= $lang['buscar-medicamento'] ?></a></li>
+
+                        <li><a href="<?= $ruta['perfil']; ?>">Perfil</a></li>
+                        <?php if (isset($_SESSION['usuario']) && $_SESSION['tipo'] !== "admin") { ?>
+                            <li><a href="<?= $ruta['buscar']; ?>"><?= $lang['buscar-medicamento'] ?></a></li>
+                        <?php } ?>
                         <li><a href="<?= $ruta['foro']; ?>"><?= $lang['cabecera-foro'] ?></a></li>
                         <?php if (isset($_SESSION['usuario']) && $_SESSION['tipo'] === "farmacia") { ?>
                             <li><a href="<?= $ruta['aniadir']; ?>"><?= $lang['cabecera-aniadir'] ?></a></li>
@@ -50,6 +54,9 @@
             <div class="navMovil" >
                 <ul>
                     <li><a href="<?= $ruta['indice']; ?>"><?= $lang['cabecera-inicio'] ?></a></li>
+                    <?php if (isset($_SESSION['usuario']) && $_SESSION['tipo'] !== "admin") { ?>
+                        <li><a href="<?= $ruta['perfil']; ?>">Perfil</a></li>
+                    <?php } ?>
                     <li><a href="<?= $ruta['buscar']; ?>"><?= $lang['buscar-medicamento'] ?></a></li>
                     <li><a href="<?= $ruta['foro']; ?>"><?= $lang['cabecera-foro'] ?></a></li>
                     <?php if (isset($_SESSION['usuario']) && $_SESSION['tipo'] === "farmacia") { ?>

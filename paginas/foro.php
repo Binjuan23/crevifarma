@@ -7,21 +7,16 @@
     <p class="noPreguntas" style="display:none"></p>
     <!--Ocultar botón sino se esta registrado-->
     <?php if (isset($_SESSION['usuario'])) { ?>
-        <div class="crearPregunta">
+        <div class="botonPregunta">
             <button onclick="mostrarFormPregunta()"><?= $lang["foro-nuevaPregunta"]; ?></button>
         </div>
     <?php } ?>
     <div class="formPregunta" style="display:none">
-        <form action="" method="POST">
+        <form action="./actions/guardar_pregunta.php" method="POST" id="crearPregunta">
             <p>
                 <label for="pregunt">Pregunta</label>
-                <input type="text" name="pregunt" placeholder="<?= $lang["foro-nuevaPregunta-placeholder"] ?>">
+                <input type="text" name="pregunt" id="pregunt" placeholder="<?= $lang["foro-nuevaPregunta-placeholder"] ?>">
             </p>
-            <input type="hidden" name="idUsuario" value="<?php
-            if (isset($_SESSION['usuario'])) {
-                echo $_SESSION['id'];
-            }
-            ?>">
             <input type="submit" name="enviarPregunta" value="Enviar">
         </form>
     </div>
@@ -32,6 +27,8 @@
 
     const contPre = document.getElementById("contenedor-preguntas");
     const error = document.querySelector(".noPreguntas");
+    let formPregunta = document.querySelector(".formPregunta");
+    let boton = document.querySelector(".botonPregunta");
     const preguntas = async () => {
         try {
             const response = await fetch('./actions/mostrar_foro.php');
@@ -101,5 +98,53 @@
     }
 
     mostrarPreguntas();
+
+    function mostrarFormPregunta() {
+        boton.style.display = "none";
+        formPregunta.style.display = "block";
+    }
+
+    $(document).ready(function () {
+        $("#crearPregunta").submit(function (event) {
+            event.preventDefault();
+            let form_data = new FormData();
+            form_data.append('pregunta', $("input[name='pregunt']").val());
+            
+            $.ajax({
+                type: 'POST',
+                url: './actions/guardar_pregunta.php',
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response) {
+                        formPregunta.style.display = "none";
+                        boton.style.display = "block";
+                        error.style.display = "block";
+                        error.innerTEXT = '<?= $lang["foro-preAnia"] ?>';
+                        setTimeout(() => {
+                            error.style.display = "none";
+                            error.innerTEXT = '';
+                            //location.reload();
+                        }, 3000);
+                    } else {
+                        formPregunta.style.display = "none";
+                        boton.style.display = "block";
+                        error.style.display = "block";
+                        error.innerTEXT = '<?= $lang["foro-preNoAnia"] ?>';
+                        setTimeout(() => {
+                            error.style.display = "none";
+                            error.innerTEXT = '';
+                        }, 3000);
+                    }
+                }
+            });
+
+
+
+
+        })
+                ;
+    });
 
 </script>

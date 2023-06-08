@@ -98,7 +98,8 @@ include_once "./encabezado.php";
                                 let divFecha = document.createElement("div");
                                 divFecha.classList.add("Fecha");
                                 let pFecha = document.createElement("p");
-                                pFecha.innerText = datos[index].fecha;
+                                let fecha1 = new Date(datos[index].fecha)
+                                pFecha.innerText = fecha1.toDateString() + " " + fecha1.getHours() + ":" + fecha1.getMinutes();
                                 divFecha.appendChild(pFecha);
                                 let divMensaje = document.createElement("div");
                                 divMensaje.classList.add("Mensaje");
@@ -109,7 +110,8 @@ include_once "./encabezado.php";
                                         if (datos[inde].idrespuesta === referencia) {
                                             let pDatosReferencia = document.createElement("p");
                                             pDatosReferencia.classList.add("datosReferencia");
-                                            pDatosReferencia.innerText = `Ref a ${datos[inde].usuario} el ${datos[inde].fecha}`;
+                                            let fecha = new Date(datos[inde].fecha);
+                                            pDatosReferencia.innerText = `Ref a ${datos[inde].usuario} el ${fecha.toDateString()} ${fecha.getHours()}:${fecha.getMinutes()}`;
                                             let pSecundario = document.createElement("p");
                                             pSecundario.classList.add("respuestaReferencia")
                                             pSecundario.innerText = `"${datos[inde].respuesta}"`;
@@ -156,7 +158,6 @@ include_once "./encabezado.php";
     }
 
     mostrar();
-
     function controlError2() {
         let errorParrafo = document.createElement("p");
         let divError = document.createElement("div");
@@ -200,7 +201,7 @@ include_once "./encabezado.php";
         let etiquetaInput = document.createElement("input");
         etiquetaInput.type = "hidden";
         etiquetaInput.name = "idUsuario";
-        etiquetaInput.value = 1;//HAY QUE PONER AQUI EL ID GUARDADO AL LOGUEARSE
+        etiquetaInput.value = 1; //HAY QUE PONER AQUI EL ID GUARDADO AL LOGUEARSE
         let etiquetaInput2 = document.createElement("input");
         let etiquetaP2 = document.createElement("p");
         if (idMensaje !== 0) {

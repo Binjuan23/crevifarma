@@ -10,6 +10,10 @@
         <div>
             <button onclick="comprar()">Comprar</button>
         </div>
+    <?php } else if (isset($_SESSION['carro']) && count($_SESSION['carro']) >= 1) { ?>
+        <div>
+            <p><?= $lang["carro-registro"] ?></p>
+        </div>
     <?php } ?>
     <div>
         <button onclick="vaciar(0, 0)"><?= $lang['carro-vaciar']; ?></button>

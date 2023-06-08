@@ -25,6 +25,8 @@ include_once "./paginas/encabezado.php";
             break;
         case "logout": include_once "./actions/logOut.php";
             break;
+        case "perfil": include_once "./paginas/perfil.php";
+            break;
         default: include_once "./paginas/inicio.php";
     }
     ?>    

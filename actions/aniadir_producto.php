@@ -46,7 +46,7 @@ try {
                 $nuevoNom      = $_SERVER['REQUEST_TIME'] . $nomImagen;
                 $directorio    = '../assets/images/';
                 $destino       = $directorio . $nuevoNom;
-                $imagen        = $destino;
+                $imagen        = '../assets/images/' . $nuevoNom;
                 if (move_uploaded_file($nomTemp, $destino)) {
                     $datos2 ['imagen'] = true;
                 } else {

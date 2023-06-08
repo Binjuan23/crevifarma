@@ -35,7 +35,7 @@ try {
     }
 
     if ($password) {
-        $resul->bindValue(':contra', $password);
+        $resul->bindValue(':contra', "$password");
     }
 
     if ($nick) {
@@ -47,11 +47,18 @@ try {
     $row = $resul->fetch(PDO::FETCH_OBJ);
 
     if ($row) {
+        $tipo = $row->tipo;
+        $ID   = $row->ID;
         if ($password && $nick) {
+            $fecha               = date("Y-m-d H:i:s");
+            $resul2              = $conexion->prepare("UPDATE usuarios SET ultimo_login='" . $fecha . "' WHERE ID=" . $ID) or die(print($conexion->errorInfo()));
+            $resul2->execute();
             $_SESSION['usuario'] = $nick;
-            $_SESSION['tipo']    = $row->tipo;
-            $_SESSION['id']      = $row->ID;
+            $_SESSION['tipo']    = $tipo;
+            $_SESSION['id']      = $ID;
             echo json_encode(true);
+        } else {
+            echo json_encode(false);
         }
     } else {
         echo json_encode(false);

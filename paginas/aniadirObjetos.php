@@ -3,6 +3,10 @@
 ?>
 <div>
     <div>
+
+        <p class="verde" style="display:none"><?= $lang['producto-eliminado'] ?></p>
+        <p class="rojo" style="display:none"><?= $lang['producto-noEliminado'] ?></p>
+
         <table id="medicamentos">
             <thead>
                 <tr>
@@ -89,7 +93,7 @@
                 <input type="number" step="any" min="0" name="precio" id="precioM" placeholder="<?= $lang['precio']; ?>">
             </div>
 
-            <input type="submit" value="Modificar" name="insert-boton" class="form-boton">
+            <input type="submit" value="Modificar" name="modificar-boton" class="form-boton">
 
         </form>
         <button onclick="cerrarForm()"><?= $lang['aniadir-cerrarForm'] ?></button>
@@ -131,20 +135,20 @@
                                 dato.innerText = (key !== "tipo") ? item[key] : (item[key] === "tipomedicamento") ? "" : item[key] + "€";
                             }
                             row.appendChild(dato);
-
                         }
                     }
                     let dato_mod = document.createElement("td");
                     let modificar = document.createElement("button");
                     modificar.classList.add("modificar");
-                    modificar.setAttribute("onclick", `modificar(${item.id},${item.stock},${item.precio},\"${item.tipo}\")`);
+                    modificar.setAttribute("onclick", `modificar(${item.id},\"${item.tipo}\")`);
                     modificar.innerText = "Modificar";
                     dato_mod.appendChild(modificar);
                     row.appendChild(dato_mod);
                     let dato_form = document.createElement("td");
                     let form = document.createElement("form");
-                    form.action = "./actions/borrar-medicamento.php";
+                    form.action = "./actions/borrar_medicamento.php";
                     form.method = "post";
+                    form.id = "eliminarProducto";
                     let input = document.createElement("input");
                     input.type = "hidden";
                     input.name = "medicamento-id-del";
@@ -177,43 +181,41 @@
         formMod.style.display = "none";
     }
 
-    function modificar(itemId, stock, tipo, precio) {
+    function modificar(id, tipo) {
+        let hide = document.querySelectorAll("#modificar-form>input[type='hidden']");
+        if (hide) {
+            hide.forEach(item => item.remove());
+        }
+        console.log(hide);
         formNuevo.style.display = "none";
         boton.style.display = "none";
         formMod.style.display = "block";
-
-        $('#modificar-form').submit(function (event) {
-            event.preventDefault();
-            let form = new FormData();
-            form.append("stock", stock);
-            form.append("tipo", tipo);
-            form.append("id", itemId);
-            form.append("precio", precio);
-            $.ajax({
-                type: 'POST',
-                url: './actions/modificar_producto.php',
-                data: form,
-                contentType: false,
-                processData: false,
-                success: function (response) {
-
-                    const aniadido = document.querySelector(".noInsert");
-                    formNuevo.style.display = "none";
-                    boton.style.display = "block";
-                    aniadido.style.display = "block";
-                    aniadido.innerText = "<?= $lang['aniadir-bien'] ?>";
-                    setTimeout(() => {
-                        aniadido.style.display = "none";
-                        aniadido.innerTEXT = '';
-                        //location.reload();
-                    }, 3000);
-                }
-            });
-        })
-                ;
-
+        let modiform = document.getElementById("modificar-form");
+        let input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "id";
+        input.value = id;
+        let input3 = document.createElement("input");
+        input3.type = "hidden";
+        input3.name = "tipo";
+        input3.value = tipo;
+        modiform.append(input, input3);
     }
 
+    const verde = document.querySelector(".verde");
+    const rojo = document.querySelector(".rojo");
+
+<?php if (isset($_GET["eliminado"]) && $_GET["eliminado"]) { ?>
+        verde.style.display = "block";
+        setTimeout(() => {
+            verde.style.display = "none";
+        }, 3000);
+<?php } else if (isset($_GET["eliminado"]) && !$_GET["eliminado"]) { ?>
+        rojo.style.display = "block";
+        setTimeout(() => {
+            rojo.style.display = "none";
+        }, 3000);
+<?php } ?>
 
     $(document).ready(function () {
         let tipo = document.getElementsByName("tipo");
@@ -300,7 +302,6 @@
                 $.ajax({
                     type: 'POST',
                     url: './actions/aniadir_producto.php',
-                    //data: {insert: $formInsert.serialize()},
                     data: form_data,
                     contentType: false,
                     processData: false,
@@ -325,7 +326,55 @@
 
         })
                 ;
+        $('#modificar-form').submit(function (event) {
+            event.preventDefault();
+            let form = new FormData();
+            let stock = $("#stockM").val() || 0;
+            let precio = $("#precioM").val() || 0;
+            let tipo = $("#modificar-form>input[name='tipo']").val() || 0;
+            let id = $("#modificar-form>input[name='id']").val() || 0;
+            form.append("stock", stock);
+            form.append("tipo", tipo);
+            form.append("id", id);
+            form.append("precio", precio);
+            $.ajax({
+                type: 'POST',
+                url: './actions/modificar_producto.php',
+                data: form,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response === "true") {
+                        const aniadido = document.querySelector(".noInsert");
+                        formNuevo.style.display = "none";
+                        formMod.style.display = "none";
+                        boton.style.display = "block";
+                        aniadido.style.display = "block";
+                        aniadido.innerText = "<?= $lang['aniadir-mod'] ?>";
+                        setTimeout(() => {
+                            aniadido.style.display = "none";
+                            aniadido.innerTEXT = '';
+                            location.reload();
+                        }, 3000);
+                    } else {
+                        const aniadido = document.querySelector(".noInsert");
+                        formNuevo.style.display = "none";
+                        formMod.style.display = "none";
+                        boton.style.display = "block";
+                        aniadido.style.display = "block";
+                        aniadido.innerText = "<?= $lang['aniadir-nada'] ?>";
+                        setTimeout(() => {
+                            aniadido.style.display = "none";
+                            aniadido.innerTEXT = '';
+                            
+                        }, 3000);
 
+                    }
+
+                }
+            });
+        })
+                ;
     });
 </script>
 

@@ -33,6 +33,8 @@
 
     </div>
 
+    <p class="loginNo rojo" style="display:none"><?= $lang['login-fallo'] ?></p>
+
     <div class="form-register">
         <div class="login-logo">
             <img src="" alt="logoLog">
@@ -93,6 +95,8 @@
 </div>
 
 <script>
+    let noLogin = document.querySelector(".loginNo");
+
     $(document).ready(function () {
 
         $("input[type=radio]").click(function () {
@@ -165,6 +169,7 @@
             }
         });
 
+        
         $('#login-form').validate({
             focusCleanup: true,
             errorPlacement: function (error, element) {
@@ -194,8 +199,15 @@
                     url: './actions/comprobar_email_login.php',
                     data: {register1: $formLogin.serialize()},
                     success: function (response) {
-                        console.log(response);                        
-                        location.href = './index.php?id=inicio';
+                        if (response === "true") {
+                            location.href = './index.php?id=inicio';
+                        } else {
+                            noLogin.style.display = "block";
+                            setTimeout(() => {
+                                noLogin.style.display = "none";
+                            }, 3000);
+                        }
+
                     }
                 });
             } else {
