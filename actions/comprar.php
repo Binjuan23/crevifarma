@@ -18,6 +18,12 @@ try {
     $id_usuario = $_SESSION['id'];
     $condicion  = '';
     $total      = isset($_POST['total']) ? $_POST['total'] : 0;
+    $direccion = $conexion->query("SELECT direccion FROM usuarios WHERE ID=" . $id_usuario)or die(print($conexion->errorInfo()));
+    $direccion2 = $direccion->fetch(PDO::FETCH_OBJ);
+    if($direccion2->direccion === null || $direccion2->direccion === ''){
+        echo json_encode("direccion");
+        exit;
+    }
 
     $dinero   = $conexion->query("SELECT dinero FROM usuarios WHERE ID=" . $id_usuario) or die(print($conexion->errorInfo()));
     $cantidad = $dinero->fetch(PDO::FETCH_OBJ);

@@ -8,7 +8,6 @@ try {
 
     $resul = $conexion->query("SELECT * FROM pedidos WHERE id_usuario=" . $_SESSION['id']) or die(print($conexion->errorInfo()));
 
-    $row    = $resul->fetch(PDO::FETCH_OBJ);
     $datos2 = [];
     while ($row    = $resul->fetch(PDO::FETCH_OBJ)) {
         $datos    = [

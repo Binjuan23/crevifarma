@@ -5,6 +5,9 @@ include_once "./utiles/funciones.php";
 $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 include_once "./utiles/rutas.php";
 include_once "./paginas/encabezado.php";
+
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Sat, 1 Jul 2000 05:00:00 GMT"); // Fecha en el pasado
 ?>
 <main>
     <?php
@@ -32,6 +35,7 @@ include_once "./paginas/encabezado.php";
     ?>    
 
 </main>
+
 <?php
 include_once "./paginas/pie.php";
 ?>    

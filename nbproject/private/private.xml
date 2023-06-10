@@ -5,8 +5,10 @@
         <group>
             <file>file:/C:/xampp/htdocs/CreviFarma/languages/es.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/paginas/encabezado.php</file>
+            <file>file:/C:/xampp/htdocs/CreviFarma/includes/login.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/paginas/perfil.php</file>
-            <file>file:/C:/xampp/htdocs/CreviFarma/paginas/listado.php</file>
+            <file>file:/C:/xampp/htdocs/CreviFarma/assets/javascript/script.js</file>
+            <file>file:/C:/xampp/htdocs/CreviFarma/index.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/utiles/rutas.php</file>
             <file>file:/C:/xampp/htdocs/CreviFarma/languages/val.php</file>
         </group>

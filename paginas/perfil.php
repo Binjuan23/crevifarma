@@ -82,7 +82,7 @@
                 <th>ID</th>
                 <th>Fecha</th>
                 <th><?= $lang['perfil-estado']; ?></th>
-                <th></th>
+                <th>Factura</th>
             </tr>
         </thead>
 
@@ -97,7 +97,6 @@
                 <th><?= $lang['nombre'] ?></th>
                 <th>Fecha</th>
                 <th><?= $lang['direccion']; ?></th>
-                <th></th>
             </tr>
         </thead>
 
@@ -239,7 +238,6 @@
                         tPed.innerHTML += `<tbody><tr colspan="4"><td class="tdCenter"><?= $lang['perfil-noPedidos']; ?></td></tr></tbody>`;
                     } else {
                         console.log(datos);
-
                         let bodi = document.createElement("tbody");
                         datos.map(element => {
                             let linea = document.createElement("tr");
@@ -250,9 +248,24 @@
                                 dato.innerText = (propiedad === "4Total") ? element[propiedad] + "€ " : element[propiedad];
                                 linea.appendChild(dato);
                             }
+                            let celda = document.createElement("td");
+                            let factura = document.createElement("form");
+                            factura.action = "./actions/factura.php";
+                            factura.method = "post";
+                            factura.target = "_blank";
+                            let inid = document.createElement("input");
+                            inid.type = "hidden";
+                            inid.name = "id";
+                            inid.value = element['1Id'];
+                            let boton = document.createElement("button");
+                            boton.innerText = "Factura";
+                            boton.type = "submit";
+                            factura.append(inid, boton);
+                            celda.appendChild(factura)
+                            linea.appendChild(celda);
                             bodi.appendChild(linea);
                         });
-                        tPedidos.appendChild(bodi);
+                        tPed.appendChild(bodi);
 
 
                     }
@@ -264,9 +277,10 @@
     ;
     mostrarPedidos();
 
+
     const reservas = async () => {
         try {
-            const response = await fetch('./actions/mostrar_pedidos.php');
+            const response = await fetch('./actions/mostrar_reservas.php');
             if (response.status === 200 && response.ok) {
                 return response.json();
             } else {
@@ -285,21 +299,19 @@
                         tRes.innerHTML += `<tbody><tr colspan="4"><td class="tdCenter"><?= $lang['perfil-noReservas']; ?></td></tr></tbody>`;
                     } else {
                         console.log(datos);
-                        /*
-                         let bodi = document.createElement("tbody");
-                         datos.map(element => {
-                         let linea = document.createElement("tr");
-                         for (const propiedad in element) {
-                         if (propiedad === "Farmacia")
-                         continue;
-                         let dato = document.createElement("td");
-                         dato.innerText = (propiedad === "4Total") ? element[propiedad] + "€ " : element[propiedad];
-                         linea.appendChild(dato);
-                         }
-                         bodi.appendChild(linea);
-                         });
-                         tRes.appendChild(bodi);
-                         */
+
+                        let bodi = document.createElement("tbody");
+                        datos.map(element => {
+                            let linea = document.createElement("tr");
+                            for (const propiedad in element) {
+                                let dato = document.createElement("td");
+                                dato.innerText = (element[propiedad] === "" || element[propiedad] === null) ? " " : element[propiedad];
+                                linea.appendChild(dato);
+                            }
+                            bodi.appendChild(linea);
+                        });
+                        tRes.appendChild(bodi);
+
 
                     }
                 })

@@ -22,6 +22,7 @@
     <p class="gracias" style="display:none"><?= $lang["carro-gracias"]; ?></p>
     <p class="loSiento" style="display:none"><?= $lang["carro-siento"]; ?></p>
     <p class="noFondos" style="display:none"><?= $lang['carro-fondos']; ?></p>
+    <p class="noDireccion" style="display:none"><?= $lang['carro-direccion']; ?></p>
 </div>
 
 <script>
@@ -153,9 +154,10 @@
         let totalPagar = document.querySelector("#total");
         if (totalPagar) {
             totalPagar = parseFloat(totalPagar.innerText);
-            let errorFondos = document.querySelector(".nofondos");
+            let errorFondos = document.querySelector(".noFondos");
             let gracias = document.querySelector(".gracias");
             let siento = document.querySelector(".loSiento");
+            let direccion = document.querySelector(".noDireccion");
 
             const total = async () => {
                 try {
@@ -180,6 +182,11 @@
                             errorFondos.style.display = "block";
                             setTimeout(() => {
                                 errorFondos.style.display = "none";
+                            }, 4000);
+                        } else if (datos === "direccion") {
+                            direccion.style.display = "block";
+                            setTimeout(() => {
+                                direccion.style.display = "none";
                             }, 4000);
                         } else {
                             if (datos === "gracias") {

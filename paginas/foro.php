@@ -1,4 +1,4 @@
-<div>
+<div class="foro">
 
     <div id="contenedor-preguntas">
 

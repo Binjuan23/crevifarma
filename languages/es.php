@@ -31,7 +31,7 @@ $lang = array(
     "login-eliminado"                  => "Usuario eliminado",
     "login-noEliminado"                => "Error al eliminar el usuario",
     "listado-orden"                    => "Ordenar por...",
-    "buscar-medicamento"               => "Buscar medicamento",
+    "buscar-medicamento"               => "Medicamento",
     "buscar-medicamento-nombre"        => "Introduce medicamento...",
     "buscar-medicamento-h1"            => "Busca el medicamento que necesitas",
     "buscar-medicamento-imagenDef"     => "Imagen por defecto",
@@ -116,6 +116,13 @@ $lang = array(
     "perfil-estado"                    => "Estado",
     "perfil-noPedidos"                 => "No has realizado ningún pedido",
     "perfil-reservas"                  => "Reservas realizadas",
-    "perfil-noReservas"                => "No has realizado ninguna reserva"
+    "perfil-noReservas"                => "No has realizado ninguna reserva",
+    "reserva-si"                       => "Reserva realizada",
+    "reserva-no"                       => "Error al realizar la reserva",
+    "reserva-ya"                       => "Ya tienes una reserva de este medicamento",
+    "carro-direccion"                  => "Introduce una dirección para poder comprar",
+    "terminos"                         => "Términos y condiciones",
+    "privacidad"                       => "Política de privacidad",
+    "bases"                            => "Bases legales"
 );
 

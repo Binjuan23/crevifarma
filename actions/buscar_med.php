@@ -8,7 +8,7 @@ try {
     $error     = ["data" => false];
     $datos     = [];
 
-    $resul = $conexion->prepare("SELECT u.nombre, u.apellidos, u.direccion, u.email, u.imagen, m.nombre_med, m.stock FROM medicamentos m inner join usuarios u on m.id_farmacia=u.id WHERE UPPER(m.nombre_med) LIKE :condicion") or die(print($conexion->errorInfo()));
+    $resul = $conexion->prepare("SELECT u.nombre, u.apellidos, u.direccion, u.email, u.imagen, m.nombre_med, m.stock,m.ID FROM medicamentos m inner join usuarios u on m.id_farmacia=u.id WHERE UPPER(m.nombre_med) LIKE :condicion") or die(print($conexion->errorInfo()));
     $resul->bindValue(':condicion', "%$condicion%");
     $resul->execute();
     $row   = $resul->fetch(PDO::FETCH_OBJ);
@@ -21,7 +21,8 @@ try {
                 'direccion'   => $row->direccion,
                 'medicamento' => $row->nombre_med,
                 'stock'       => $row->stock,
-                'imagen'      => $row->imagen
+                'imagen'      => $row->imagen,
+                "idmed"       => $row->ID
             ];
             $row      = $resul->fetch(PDO::FETCH_OBJ);
         } while ($row);

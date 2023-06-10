@@ -3,8 +3,292 @@
     margin: 0px;
     padding: 0px;
     text-align: center;
+    list-style: none;
 }
 
 body{
     min-height: 100vh;
+    background:#C8F4A4;
 }
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:20px 20px 0px 20px;
+    background: linear-gradient(to right, #B4F18A, #82EF36);
+    z-index:99;
+    box-shadow: 0 0 5px 2px #C4E5A9;
+}
+header .burguer:before{
+    font-size:50px;
+}
+
+header .head-principal{
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .head-principal img,.nav-foot li a img{
+    width:75px;
+}
+
+body .container-login-register{
+    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+
+.wrapper .form-login, .wrapper .form-register{
+    width:100%;
+}
+
+.wrapper{
+    position:relative;
+    background: white;
+    width:400px;
+    height:342.6px;
+    border:2px solid rgba(255, 255, 255, .5);
+    margin-top:20px;
+    border-radius:20px;
+    box-shadow: 0 0 5px 5px #C4E5A9;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition:height .1s ease;
+}
+
+.wrapper .form-login{
+    transition: transform .18s ease;
+    transform:translateX(0);
+}
+
+.wrapper.active .form-login{
+    transition:none;
+    transform:translateX(-400px);
+}
+
+.wrapper .form-register{
+    position:absolute;
+    transition:none;
+    transform:translateX(400px);
+}
+
+.wrapper.active .form-register{
+    transition: transform .18s ease;
+    transform:translateX(0);
+}
+
+.wrapper.active.valre{
+    height:510.6px;
+}
+
+.wrapper.active{
+    height:390.6px;
+}
+
+div .login-logo{
+    position:relative;
+    height:150px;
+    z-index:1;
+}
+
+div .login-logo img{
+    width:200px;
+}
+
+div .login-logo h2 {
+    position: absolute;
+    right:130px;
+    bottom:-3px;
+}
+
+div .form-login #login-form, div .form-register #register-form{
+    position:relative;
+    z-index:2;
+}
+
+.form-boton{
+    font-size: .9em;
+    background:#C8F4A4;
+    color:white;
+    width:80%;
+    outline: none;
+    border-radius:6px;
+    cursor:pointer;
+    text-align: center;
+    font-weight: 500;
+    margin:25px 0px 10px;
+}
+
+.login-no-cuenta a{
+    text-decoration: none;
+    font-weight: 600;
+    color:#C4E5A9;
+}
+
+.login-no-cuenta a:hover{
+    text-decoration:underline;
+}
+
+.logoTitulo-Movil:hover, .burguer:hover{
+    cursor:pointer;
+}
+
+label{
+    width:150px;
+    text-align: right;
+}
+
+.error{
+    width:auto;
+    color:red;
+}
+
+input{
+    display:inline-block;
+    width:200px;
+    border:none;
+    background: transparent;
+    margin-left:15px;
+}
+
+input::placeholder{
+    text-align: left;
+}
+
+.idiomas{
+    display:flex;
+    justify-content: end;
+}
+
+.idiomas a{
+    text-decoration: none;
+    font-weight: 600;
+    color:black;
+}
+
+.idiomas a:hover, {
+    cursor:pointer;
+}
+
+input[type='radio'],input[type='checkbox'],label[for='remember2'],label[for='normal'],label[for='farmacia']{
+    width:auto;
+}
+
+.inicio{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#carouselSlider{
+    margin-top:100px;
+    width:90%;
+}
+
+.articulo{
+    margin-top:25px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border:2px solid rgba(0,0,0, .5);
+    box-shadow: 0 0 5px 5px #C4E5A9;
+    width:85%;
+    border-radius:15px;
+}
+
+.articulo p{
+    width:90%;
+    text-align: justify;
+}
+
+footer{
+    margin-top:20px;
+}
+
+.nav-foot{
+    display:flex;
+    justify-content: space-around;
+    padding:0;
+    margin:0;
+    align-items: center;
+}
+
+.articulo img{
+    margin-top:10px;
+    border-radius:15px;
+}
+
+.articulo img:hover{
+    transform:scale(1.02);
+    cursor:pointer;
+    box-shadow: 0 0 5px 5px #C4E5A9;
+}
+
+.nav-icon{
+    margin-top:10px;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding:0;
+    margin:0;
+}
+
+.nav-icon i{
+    font-size: 1.2em;
+}
+
+.politica{
+    margin-top:10px;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+footer a{
+    text-decoration: none;
+    color:black;
+}
+
+footer a:hover{
+    text-decoration: underline;
+}
+
+.medicamento{
+    margin-top:120px;
+    min-height: 60vh;
+}
+
+div.resultados-busqueda{
+
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.resultados-busqueda div{
+    border: 2px solid rgba(0,0,0, .5);
+    width:60%;
+    margin-top:25px;
+    border-radius:15px;
+    box-shadow: 0 0 5px 5px #C4E5A9;
+    background: white;
+}
+
+.resultados-busqueda div picture img{
+    width:50%;
+    margin-top:10px;
+    border-radius:15px;
+}
+
+

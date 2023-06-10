@@ -12,7 +12,7 @@ try {
                     . "(Select usu.direccion direccion, med.nombre_med nombre from medicamentos med inner join "
                     . "usuarios usu on usu.ID=med.id_farmacia) consulta2 on consulta1.nombre=consulta2.nombre") or die(print($conexion->errorInfo()));
 
-    $row    = $resul->fetch(PDO::FETCH_OBJ);
+    
     $datos2 = [];
     while ($row    = $resul->fetch(PDO::FETCH_OBJ)) {
         $datos    = [
@@ -22,7 +22,6 @@ try {
         ];
         $datos2[] = $datos;
     }
-
 
     if ($datos2) {
         echo json_encode($datos2);
