@@ -7,9 +7,9 @@ include_once "../utiles/rutas.php";
 include_once "./encabezado.php";
 ?>
 <main>
-    <div>
+    <div class="tiendaProducto">
 
-        <div>
+        <div class="volver">
             <p>
                 <a href="<?= $ruta['tienda']; ?>" ><i class="fa-solid fa-backward"></i><?= $lang['foro-volver']; ?></a>
             </p>
@@ -61,8 +61,8 @@ include_once "./encabezado.php";
                             divProducto.classList.add("ProductoSolo");
                             let divInterior = document.createElement("div");
                             let divIn1 = document.createElement("div");
-                            let imagen = document.createElement("image");
-                            imagen.style.backgroundImage="url(\"" + item.imagen + "\");";
+                            let imagen = new Image;
+                            imagen.src = item.imagen;
                             divIn1.appendChild(imagen);
                             let divIn2 = document.createElement("div");
                             let pIn2Nombre = document.createElement("p");
@@ -157,3 +157,7 @@ include_once "./encabezado.php";
     }
 
 </script>
+<?php
+include_once "../paginas/pie.php";
+?>    
+

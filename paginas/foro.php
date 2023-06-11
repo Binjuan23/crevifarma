@@ -12,12 +12,13 @@
         </div>
     <?php } ?>
     <div class="formPregunta" style="display:none">
+        <span class="cerral" onclick="cerrar()" ><i class="fa-solid fa-xmark"></i></span>
         <form action="./actions/guardar_pregunta.php" method="POST" id="crearPregunta">
             <p>
                 <label for="pregunt">Pregunta</label>
                 <input type="text" name="pregunt" id="pregunt" placeholder="<?= $lang["foro-nuevaPregunta-placeholder"] ?>">
             </p>
-            <input type="submit" name="enviarPregunta" value="Enviar">
+            <input type="submit" class="pregunta" name="enviarPregunta" value="Enviar">
         </form>
     </div>
 
@@ -28,6 +29,7 @@
     const contPre = document.getElementById("contenedor-preguntas");
     const error = document.querySelector(".noPreguntas");
     let formPregunta = document.querySelector(".formPregunta");
+    const close = document.querySelector(".cerral");
     let boton = document.querySelector(".botonPregunta");
     const preguntas = async () => {
         try {
@@ -102,6 +104,11 @@
     function mostrarFormPregunta() {
         boton.style.display = "none";
         formPregunta.style.display = "block";
+    }
+    
+    function cerrar() {
+        boton.style.display = "block";
+        formPregunta.style.display = "none";
     }
 
     $(document).ready(function () {

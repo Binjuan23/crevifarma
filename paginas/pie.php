@@ -2,22 +2,12 @@
 <footer>
 
     <nav>
-        <ul class="nav-foot">            
-            <?php if (isset($_SESSION['usuario']) && $_SESSION['tipo'] !== "admin") { ?>
-                <li><a href="<?= $ruta['perfil']; ?>">Perfil</a></li>
-            <?php } ?>
+        <ul class="nav-foot">
             <li><a href="<?= $ruta['buscar']; ?>"><?= $lang['buscar-medicamento'] ?></a></li>
-
             <li><a href="<?= $ruta['foro']; ?>"><?= $lang['cabecera-foro'] ?></a></li>
-            <li><a href="<?= $ruta['indice']; ?>"><img src="./assets/images/LogoPagina.png" alt="Logo" class="logoTitulo-Movil"></a></li>
-            <?php if (isset($_SESSION['usuario']) && $_SESSION['tipo'] === "farmacia") { ?>
-                <li><a href="<?= $ruta['aniadir']; ?>"><?= $lang['cabecera-aniadir'] ?></a></li>
-            <?php } ?>
+            <li><a href="<?= $ruta['indice']; ?>"><img src="<?= $pre ?>./assets/images/LogoPagina.png" alt="Logo" class="logoTitulo-Movil"></a></li>
             <li><a href="<?= $ruta['tienda']; ?>"><?= $lang['cabecera-tienda'] ?></a></li>
             <li><a href="<?= $ruta['carro']; ?>"><?= $lang['cabecera-carro'] ?></a></li>
-            <?php if (isset($_SESSION['usuario']) && $_SESSION['tipo'] === "admin") { ?>
-                <li><a href="<?= $ruta['listado']; ?>"><?= $lang['cabecera-listado'] ?></a></li>
-            <?php } ?>
         </ul>
     </nav>
     <nav>

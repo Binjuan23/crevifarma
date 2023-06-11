@@ -1,11 +1,12 @@
-<div>
+<div class="perfil">
     <div id="contenedorUsuario">
 
     </div>
     <p class="datosModificados" style="display:none"></p>
     <div id="contenedorModificar">
-        <form action="./actions/modificar_user.php" method="post" id="update-form" style="display:none">
 
+        <form action="./actions/modificar_user.php" method="post" id="update-form" style="display:none">
+            <span class="cerral" onclick="cerrar()" style="display:none"><i class="fa-solid fa-xmark"></i></span>
             <div class="input-box">
                 <label for="user-mod"><?= $lang['usuario']; ?></label>
                 <input type="text" name="user-mod" id="user-mod" placeholder="<?= $lang['usuario']; ?>">
@@ -113,6 +114,7 @@
     const tPed = document.getElementById("contendorPedidos");
     const tRes = document.getElementById("reservas");
     let error = document.querySelector(".errorPass");
+    const close = document.querySelector(".cerral");
     let pasa = 0;
 
 <?php if (isset($_SESSION['usuario']) && $_SESSION['tipo'] === "farmacia") { ?>
@@ -224,7 +226,7 @@
                 return response.json();
             } else {
 <?php echo "throw new Error('" . $lang['buscar-medicamento-falloServidor'] . "');"; ?>
-                tPed.innerHTML += `<tbody><tr colspan="4"><td class="tdCenter"><?= $lang['buscar-medicamento-falloServidor']; ?></td></tr></tbody>`;
+                tPed.innerHTML += `<tbody><tr><td class="tdCenter" colspan="4"><?= $lang['buscar-medicamento-falloServidor']; ?></td></tr></tbody>`;
             }
         } catch (error) {
             console.log(error.message);
@@ -235,7 +237,7 @@
         pedidos()
                 .then(datos => {
                     if (typeof datos !== 'undefined' && !datos) {
-                        tPed.innerHTML += `<tbody><tr colspan="4"><td class="tdCenter"><?= $lang['perfil-noPedidos']; ?></td></tr></tbody>`;
+                        tPed.innerHTML += `<tbody><tr><td colspan="4" class="tdCenter"><?= $lang['perfil-noPedidos']; ?></td></tr></tbody>`;
                     } else {
                         console.log(datos);
                         let bodi = document.createElement("tbody");
@@ -285,7 +287,7 @@
                 return response.json();
             } else {
 <?php echo "throw new Error('" . $lang['buscar-medicamento-falloServidor'] . "');"; ?>
-                tRes.innerHTML += `<tbody><tr colspan="4"><td class="tdCenter"><?= $lang['buscar-medicamento-falloServidor']; ?></td></tr></tbody>`;
+                tRes.innerHTML += `<tbody><tr><td colspan="4" class="tdCenter"><?= $lang['buscar-medicamento-falloServidor']; ?></td></tr></tbody>`;
             }
         } catch (error) {
             console.log(error.message);
@@ -296,7 +298,7 @@
         reservas()
                 .then(datos => {
                     if (typeof datos !== 'undefined' && !datos) {
-                        tRes.innerHTML += `<tbody><tr colspan="4"><td class="tdCenter"><?= $lang['perfil-noReservas']; ?></td></tr></tbody>`;
+                        tRes.innerHTML += `<tbody><tr><td colspan="4" class="tdCenter"><?= $lang['perfil-noReservas']; ?></td></tr></tbody>`;
                     } else {
                         console.log(datos);
 
@@ -341,7 +343,14 @@
 
     function mostrar() {
         contModi.style.display = "block";
+        close.style.display = "block";
         butForm.style.display = "none";
+    }
+
+    function cerrar() {
+        contModi.style.display = "none";
+        close.style.display = "none";
+        butForm.style.display = "block";
     }
 
     $(document).ready(function () {

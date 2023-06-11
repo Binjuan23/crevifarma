@@ -1,4 +1,4 @@
-<div>
+<div class="tienda">
 
     <div id="contenedor-tienda">
 
@@ -35,7 +35,7 @@
 <?php echo "controlError(`" . $lang['tienda-noProductos'] . "`);"; ?>
                     } else {
                         error.style.display = 'none';
-                        contTienda.style.display = 'block';
+                        contTienda.style.display = 'flex';
                         datos.map(item => {
                             let divProducto = document.createElement("div");
                             divProducto.classList.add("Producto");
@@ -45,7 +45,6 @@
                             let imagen1 = new Image();
                             imagen1.src = item.imagen;
                             imagen1.width = 200;
-                            imagen1.alt = item.nombre;
                             divIn1.appendChild(imagen1);
                             let divIn2 = document.createElement("div");
                             let pIn2Nombre = document.createElement("p");

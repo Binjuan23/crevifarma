@@ -1,4 +1,4 @@
-<div>
+<div class="carrito">
 
     <div id="contenedor-carrito">
 
@@ -8,15 +8,15 @@
 
     <?php if (isset($_SESSION['usuario'])) { ?>
         <div>
-            <button onclick="comprar()">Comprar</button>
+            <button onclick="comprar()" class="comprar">Comprar</button>
         </div>
     <?php } else if (isset($_SESSION['carro']) && count($_SESSION['carro']) >= 1) { ?>
         <div>
-            <p><?= $lang["carro-registro"] ?></p>
+            <p class="registrado"><?= $lang["carro-registro"] ?></p>
         </div>
     <?php } ?>
     <div>
-        <button onclick="vaciar(0, 0)"><?= $lang['carro-vaciar']; ?></button>
+        <button onclick="vaciar(0, 0)" class="vaciar"><?= $lang['carro-vaciar']; ?></button>
     </div>
 
     <p class="gracias" style="display:none"><?= $lang["carro-gracias"]; ?></p>
@@ -51,14 +51,16 @@
 <?php echo "controlError(`" . $lang['carro-noProductos'] . "`);"; ?>
                     } else {
                         error.style.display = 'none';
-                        contCarro.style.display = 'block';
+                        contCarro.style.display = 'flex';
                         console.log(datos);
                         let total = 0;
                         datos.map(item => {
                             let linea = document.createElement("div");
                             let elemento1 = document.createElement("div");
-                            elemento1.classList.add("productoFoto");
-                            elemento1.style.backgroundImage = `url(${item.imagen})`;
+                            let imagen = new Image();
+                            imagen.src = item.imagen;
+                            imagen.width = 200;
+                            elemento1.appendChild(imagen);                            
                             let elemento2 = document.createElement("div");
                             let parrafoElemento2 = document.createElement("p");
                             parrafoElemento2.innerText = item.nombre;
@@ -86,7 +88,7 @@
                             valor.step = 1;
                             valor.value = item.cantidad;
                             let eliminar = document.createElement("span");
-                            eliminar.innerHTML = "<i class=\"fa-regular fa-xmark\"></i>";
+                            eliminar.innerHTML = "<i class=\"fa-solid fa-circle-xmark\"></i>";
                             eliminar.setAttribute("onclick", `vaciar("eliminar",${item.id})`);
                             elemento5.append(menos, valor, mas, eliminar);
                             let elemento6 = document.createElement("div");

@@ -114,7 +114,7 @@ div .form-login #login-form, div .form-register #register-form{
     z-index:2;
 }
 
-.form-boton{
+.form-boton, .Producto button, .productoSolo .fa-sharp,.vaciar,.comprar,.mostrarFormMod,#submit_actualizar,.pregunta,.botonPregunta button{
     font-size: .9em;
     background:#C8F4A4;
     color:white;
@@ -174,7 +174,7 @@ input::placeholder{
     color:black;
 }
 
-.idiomas a:hover, {
+.idiomas a:hover {
     cursor:pointer;
 }
 
@@ -213,6 +213,8 @@ input[type='radio'],input[type='checkbox'],label[for='remember2'],label[for='nor
 
 footer{
     margin-top:20px;
+    background: linear-gradient(to left, #B4F18A, #82EF36);
+    height: 150px;
 }
 
 .nav-foot{
@@ -254,7 +256,7 @@ footer{
     align-items: center;
 }
 
-footer a{
+footer a,.tiendaProducto div.volver a{
     text-decoration: none;
     color:black;
 }
@@ -263,13 +265,12 @@ footer a:hover{
     text-decoration: underline;
 }
 
-.medicamento{
+.medicamento,.foro, .tienda, .tiendaProducto,.carrito,.perfil{
     margin-top:120px;
-    min-height: 60vh;
+    min-height: calc(100vh - 120px);
 }
 
 div.resultados-busqueda{
-
     flex-direction: column;
     justify-content: center;
     align-content: center;
@@ -290,5 +291,149 @@ div.resultados-busqueda{
     margin-top:10px;
     border-radius:15px;
 }
+
+#contenedor-tienda,.tiendaProducto,#contenedor-carrito,.perfil,#contenedorModificar,.foro{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Producto,#contenedor-producto,#contenedor-carrito>div,.articulo,#contenedorUsuario,#update-form,.formPregunta{
+    margin-bottom:15px;
+    border: 2px solid rgba(0,0,0, .5);
+    width:60%;
+    border-radius:15px;
+    box-shadow: 0 0 5px 5px #C4E5A9;
+    background: white;
+    padding:20px;
+    overflow: hidden;
+}
+
+.formPregunta{
+    position:relative;
+}
+
+.Producto>div{
+    width:100%;
+}
+
+.Producto p, #contenedor-carrito p{
+    color:rgba(0,0,0,.6);
+    font-weight: 600;
+}
+
+.Producto div:nth-child(3) p, #contenedor-carrito div:nth-child(4) p, #contenedor-carrito div:nth-child(6) p{
+    color:black;
+    font-weight: 800;
+}
+
+#contenedor-carrito div:nth-child(6) p{
+    margin-top:10px;
+    color:#28B463;
+}
+
+.Producto img, #contenedorUsuario>div img{
+    border-radius:15px;
+}
+
+.tiendaProducto .volver{
+    display:flex;
+    justify-content:start;
+    align-items: center;
+}
+
+.productoSolo .fa-sharp{
+    color:black;
+}
+
+.comprar{
+    background: #82EF36;
+}
+
+
+.productoSolo .fasharp:hover,.Producto>button:hover, .vaciar:hover,.comprar:hover{
+    transform:scale(1.02);
+    cursor:pointer;
+    box-shadow: 0 0 2px 2px #C4E5A9;
+}
+
+#contenedor-producto,#contenedor-carrito>div,.articulo,#contenedorUsuario,#update-form,#contenedorModificar,.formPregunta,.botonPregunta{
+    width:90%;
+}
+
+#contenedor-carrito>div span{
+    color:red;
+    padding-left:15px;
+    border-radius:50%;
+}
+
+.noDireccion,.noFondos,.loSiento,.registrado,.rojo{
+    color:red;
+}
+.verde{
+    color:greenyellow;
+}
+
+.vaciar{
+    background:rgba(255,0,0,.5);
+}
+
+.vaciar:hover{
+    box-shadow: 0 0 2px 2px rgba(255,0,0,.5)
+}
+
+.perfil>table, .perfil>h2{
+    margin-top:15px;
+}
+
+#contenedorUsuario>div p{
+    font-size:1.2em;
+}
+
+#contenedorUsuario>div p span{
+    font-weight: 600;
+    font-size:.8em;
+}
+
+.mostrarFormMod,.botonPregunta button{
+    background:rgba(212, 172, 13,.7) ;
+}
+
+#update-form{
+    width:100%;
+    position:relative;
+}
+#update-form label{
+    width:100px;
+}
+
+.cerral{
+    position:absolute;
+    top:0;
+    right:0;
+    width:25px;
+    height: 25px;
+    background: rgba(212, 172, 13,.7);
+    font-size:1.3em;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 15px;
+}
+
+.cerral:hover{
+    cursor:pointer;
+}
+
+#contendorPedidos th:nth-child(2),#contendorPedidos th:nth-child(3), #contendorPedidos td:nth-child(3),#contendorPedidos td:nth-child(2){
+    display:none;
+}
+
+#reservas th:nth-child(2),#reservas td:nth-child(2){
+    display:none;
+}
+
+
 
 

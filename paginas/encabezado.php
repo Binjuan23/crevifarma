@@ -15,8 +15,8 @@
     <body>
         <header>
             <div class="head-principal">
-                <img src="./assets/images/LogoPagina.png" alt="Logo" class="logoTitulo-Movil">
-                <img src="./assets/images/Logo.png" alt="Logo" class="logoTitulo-Pc" style="display:none">
+                <img src="<?= $pre?>./assets/images/LogoPagina.png" alt="Logo" class="logoTitulo-Movil">
+                <img src="<?= $pre?>./assets/images/Logo.png" alt="Logo" class="logoTitulo-Pc" style="display:none">
                 <nav class="lista-navegacion" style="display:none">
                     <ul>
                         <li><a href="<?= $ruta['indice']; ?>"><?= $lang['cabecera-inicio'] ?></a></li>
@@ -73,3 +73,4 @@
             </div>
 
         </header>
+        
