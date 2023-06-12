@@ -5,7 +5,7 @@
         <ul class="nav-foot">
             <li><a href="<?= $ruta['buscar']; ?>"><?= $lang['buscar-medicamento'] ?></a></li>
             <li><a href="<?= $ruta['foro']; ?>"><?= $lang['cabecera-foro'] ?></a></li>
-            <li><a href="<?= $ruta['indice']; ?>"><img src="<?= $pre ?>./assets/images/LogoPagina.png" alt="Logo" class="logoTitulo-Movil"></a></li>
+            <li><a href="<?= $ruta['indice']; ?>"><img src="<?= $pre ?>./assets/images/LogoPagina.png" alt="Logo" class="foot-logoTitulo-Movil"></a></li>
             <li><a href="<?= $ruta['tienda']; ?>"><?= $lang['cabecera-tienda'] ?></a></li>
             <li><a href="<?= $ruta['carro']; ?>"><?= $lang['cabecera-carro'] ?></a></li>
         </ul>

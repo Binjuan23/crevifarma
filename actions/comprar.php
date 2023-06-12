@@ -18,9 +18,9 @@ try {
     $id_usuario = $_SESSION['id'];
     $condicion  = '';
     $total      = isset($_POST['total']) ? $_POST['total'] : 0;
-    $direccion = $conexion->query("SELECT direccion FROM usuarios WHERE ID=" . $id_usuario)or die(print($conexion->errorInfo()));
+    $direccion  = $conexion->query("SELECT direccion FROM usuarios WHERE ID=" . $id_usuario)or die(print($conexion->errorInfo()));
     $direccion2 = $direccion->fetch(PDO::FETCH_OBJ);
-    if($direccion2->direccion === null || $direccion2->direccion === ''){
+    if ($direccion2->direccion === null || $direccion2->direccion === '') {
         echo json_encode("direccion");
         exit;
     }
@@ -46,6 +46,7 @@ try {
     foreach ($_SESSION['carro'] as $key => $value) {
         $stock = $conexion->query("UPDATE productos SET stock=stock-" . $value . " WHERE ID=" . $key) or die(print($conexion->errorInfo()));
     }
+    $resul->closeCursor();
 
     $result2 = $conexion->query("INSERT INTO pedidos (id_pedido,id_usuario,estado) VALUES ('" . $codigo . "'," . $id_usuario . ",'enviado')") or die(print($conexion->errorInfo()));
 

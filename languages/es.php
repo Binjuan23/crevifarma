@@ -123,6 +123,8 @@ $lang = array(
     "carro-direccion"                  => "Introduce una dirección para poder comprar",
     "terminos"                         => "Términos y condiciones",
     "privacidad"                       => "Política de privacidad",
-    "bases"                            => "Bases legales"
+    "bases"                            => "Bases legales",
+    "respuesta-error"                  => "No se ha podido guardar la respuesta",
+    "acceso"                           => "No tienes acceso"
 );
 

@@ -43,7 +43,7 @@ function filtro($bbdd) {
 
 //PROBAR
 function comprobar_sesion($tipo) {
-    if (!isset($_SESSION['usuario']) && $_SESSION['tipo'] !== $tipo) {
+    if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] !== $tipo) {
         header("Location: ./index.php?id=login&aviso=1");
     }
 }

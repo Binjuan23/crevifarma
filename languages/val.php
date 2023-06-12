@@ -123,5 +123,7 @@ $lang = array(
     "carro-direccion"                  => "Introdueix una adreça per poder comprar",
     "terminos"                         => "Termes i condicions",
     "privacidad"                       => "Política de privadesa",
-    "bases"                            => "Bases legals"
+    "bases"                            => "Bases legals",
+    "respuesta-error"                  => "No s'ha pogut desar la resposta",
+    "acceso"                           => "No tens acces"
 );

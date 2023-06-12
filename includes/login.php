@@ -30,7 +30,7 @@
 
         </div>
 
-        <p class="loginNo rojo" style="display:none"><?= $lang['login-fallo'] ?></p>
+
 
         <div class="form-register">
             <div class="login-logo">
@@ -91,10 +91,23 @@
 
         </div>
     </div>
+    <p class="loginNo rojo" style="display:none"><?= $lang['login-fallo'] ?></p>
+    <p class="acceso rojo" style="display:none"><?= $lang['acceso'] ?></p>
 </div>
 
 <script>
     let noLogin = document.querySelector(".loginNo");
+    let acces = document.querySelector(".acceso");
+<?php
+if (isset($_GET['aviso']) && $_GET['aviso']) {
+    ?>
+        acces.style.display = "block";
+        setTimeout(() => {
+            acces.style.display = "none";
+        }, 3000);
+    <?php
+}
+?>
 
 
     $(document).ready(function () {
@@ -229,7 +242,7 @@
                         console.log(response);
                     }
                 });
-            } else {                
+            } else {
                 wrapper.classList.add("valre");
                 console.log("Faltan campos");
             }

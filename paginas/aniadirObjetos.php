@@ -1,8 +1,9 @@
 <?php
-//comprobar_sesion("farmacia");
+comprobar_sesion("farmacia");
 ?>
-<div>
-    <div>
+
+<div class="aniadir">
+    <div class="tabla">
 
         <p class="verde" style="display:none"><?= $lang['producto-eliminado'] ?></p>
         <p class="rojo" style="display:none"><?= $lang['producto-noEliminado'] ?></p>
@@ -24,7 +25,7 @@
     </div>
 
     <div id="contenedor-formulario" style="display:none">
-
+        <span class="cerral" onclick="cerrar()" ><i class="fa-solid fa-xmark"></i></span>
         <h2><?= $lang['aniadir-objetos'] ?></h2>
 
         <form action="./actions/aniadir_producto.php" method="post" id="insertar-form" enctype="multipart/form-data">
@@ -73,12 +74,11 @@
 
             <input type="submit" value="Agregar" name="insert-boton" class="form-boton">
 
-        </form>
-        <button onclick="cerrarForm()"><?= $lang['aniadir-cerrarForm'] ?></button>
+        </form>        
     </div>
 
     <div id="contenedor-modificar" style="display:none">
-
+        <span class="cerral" onclick="cerrar()" ><i class="fa-solid fa-xmark"></i></span>
         <h2><?= $lang['aniadir-objetosModificar'] ?></h2>
 
         <form action="./actions/modificar_producto.php" method="post" id="modificar-form">
@@ -95,8 +95,7 @@
 
             <input type="submit" value="Modificar" name="modificar-boton" class="form-boton">
 
-        </form>
-        <button onclick="cerrarForm()"><?= $lang['aniadir-cerrarForm'] ?></button>
+        </form>        
     </div>
     <div class="botonForm">
         <button onclick="mostrarForm()"><?= $lang['aniadir-botonForm'] ?></button>
@@ -160,6 +159,7 @@
                     let input2 = document.createElement("input");
                     input2.type = "submit";
                     input2.name = "delete";
+                    input2.classList.add("botonEliminar")
                     input2.value = "Eliminar";
                     form.append(input, input2, input3);
                     dato_form.appendChild(form);
@@ -175,7 +175,7 @@
         formMod.style.display = "none";
     }
 
-    function cerrarForm() {
+    function cerrar() {
         formNuevo.style.display = "none";
         boton.style.display = "block";
         formMod.style.display = "none";
@@ -366,7 +366,7 @@
                         setTimeout(() => {
                             aniadido.style.display = "none";
                             aniadido.innerTEXT = '';
-                            
+
                         }, 3000);
 
                     }

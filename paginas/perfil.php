@@ -190,6 +190,7 @@
                         contUsuario.style.display = 'block';
                         console.log(datos);
                         let divDato1 = document.createElement("div");
+                        divDato1.classList.add("dat");
                         let imagen = new Image();
                         imagen.src = datos['imagen'];
                         imagen.width = 200;
@@ -261,6 +262,7 @@
                             inid.value = element['1Id'];
                             let boton = document.createElement("button");
                             boton.innerText = "Factura";
+                            boton.classList.add("botonFactura");
                             boton.type = "submit";
                             factura.append(inid, boton);
                             celda.appendChild(factura)

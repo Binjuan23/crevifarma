@@ -43,7 +43,7 @@ class PDF extends FPDF {
 // Cabecera de página
     function Header() {
         // Logo
-        $this->Image('../assets/images/LogoTexto.png', 140, -15, 150);
+        $this->Image('../assets/images/Logo.png', 140, -15, 150);
         //Salto
         $this->Ln(8);
     }

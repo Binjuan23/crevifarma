@@ -8,8 +8,8 @@ include_once "../utiles/rutas.php";
 include_once "./encabezado.php";
 ?>
 <main>
-    <div>
-        <div>
+    <div class="respuesta">
+        <div class="volver">
             <p>
                 <a href="<?= $ruta['foro']; ?>" ><i class="fa-solid fa-backward"></i><?= $lang['foro-volver']; ?></a>
             </p>
@@ -29,16 +29,22 @@ include_once "./encabezado.php";
         <div class="formRespuesta" style="display:none">
 
         </div>
-        <?php
-        if (isset($_GET["respuestaGuardada"])) {
-
-            echo "<p>Respuesta guardada</p>";
-        }
-        ?>
+        <p class="noR rojo" style="display:none"></p>
     </div>
 </main>
 <script>
-
+    <?php
+    if(isset($_GET['respuestaGuardada']) && !$_GET['respuestaGuardada']){?>
+    const error2 = document.querySelector(".noR");
+    error2.style.display="block";
+    error2.innerText = "<?= $lang['respuesta-error']?>";
+    setTimeout(()=>{
+        error2.style.display="none";
+    error2.innerText = "";
+    },3000);
+    <?php
+    }
+    ?>
     const contRes = document.getElementById("contenedor-respuestas");
     const error = document.querySelector(".noRespuestas");
     const preguntas = async () => {
@@ -64,7 +70,7 @@ include_once "./encabezado.php";
 <?php echo "controlError(`" . $lang['foro-noPreguntas'] . "`);"; ?>
                     } else {
                         error.style.display = 'none';
-                        contRes.style.display = 'block';
+                        contRes.style.display = 'flex';
                         let divPregunta = document.createElement("div");
                         divPregunta.classList.add("Pregunta");
                         let divIn1 = document.createElement("div");
@@ -174,6 +180,7 @@ include_once "./encabezado.php";
         formRespuesta.style.display = "block";
         crear.style.display = "none";
     }
+  
 
     function salirForm() {
         const formRespuesta = document.querySelector(".formRespuesta");
@@ -214,11 +221,13 @@ include_once "./encabezado.php";
         }
         let etiquetaInput3 = document.createElement("input");
         etiquetaInput3.type = "submit";
+        etiquetaInput3.classList.add("enviarRespuesta");
         etiquetaInput3.name = "enviarRespuesta";
         etiquetaInput3.value = "Enviar";
         let etiquetaButton = document.createElement("button");
         etiquetaButton.setAttribute("onclick", "salirForm()");
         etiquetaButton.innerText = "<?= $lang["foro-respuesta-cancelar"] ?>";
+        etiquetaButton.classList.add("cancelar");
         etiquetaForm.append(etiquetaP, etiquetaInput, etiquetaInput3);
         formRespuesta.append(etiquetaForm, etiquetaButton);
     }

@@ -9,7 +9,11 @@ try {
     $respuesta  = htmlspecialchars($_POST['respuesta']);
     $usuario    = htmlspecialchars($_POST['idUsuario']);
     $referencia = (isset($_POST['idMensaje'])) ? htmlspecialchars($_POST['idMensaje']) : null;
-
+    
+    if(empty($respuesta)){
+        header("Location: ../paginas/foro_respuestas.php?respuestaGuardada=0&id=foro_respuestas&idioma=" . htmlspecialchars($_GET['idioma']) . "&pregunta=" . $foro);
+        exit;
+    }
     $resul = $conexion->prepare("INSERT INTO respuestas (foro_id,respuesta,usuario_id,respuesta_id) VALUES "
                     . "(:foro,:respuesta,:usuario,:referencia)") or die(print($conexion->errorInfo()));
 

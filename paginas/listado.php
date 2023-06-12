@@ -1,8 +1,9 @@
-<!-- Este archivo muestra al admin un listado de datos de la tabla usuarios -->
+
 <?php
-    //comprobar_sesion("admin");
+    comprobar_sesion("admin");
 ?>
-<div>
+
+<div class="listado">
     <div class="filtro-busqueda"> 
         <select name="filtro" id="filtro">
             <?php
@@ -31,6 +32,7 @@
                     echo "<th>" . $lang[$value] . "</th>";
                 }
                 ?>
+                <th></th>
             </tr>
         </thead>
 
@@ -98,6 +100,7 @@
             input2.type = "submit";
             input2.name = "delete";
             input2.value = "Eliminar";
+            input2.classList.add("botonEliminarUsuario");
             form.appendChild(input);
             form.appendChild(input2);
             dato_form.appendChild(form);

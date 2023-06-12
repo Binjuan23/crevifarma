@@ -54,7 +54,7 @@
 <?php echo "controlError(`" . $lang['foro-noPreguntas'] . "`);"; ?>
                     } else {
                         error.style.display = 'none';
-                        contPre.style.display = 'block';
+                        contPre.style.display = 'flex';
                         datos.map(item => {
                             let divPrincipal = document.createElement("div");
                             divPrincipal.classList.add("Pregunta");

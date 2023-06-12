@@ -6,9 +6,16 @@
     list-style: none;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-    min-height: 100vh;
     background:#C8F4A4;
+}
+
+nav.lista-navegacion,.logoTitulo-Pc,.articulo2,.articulo3,.articulo4{
+    display:none;
 }
 
 header{
@@ -114,7 +121,7 @@ div .form-login #login-form, div .form-register #register-form{
     z-index:2;
 }
 
-.form-boton, .Producto button, .productoSolo .fa-sharp,.vaciar,.comprar,.mostrarFormMod,#submit_actualizar,.pregunta,.botonPregunta button{
+.form-boton, .Producto button, .productoSolo .fa-sharp,.vaciar,.comprar,.mostrarFormMod,#submit_actualizar,.botonPregunta button,.modificar,.botonEliminar,.botonForm button, .crearRespuesta button,.enviarRespuesta,.cancelar,.PreguntaRes button,.botonFactura,.botonEliminarUsuario{
     font-size: .9em;
     background:#C8F4A4;
     color:white;
@@ -163,6 +170,10 @@ input::placeholder{
     text-align: left;
 }
 
+#modificar-form input, #modificar-form label,#contenedor-formulario label, #contenedor-formulario input{
+    width:100px;
+}
+
 .idiomas{
     display:flex;
     justify-content: end;
@@ -178,11 +189,11 @@ input::placeholder{
     cursor:pointer;
 }
 
-input[type='radio'],input[type='checkbox'],label[for='remember2'],label[for='normal'],label[for='farmacia']{
+input[type='radio'],input[type='checkbox'],label[for='remember2'],label[for='normal'],label[for='farmacia'], #contenedor-formulario [type='radio'], #contenedor-formulario [for='parafarmacia'],#contenedor-formulario [for='medicamento'],#contenedor-formulario [for='categoria_es'],#contenedor-formulario [for='categoria_val'],#contenedor-formulario [for='imagen']{
     width:auto;
 }
 
-.inicio{
+.inicio,div#WidgetTutiempo, .medicamento,.listado{
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -195,7 +206,6 @@ input[type='radio'],input[type='checkbox'],label[for='remember2'],label[for='nor
 }
 
 .articulo{
-    margin-top:25px;
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -206,7 +216,7 @@ input[type='radio'],input[type='checkbox'],label[for='remember2'],label[for='nor
     border-radius:15px;
 }
 
-.articulo p{
+.articulo>p, .articulo2>p, .articulo3>p, .articulo4>p{
     width:90%;
     text-align: justify;
 }
@@ -225,12 +235,12 @@ footer{
     align-items: center;
 }
 
-.articulo img{
+.articulo img,.articulo2 img,.articulo3 img,.articulo4 img{
     margin-top:10px;
     border-radius:15px;
 }
 
-.articulo img:hover{
+.articulo img:hover,.articulo2 img:hover,.articulo3 img:hover,.articulo4 img:hover{
     transform:scale(1.02);
     cursor:pointer;
     box-shadow: 0 0 5px 5px #C4E5A9;
@@ -256,7 +266,7 @@ footer{
     align-items: center;
 }
 
-footer a,.tiendaProducto div.volver a{
+footer a,div.volver a{
     text-decoration: none;
     color:black;
 }
@@ -265,12 +275,12 @@ footer a:hover{
     text-decoration: underline;
 }
 
-.medicamento,.foro, .tienda, .tiendaProducto,.carrito,.perfil{
+.medicamento,.foro, .tienda, .tiendaProducto,.carrito,.perfil,.aniadir,.respuesta,.listado{
     margin-top:120px;
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 290px);
 }
 
-div.resultados-busqueda{
+div.resultados-busqueda,#contenedor-respuestas{
     flex-direction: column;
     justify-content: center;
     align-content: center;
@@ -292,14 +302,14 @@ div.resultados-busqueda{
     border-radius:15px;
 }
 
-#contenedor-tienda,.tiendaProducto,#contenedor-carrito,.perfil,#contenedorModificar,.foro{
+#contenedor-tienda,.tiendaProducto,#contenedor-carrito,.perfil,#contenedorModificar,.foro,.aniadir,#contenedor-preguntas, .respuesta,.PreguntaRes{
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.Producto,#contenedor-producto,#contenedor-carrito>div,.articulo,#contenedorUsuario,#update-form,.formPregunta{
+.Producto,#contenedor-producto,#contenedor-carrito>div,.articulo,.articulo2,.articulo3,.articulo4,#contenedorUsuario,#update-form,.formPregunta,#contenedor-modificar,#contenedor-formulario,.pregunta,.formRespuesta,.PreguntaRes>div{
     margin-bottom:15px;
     border: 2px solid rgba(0,0,0, .5);
     width:60%;
@@ -310,11 +320,11 @@ div.resultados-busqueda{
     overflow: hidden;
 }
 
-.formPregunta{
+.formPregunta,#contenedor-modificar,#contenedor-formulario,.formRespuesta{
     position:relative;
 }
 
-.Producto>div{
+.Producto>div,.modificar,.botonEliminar,#medicamentos,.botonEliminarUsuario{
     width:100%;
 }
 
@@ -351,6 +361,16 @@ div.resultados-busqueda{
     background: #82EF36;
 }
 
+.articulos{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.producto img{
+    height:200px;
+}
 
 .productoSolo .fasharp:hover,.Producto>button:hover, .vaciar:hover,.comprar:hover{
     transform:scale(1.02);
@@ -358,8 +378,28 @@ div.resultados-busqueda{
     box-shadow: 0 0 2px 2px #C4E5A9;
 }
 
-#contenedor-producto,#contenedor-carrito>div,.articulo,#contenedorUsuario,#update-form,#contenedorModificar,.formPregunta,.botonPregunta{
+#contenedor-producto,#contenedor-carrito>div,.articulo,#contenedorUsuario,#update-form,#contenedorModificar,.formPregunta,.botonPregunta,.botonForm, #modificar-form input.form-boton,#contenedor-formulario,div#WidgetTutiempo>div,.pregunta,.crearRespuesta,.enviarRespuesta,.cancelar{
     width:90%;
+}
+
+div#WidgetTutiempo{
+    margin:25px 0;
+    height:160px;
+    overflow: auto;
+    scroll-snap-type:y mandatory;
+}
+
+div#WidgetTutiempo::-webkit-scrollbar {
+    display: none;
+}
+
+
+#WidgetTutiempo>div, #WidgetTutiempo>p{
+    scroll-snap-align:center;
+}
+
+div#WidgetTutiempo>div:first-child{
+    margin-top:950px;
 }
 
 #contenedor-carrito>div span{
@@ -371,11 +411,11 @@ div.resultados-busqueda{
 .noDireccion,.noFondos,.loSiento,.registrado,.rojo{
     color:red;
 }
-.verde{
-    color:greenyellow;
+.verde,.gracias{
+    color:rgba(6, 92, 58,.5) ;
 }
 
-.vaciar{
+.vaciar,.botonEliminar,.cancelar,.botonEliminarUsuario{
     background:rgba(255,0,0,.5);
 }
 
@@ -396,7 +436,7 @@ div.resultados-busqueda{
     font-size:.8em;
 }
 
-.mostrarFormMod,.botonPregunta button{
+.mostrarFormMod,.botonPregunta button,.modificar,.botonForm button,.crearRespuesta button,.botonFactura{
     background:rgba(212, 172, 13,.7) ;
 }
 
@@ -422,18 +462,346 @@ div.resultados-busqueda{
     border-bottom-left-radius: 15px;
 }
 
+#contendorPedidos thead tr,#reservas thead tr, #medicamentos thead tr,#datos-usuario thead tr{
+    background: rgba(6, 92, 58,.5) ;
+}
+
+#contendorPedidos tbody tr:nth-child(even),#reservas tbody tr:nth-child(even),#medicamentos tbody tr:nth-child(even),#datos-usuario tbody tr:nth-child(even){
+    background: rgba(17, 163, 105,.5) ;
+}
+
 .cerral:hover{
     cursor:pointer;
 }
 
-#contendorPedidos th:nth-child(2),#contendorPedidos th:nth-child(3), #contendorPedidos td:nth-child(3),#contendorPedidos td:nth-child(2){
+#contendorPedidos th:nth-child(2),#contendorPedidos th:nth-child(3), #contendorPedidos td:nth-child(3),#contendorPedidos td:nth-child(2),#datos-usuario th:nth-child(n+2):nth-child(-n+4),#datos-usuario th:nth-child(n+6):nth-child(-n+7),#datos-usuario th:nth-child(n+11):nth-child(-n+12),#datos-usuario th:nth-child(9),#datos-usuario td:nth-child(n+2):nth-child(-n+4),#datos-usuario td:nth-child(n+6):nth-child(-n+7),#datos-usuario td:nth-child(n+11):nth-child(-n+12),#datos-usuario td:nth-child(9){
     display:none;
+}
+
+.tabla,#datos-usuario{
+    width:90%;
+}
+
+#datos-usuario td,#datos-usuario th{
+    padding:2px;
 }
 
 #reservas th:nth-child(2),#reservas td:nth-child(2){
     display:none;
 }
 
+#medicamentos td:nth-child(5){
+    padding-left:5px;
+}
+
+.referenciar{
+    height:37px;
+}
 
 
 
+@media screen and (min-width:768px) {
+    .head-principal .burguer,.logoTitulo-Movil{
+        display:none;
+    }
+
+    #contendorPedidos th:nth-child(2),#contendorPedidos th:nth-child(3), #contendorPedidos td:nth-child(3),#contendorPedidos td:nth-child(2),#reservas th:nth-child(2),#reservas td:nth-child(2),#datos-usuario th:nth-child(n+11):nth-child(-n+12),#datos-usuario th:nth-child(9),#datos-usuario td:nth-child(n+11):nth-child(-n+12),#datos-usuario td:nth-child(9){
+        display:table-cell;
+    }
+
+    #contendorPedidos, #reservas{
+        width:90%;
+    }
+
+    #contendorPedidos th, #reservas th,#contendorPedidos td, #reservas td{
+        text-align: center;
+    }
+
+    .head-principal{
+        position:relative;
+    }
+
+    #medicamentos{
+        width:100%;
+    }
+
+    .dat{
+        display:grid;
+        grid-template-columns: 30% 1fr;
+        grid-template-rows: repeat(9, 1fr);
+        height:300px;
+    }
+
+    .dat img{
+        grid-column:1;
+        grid-row:1/-1;
+    }
+
+    .head-principal .logoTitulo-PC{
+        display:block;
+        transform: scale(4);
+        position:relative;
+        right:-55px;
+    }
+
+    header .head-principal{
+        justify-content: end;
+    }
+    nav.lista-navegacion{
+        display:block;
+        width:100%;
+    }
+
+    nav.lista-navegacion ul{
+        display:flex;
+        justify-content: space-evenly;
+    }
+
+    nav.lista-navegacion a{
+        text-decoration: none;
+        color:#254639;
+        font-weight: 550;
+        position:relative;
+    }
+
+    nav.lista-navegacion a:after{
+        content:"";
+        position:absolute;
+        left:0;
+        bottom:-6px;
+        width:100%;
+        height:3px;
+        background:linear-gradient(to left,#254639,#48DF98);
+        border-radius:5px;
+        transform-origin: right;
+        transform:scaleX(0);
+        transition:transform .5s;
+    }
+
+    nav.lista-navegacion a:hover:after{
+        transform-origin: left;
+        transform:scaleX(1);
+    }
+
+    div#WidgetTutiempo>div:first-child{
+        margin-top:980px;
+    }
+
+    .carousel, .carousel-inner > .item > img, .carousel img {
+        height:600px;
+    }
+
+    .articulo2,.articulo3,.articulo4,.articulo{
+        display:flex;
+        flex-basis: 280px;
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border:2px solid rgba(0,0,0, .5);
+        box-shadow: 0 0 5px 5px #C4E5A9;
+        width:85%;
+        border-radius:15px;
+    }
+
+    .articulos{
+        width:90%;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .articulos p{
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    div.resultados-busqueda{
+        flex-direction: row;
+        justify-content: center;
+        gap:15px;
+        width:90%;
+    }
+
+    div.resultados-busqueda>div{
+        flex-basis:max(40%,300px);
+    }
+
+    div.resultados-busqueda picture img{
+        height:145.71px;
+    }
+
+    #contenedor-preguntas,#contenedor-respuestas,.preguntaRes{
+        width:90%;
+    }
+
+    .pregunta{
+        width:100%;
+        display:grid;
+        height:max(40%,250px);
+        grid-template-columns: 20% 1fr;
+        grid-template-rows: 1fr 1fr 18%;
+    }
+
+    .PreguntaRes>div{
+        width:100%;
+        display:grid;
+        height:max(40%,250px);
+        grid-template-columns: 20% 1fr;
+        grid-template-rows: 30px 1fr;
+    }
+
+    .PreguntaRes>div>div{
+        width:100%;
+    }
+
+    .fecha,.usuario{
+        border-bottom: 2px solid black;
+    }
+
+    .mensaje{
+        grid-column:2;
+        grid-row:2;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mensaje p{
+        margin:0;
+    }
+
+    p.respuestaReferencia ,p.datosReferencia {
+        color:rgba(0,0,0,.6);
+    }
+
+    .pregunta>div{
+        width:100%;
+        height: 100%;
+    }
+
+    .pregunta>div:nth-child(5){
+        grid-column:2;
+        grid-row:3;
+        border-top:2px solid black;
+    }
+
+    .pregunta>div:nth-child(3),.pregunta>div:nth-child(1),.pregunta>div:nth-child(4){
+        border-right: 2px solid black;
+    }
+
+    .pregunta>div:nth-child(3){
+        grid-column:1;
+        grid-row:3;
+    }
+
+    .pregunta>div:nth-child(4){
+        grid-column:1;
+        grid-row:2;
+        font-weight: 550;
+        color:rgba(0,0,0,.7)
+    }
+
+    .pregunta>div:nth-child(2){
+        grid-column:2;
+        grid-row:2;
+    }
+
+    #contenedor-tienda{
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap:15px;
+    }
+
+    .producto{
+        height:400px;
+        flex-basis: 300px;
+    }
+
+    .producto>div{
+        height:288px;
+    }
+
+}
+
+@media screen and (min-width:992px) {
+    .articulos{
+        width:90%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap:wrap;
+        gap:10px;
+    }
+    
+    #datos-usuario td:nth-child(n+2):nth-child(-n+4),#datos-usuario th:nth-child(n+2):nth-child(-n+4){
+        display:table-cell;
+    }
+
+    .articulos img{
+        width:min(80%,400px);
+        justify-self: center;
+        margin:0;
+    }
+
+    .articulos p{
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .articulo2,.articulo3,.articulo4,.articulo{
+        display:grid;
+        height:300px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 10% 50% 50%;
+        width:100%;
+    }
+
+    .articulo img,.articulo3 img{
+        grid-column: 1;
+        grid-row: 1/4;
+
+    }
+
+    .articulo h2,.articulo3 h2{
+        grid-column:2;
+        grid-row: 1;
+    }
+
+
+    .articulo p,.articulo3 p{
+        grid-column:2;
+        grid-row: 2/4;
+    }
+
+    .articulo2 img,.articulo4 img{
+        grid-column: 2;
+        grid-row: 1/4;
+    }
+
+    .articulo2 h2,.articulo4 h2{
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .articulo2 p,.articulo4 p{
+        grid-column:1;
+        grid-row: 2/4;
+    }
+
+}
+
+@media screen and (min-width:1280px) {
+    #datos-usuario td:nth-child(n+6):nth-child(-n+7),#datos-usuario th:nth-child(n+6):nth-child(-n+7){
+        display:table-cell;
+    }
+}
+
+    

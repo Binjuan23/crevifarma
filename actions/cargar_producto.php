@@ -16,7 +16,8 @@ try {
             'nombre' => urldecode($row->nombre),
             'id'     => $row->ID,
             'precio' => $row->precio,
-            "stock"  => $row->stock
+            "stock"  => $row->stock,
+            "imagen"  => $row->imagen
         ];
     }
 
