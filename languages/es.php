@@ -1,7 +1,7 @@
 <?php
 
 $lang = array(
-    "title"                            => "Este es el titulo",
+    "title"                            => "CreviFarma, tú tienda parafarmacia y más",
     "titulo"                           => "Mi título",
     "cabecera-listado"                 => "Listado usuarios",
     "cabecera-inicio"                  => "Inicio",
@@ -125,6 +125,7 @@ $lang = array(
     "privacidad"                       => "Política de privacidad",
     "bases"                            => "Bases legales",
     "respuesta-error"                  => "No se ha podido guardar la respuesta",
-    "acceso"                           => "No tienes acceso"
+    "acceso"                           => "No tienes acceso",
+    "regiSi"                           => "Te has registrado"
 );
 

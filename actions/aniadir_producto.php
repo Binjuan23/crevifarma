@@ -25,7 +25,9 @@ try {
 
         $datos2 = [];
 
-        $sql = ($_POST["tipo"] !== "medicamento") ? "INSERT INTO productos (ID, nombre, categoria_es,categoria_val,precio,stock,imagen,id_farmacia) VALUE (:id,:nom,:catEs,:catVal,:precio,:stock,:imagen,:idFarm)" : "INSERT INTO medicamentos (id_farmacia, nombre_med, stock) VALUE (:id,:nom,:stock)";
+        $sql = ($_POST["tipo"] !== "medicamento") ? "INSERT INTO productos (ID, nombre, categoria_es,categoria_val,precio,stock,imagen,id_farmacia)"
+                . " VALUE (:id,:nom,:catEs,:catVal,:precio,:stock,:imagen,:idFarm)" : "INSERT INTO medicamentos (id_farmacia, nombre_med, stock) "
+            . "VALUE (:id,:nom,:stock)";
 
         $nombre = urldecode($_POST['nombre']);
         $stock  = htmlspecialchars($_POST['stock']);

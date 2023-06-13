@@ -1,7 +1,7 @@
 const wrapper = document.querySelector(".wrapper");
 const loginLink = document.querySelector(".login-link");
 const registerLink = document.querySelector(".register-link");
-if(loginLink){
+if(loginLink){//Da movimiento cambiando las clases del css al login
     loginLink.addEventListener("click",(()=>{
     wrapper.classList.add("active");
     wrapper.classList.remove("valogin");
@@ -9,14 +9,14 @@ if(loginLink){
 }));
 }
 
-if(registerLink){
+if(registerLink){//Da movimiento cambiando las clases del css al register
     registerLink.addEventListener("click",(()=>{
     wrapper.classList.remove("active");
     wrapper.classList.remove("valre");
     $("#register-form").validate().resetForm();
 }));
 }
-
+//Código utilizado para el despliegue de datos de la API del tiempo
 function DrawWeatherTutiempo(data)
 {
 var htmld="",htmlh="",dhcach="",meses = new Array('-','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
@@ -67,7 +67,7 @@ LoadJSONTuTiempo();
 
 
 $(document).ready(function () {
-
+//Muestra oculta el menu en el formato mobile
     $(".burguer").click(function () {
         $(".navMovil").slideToggle("slow");
 

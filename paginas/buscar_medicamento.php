@@ -91,6 +91,7 @@
                                 let botonReserva = document.createElement("button");
                                 botonReserva.setAttribute("onclick", `reservar(${item.idmed})`);
                                 botonReserva.innerText = "Reservar";
+                                botonReserva.classList.add("botonReserva");
                                 div.appendChild(botonReserva);
 <?php } ?>
                             resultadoBusqueda.appendChild(div);

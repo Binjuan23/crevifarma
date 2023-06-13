@@ -1,5 +1,7 @@
 <div class="inicio">
-
+    <!-- Aquí se encuentra el carrousel de bootstrap con las imagenes cargadas y los texto usados en cada una de ellas
+    Es automático y aparte tiene controles manuales-->
+    
     <div id="carouselSlider" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselSlider" data-bs-slide-to="0" class="active" aria-current="true"  style="background-color:rgb(33,97,140);" aria-label="Slide 1"></button>
@@ -38,28 +40,29 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-
+    <!-- En este div se encuentra la petición a la API del tiempo -->
     <div id="WidgetTutiempo"></div>
-    <div class="articulos">
-        <div class="articulo">
+    <!-- Se ha utilizado la semantica de etiquetas en html -->
+    <section class="articulos">
+        <article class="articulo">
             <img src="./assets/images/productos-sanitarios.png" alt="articulo">
             <h2>Productos sanitarios</h2>
             <p>Los Productos Sanitarios constituyen un sector cada vez más importante en la Sanidad, tanto si consideramos su impacto en los cuidados sanitarios, como en todo lo relativo a su influencia sobre el gasto en asistencia sanitaria. Hay que tener en cuenta que su definición abarca muchos y muy variados tipos de dispositivos, materiales, productos y aparatos; utilizando una “no definición” podemos decir, sin equivocarnos demasiado, que producto sanitario es “lo que se utiliza en el campo de la salud sin ser medicamento”.</p>
-        </div>
-        <div class="articulo2">
+        </article>
+        <article class="articulo2">
             <img src="./assets/images/productos-sanitarios.png" alt="articulo">
             <h2>Productos sanitarios</h2>
             <p>Los Productos Sanitarios constituyen un sector cada vez más importante en la Sanidad, tanto si consideramos su impacto en los cuidados sanitarios, como en todo lo relativo a su influencia sobre el gasto en asistencia sanitaria. Hay que tener en cuenta que su definición abarca muchos y muy variados tipos de dispositivos, materiales, productos y aparatos; utilizando una “no definición” podemos decir, sin equivocarnos demasiado, que producto sanitario es “lo que se utiliza en el campo de la salud sin ser medicamento”.</p>
-        </div>
-        <div class="articulo3">
+        </article>
+        <article class="articulo3">
             <img src="./assets/images/productos-sanitarios.png" alt="articulo">
             <h2>Productos sanitarios</h2>
             <p>Los Productos Sanitarios constituyen un sector cada vez más importante en la Sanidad, tanto si consideramos su impacto en los cuidados sanitarios, como en todo lo relativo a su influencia sobre el gasto en asistencia sanitaria. Hay que tener en cuenta que su definición abarca muchos y muy variados tipos de dispositivos, materiales, productos y aparatos; utilizando una “no definición” podemos decir, sin equivocarnos demasiado, que producto sanitario es “lo que se utiliza en el campo de la salud sin ser medicamento”.</p>
-        </div>
-        <div class="articulo4">
+        </article>
+        <article class="articulo4">
             <img src="./assets/images/productos-sanitarios.png" alt="articulo">
             <h2>Productos sanitarios</h2>
             <p>Los Productos Sanitarios constituyen un sector cada vez más importante en la Sanidad, tanto si consideramos su impacto en los cuidados sanitarios, como en todo lo relativo a su influencia sobre el gasto en asistencia sanitaria. Hay que tener en cuenta que su definición abarca muchos y muy variados tipos de dispositivos, materiales, productos y aparatos; utilizando una “no definición” podemos decir, sin equivocarnos demasiado, que producto sanitario es “lo que se utiliza en el campo de la salud sin ser medicamento”.</p>
-        </div>
-    </div>
+        </article>
+    </section>
 </div>

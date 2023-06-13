@@ -1,3 +1,4 @@
+<!-- Contiene la estructura de los formularios de login y registro -->
 <div class="container-login-register">
     <div class="wrapper">
         <div class="form-login">
@@ -91,13 +92,18 @@
 
         </div>
     </div>
+    <!-- Mensajes de validación -->
+    <p class="regiSi rojo" style="display:none"><?= $lang['regiSi'] ?></p>
     <p class="loginNo rojo" style="display:none"><?= $lang['login-fallo'] ?></p>
     <p class="acceso rojo" style="display:none"><?= $lang['acceso'] ?></p>
 </div>
 
 <script>
+    //Variables usadas
     let noLogin = document.querySelector(".loginNo");
     let acces = document.querySelector(".acceso");
+    let registro = document.querySelector(".regiSi");
+    //Mensaje de validación
 <?php
 if (isset($_GET['aviso']) && $_GET['aviso']) {
     ?>
@@ -111,7 +117,7 @@ if (isset($_GET['aviso']) && $_GET['aviso']) {
 
 
     $(document).ready(function () {
-
+//Muestra oculta campos según la opción elegida
         $("input[type=radio]").click(function () {
             const radio = $(this).val();
             if (radio === "farmacia") {
@@ -120,13 +126,13 @@ if (isset($_GET['aviso']) && $_GET['aviso']) {
                 $(".input-box.cod").hide();
             }
         });
-
+//Estructura de validación usando jquery validate
         $('#register-form').validate({
             focusCleanup: true,
-            errorPlacement: function (error, element) {
+            errorPlacement: function (error, element) {//Posiciona el mensaje
                 error.appendTo(element.parent());
             },
-            rules: {
+            rules: {//reglas de validacion de cada campo
                 "user-register": {
                     required: true
                 },
@@ -156,7 +162,7 @@ if (isset($_GET['aviso']) && $_GET['aviso']) {
                     remote: "./actions/comprobar_licencia.php"
                 }
             },
-            messages: {
+            messages: {//mensajes que se muestras según la validación
                 "user-register": '<?= $lang['registro-user']; ?>',
                 email: {
                     required: '<?= $lang['registro-email']; ?>',
@@ -206,11 +212,11 @@ if (isset($_GET['aviso']) && $_GET['aviso']) {
             event.preventDefault();
 
             let $formLogin = $("#login-form");
-            if ($formLogin.valid()) {
+            if ($formLogin.valid()) {//Comprueba que la validación es correcta o no
                 $.ajax({
                     type: 'POST',
                     url: './actions/comprobar_email_login.php',
-                    data: {register1: $formLogin.serialize()},
+                    data: {register1: $formLogin.serialize()},//tranforma los datos del formulario en una string que se enviará al servidor
                     success: function (response) {
                         if (response === "true") {
                             location.href = './index.php?id=inicio';
@@ -239,7 +245,15 @@ if (isset($_GET['aviso']) && $_GET['aviso']) {
                     url: './actions/registrar_user.php',
                     data: {register: $formRegister.serialize()},
                     success: function (response) {
-                        console.log(response);
+                        if (response === "true") {
+                            registro.style.display = "block";
+                            setTimeout(() => {
+                                registro.style.display = "none";
+                                location.reload();
+                            }, 3000);
+                        } else {
+                            console.log("No se ha podido registrar");
+                        }
                     }
                 });
             } else {

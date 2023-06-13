@@ -77,7 +77,7 @@
 
 
     <h2><?= $lang['perfil-pedidos'] ?></h2>
-    <table id="contendorPedidos">
+    <table id="contenedorPedidos">
         <thead>
             <tr>
                 <th>ID</th>
@@ -111,7 +111,7 @@
     const tPro = document.getElementById("contenedorProductos");
     const contModi = document.getElementById("update-form");
     const butForm = document.querySelector(".mostrarFormMod");
-    const tPed = document.getElementById("contendorPedidos");
+    const tPed = document.getElementById("contenedorPedidos");
     const tRes = document.getElementById("reservas");
     let error = document.querySelector(".errorPass");
     const close = document.querySelector(".cerral");

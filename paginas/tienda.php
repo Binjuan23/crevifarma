@@ -9,8 +9,10 @@
 </div>
 
 <script>
+    //variables de los elementos utilizados
     const contTienda = document.getElementById("contenedor-tienda");
     const error = document.querySelector(".noObjetos");
+    //Variable de la petición a la BBDD
     const productos = async () => {
         try {
             const response = await fetch('./actions/mostrar_tienda.php');
@@ -26,7 +28,7 @@
             console.log(error.message);
         }
     };
-
+//Muestra los datos
     function mostrarTienda() {
         productos()
                 .then(datos => {
@@ -69,6 +71,8 @@
                 });
     }
     ;
+    
+    //Controla los posibles erros de la petición
     function controlError(err) {
         error.style.display = 'block';
         contTienda.style.display = 'none';
@@ -76,7 +80,7 @@
     }
 
     mostrarTienda();
-
+//Añade los productos elegidos
     function aniadir1(item, stock) {
         try {
             let nuevoItem = new FormData();

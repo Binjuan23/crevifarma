@@ -129,26 +129,7 @@ class PDF extends FPDF {
         //Mostrar línea
         $this->Cell(40, 8, $total . EURO, 1, 0, 'C', 1);
 
-        /*
-
-          $fill = false;
-          $this->Cell(40, 6, "hola", 'LR', 0, 'L', $fill);
-          $this->Cell(40, 6, "hola2", 'LR', 0, 'L', $fill);
-          $this->Cell(40, 6, "hola3", 'LR', 0, 'R', $fill);
-          $this->Cell(40, 6, "hola4", 'LR', 0, 'R', $fill);
-          $this->Cell(40, 6, "hola5", 'LR', 0, 'R', $fill);
-          $this->Ln();
-          $fill = !$fill;
-          $this->Cell(40, 6, "col", 'LR', 0, 'L', $fill);
-          $this->Cell(40, 6, "col2", 'LR', 0, 'L', $fill);
-          $this->Cell(40, 6, "col3", 'LR', 0, 'R', $fill);
-          $this->Cell(40, 6, "col4", 'LR', 0, 'R', $fill);
-          $this->Cell(40, 6, "col5", 'LR', 0, 'R', $fill);
-          $fill = true;
-          $this->Ln();
-          $this->Cell(200, 0, '', 'T');
-         * 
-         */
+      
     }
 
 }

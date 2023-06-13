@@ -26,9 +26,10 @@ include_once "./encabezado.php";
 </main>
 
 <script>
-
+//Variables utilizadas
     const contProducto = document.getElementById("contenedor-producto");
     const error = document.querySelector(".noProducto");
+    //Petición a la BBDD guardad en una variable
     const producto = async () => {
         try {
             let productoID = new FormData();
@@ -45,6 +46,7 @@ include_once "./encabezado.php";
             console.log(error.message);
         }
     };
+    //Muestra los datos de la petición
     function mostrarProducto() {
         producto()
                 .then(datos => {

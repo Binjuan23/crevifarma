@@ -1,5 +1,5 @@
 <div class="foro">
-
+    <!-- En este contenedor se muestran las preguntas que se hayan registrado en el foro. En el caso de no haber ninguna muestra un mensaje -->
     <div id="contenedor-preguntas">
 
     </div>
@@ -25,12 +25,13 @@
 </div>
 
 <script>
-
+//constantes que hacen referencia a elementos de la web para su uso
     const contPre = document.getElementById("contenedor-preguntas");
     const error = document.querySelector(".noPreguntas");
     let formPregunta = document.querySelector(".formPregunta");
     const close = document.querySelector(".cerral");
     let boton = document.querySelector(".botonPregunta");
+    //Variable que almacena la petición al servidor con los datos requeridos
     const preguntas = async () => {
         try {
             const response = await fetch('./actions/mostrar_foro.php');
@@ -45,7 +46,7 @@
             console.log(error.message);
         }
     };
-
+//Muestras los datos solicitados
     function mostrarPreguntas() {
         preguntas()
                 .then(datos => {
@@ -93,6 +94,8 @@
                 });
     }
     ;
+
+    //Controla los posibles errores que puedan surgir al realizar la petición
     function controlError(err) {
         error.style.display = 'block';
         contPre.style.display = 'none';
@@ -100,30 +103,31 @@
     }
 
     mostrarPreguntas();
-
+    //Muestra el formulario para redactar una pregunta
     function mostrarFormPregunta() {
         boton.style.display = "none";
         formPregunta.style.display = "block";
     }
-    
+    //Cierra el formulario de las preguntas
     function cerrar() {
         boton.style.display = "block";
         formPregunta.style.display = "none";
     }
 
     $(document).ready(function () {
+        //Utilización de jquery ajax para realizar una petición al servidor
         $("#crearPregunta").submit(function (event) {
-            event.preventDefault();
-            let form_data = new FormData();
+            event.preventDefault(); //hace que al pulsar el boton de submit no se ejecute el evento predefinido por el formulario
+            let form_data = new FormData();//Crea un forumlario para enviar variables mediante POST al servidor
             form_data.append('pregunta', $("input[name='pregunt']").val());
-            
+//Realiza la peticion enviando el formulario con las variables que se quieres recoger en el servidor para tratar la información
             $.ajax({
                 type: 'POST',
-                url: './actions/guardar_pregunta.php',
-                data: form_data,
+                url: './actions/guardar_pregunta.php',//dirección archivo con el lenguaje PHP para tratar la información
+                data: form_data,//formulario que se envia
                 contentType: false,
                 processData: false,
-                success: function (response) {
+                success: function (response) {//respuesta del servidor positiva
                     if (response) {
                         formPregunta.style.display = "none";
                         boton.style.display = "block";

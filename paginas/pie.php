@@ -1,4 +1,4 @@
-
+<!-- Template del footer con etiquetas semánticas -->
 <footer>
 
     <nav>
@@ -19,7 +19,7 @@
     </nav>
 
     <nav class="politica">
-        <a href="./paginas/terminos.html" target="_blank"><?= $lang['terminos'] ?></a><a href="./paginas/privacidad.html" target="_blank"><?= $lang['privacidad'] ?></a><a href="./paginas/bases.html" target="_blank"><?= $lang['bases'] ?></a>
+        <a href="<?= $ruta['terminos']?>" target="_blank"><?= $lang['terminos'] ?></a><a href="<?= $ruta['privacidad']?>" target="_blank"><?= $lang['privacidad'] ?></a><a href="<?= $ruta['bases']?>" target="_blank"><?= $lang['bases'] ?></a>
     </nav>
 
 

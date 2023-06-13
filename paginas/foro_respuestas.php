@@ -1,5 +1,6 @@
 <?php
-session_start();
+/* Al abrir el enlace en una nueva página es obligado volver a cargar todos los archivos de configuración */
+session_start(); //Inicia la sesión
 include_once "../utiles/configuracion.php";
 include_once "../utiles/funciones.php";
 $id       = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
@@ -33,20 +34,24 @@ include_once "./encabezado.php";
     </div>
 </main>
 <script>
-    <?php
-    if(isset($_GET['respuestaGuardada']) && !$_GET['respuestaGuardada']){?>
-    const error2 = document.querySelector(".noR");
-    error2.style.display="block";
-    error2.innerText = "<?= $lang['respuesta-error']?>";
-    setTimeout(()=>{
-        error2.style.display="none";
-    error2.innerText = "";
-    },3000);
-    <?php
-    }
+<?php
+/* Si la respuesta es guarda de forma correcta muestra un mensaje que ser'a ocultado al cabo de 3 segundos */
+if (isset($_GET['respuestaGuardada']) && !$_GET['respuestaGuardada']) {
     ?>
+        const error2 = document.querySelector(".noR");
+        error2.style.display = "block";
+        error2.innerText = "<?= $lang['respuesta-error'] ?>";
+        setTimeout(() => {
+            error2.style.display = "none";
+            error2.innerText = "";
+        }, 3000);
+    <?php
+}
+?>
+    //Variables de elementos que se van a utilizar
     const contRes = document.getElementById("contenedor-respuestas");
     const error = document.querySelector(".noRespuestas");
+
     const preguntas = async () => {
         try {
             const response = await fetch('../actions/mostrar_foro_respuestas2.php?pregunta=<?= $pregunta; ?>');
@@ -61,11 +66,12 @@ include_once "./encabezado.php";
             console.log(error.message);
         }
     };
+    //Muestra todas la respuestas asosciadas a la pregunta seleccionada
     function mostrar() {
         preguntas()
                 .then(datos => {
                     console.log(datos);
-                    $("#contenedor-preguntas").empty();
+                    $("#contenedor-preguntas").empty();//Vacia el contenedor si preiviamente hubiese algo
                     if (typeof datos !== 'undefined' && !datos) {
 <?php echo "controlError(`" . $lang['foro-noPreguntas'] . "`);"; ?>
                     } else {
@@ -157,6 +163,7 @@ include_once "./encabezado.php";
                 });
     }
     ;
+    //Controla los errores que se den de la peticion
     function controlError(err) {
         error.style.display = 'block';
         contRes.style.display = 'none';
@@ -164,6 +171,8 @@ include_once "./encabezado.php";
     }
 
     mostrar();
+
+    //Controla los errores que se den en la segunda petición
     function controlError2() {
         let errorParrafo = document.createElement("p");
         let divError = document.createElement("div");
@@ -171,7 +180,7 @@ include_once "./encabezado.php";
         errorParrafo.innerText = "<?= $lang['foro-noRespuestas'] ?>";
         contRes.appendChild(errorParrafo);
     }
-
+//Muestra el formulario para realizar una respuesta haciendo referencia a otra respuesta
     function mostrarFormRespuesta(idMensaje, mensaje, usuario) {
         const formRespuesta = document.querySelector(".formRespuesta");
         const crear = document.querySelector(".crearRespuesta");
@@ -180,8 +189,8 @@ include_once "./encabezado.php";
         formRespuesta.style.display = "block";
         crear.style.display = "none";
     }
-  
 
+//Sale de formulario
     function salirForm() {
         const formRespuesta = document.querySelector(".formRespuesta");
         const crear = document.querySelector(".crearRespuesta");
@@ -189,7 +198,7 @@ include_once "./encabezado.php";
         formRespuesta.style.display = "none";
         crear.style.display = "block";
     }
-
+//Crea el formulario para realizar una respuesta
     function crearFormRespuesta(idMensaje, mensaje, usuario) {
         const formRespuesta = document.querySelector(".formRespuesta");
         let etiquetaForm = document.createElement("form");
@@ -208,7 +217,7 @@ include_once "./encabezado.php";
         let etiquetaInput = document.createElement("input");
         etiquetaInput.type = "hidden";
         etiquetaInput.name = "idUsuario";
-        etiquetaInput.value = 1; //HAY QUE PONER AQUI EL ID GUARDADO AL LOGUEARSE
+        etiquetaInput.value = '<?= $_SESSION['id'] ?>'; //HAY QUE PONER AQUI EL ID GUARDADO AL LOGUEARSE
         let etiquetaInput2 = document.createElement("input");
         let etiquetaP2 = document.createElement("p");
         if (idMensaje !== 0) {

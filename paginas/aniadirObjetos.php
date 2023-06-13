@@ -32,11 +32,11 @@ comprobar_sesion("farmacia");
 
             <div class="input-box">
                 <label for="parafarmacia">Parafarmacia</label>
-                <input type="radio" name="tipo" id="parafarmacia" value='parafarmacia' required checked>
+                <input type="radio" name="tipo" id="parafarmacia" value='parafarmacia' required>
                 <label for="medicamento"><?= $lang['aniadir-medicamento']; ?></label>
                 <input type="radio" name="tipo" id="medicamento" value='medicamento' required>
             </div> 
-
+            
             <div class="input-box">
                 <label for="nombre"><?= $lang['nombre']; ?></label>
                 <input type="text" name="nombre" id="nombre" placeholder="<?= $lang['nombre']; ?>" required>
@@ -223,6 +223,7 @@ comprobar_sesion("farmacia");
         tipo.forEach(element => element.addEventListener("click", () => {
                 if (element.value === "parafarmacia") {
                     datos.forEach(element => element.style.display = "block");
+                    console.log(element.value);
                 } else {
                     datos.forEach(element => element.style.display = "none");
                 }
@@ -287,7 +288,7 @@ comprobar_sesion("farmacia");
         $('#insertar-form').submit(function (event) {
             event.preventDefault();
             let $formInsert = $('#insertar-form');
-
+            let tipo =(document.getElementById("medicamento").checked === true)? "medicamento":"parafarmacia";
             if ($formInsert.valid()) {
                 let file_data = $('#imagen').prop('files')[0];
                 let form_data = new FormData();
@@ -298,7 +299,7 @@ comprobar_sesion("farmacia");
                 form_data.append('categoria_val', $("#categoria_val").val());
                 form_data.append('precio', $("#precio").val());
                 form_data.append('stock', $("#stock").val());
-                form_data.append('tipo', $("input[name='tipo']").val());
+                form_data.append('tipo', tipo);
                 $.ajax({
                     type: 'POST',
                     url: './actions/aniadir_producto.php',
@@ -362,11 +363,13 @@ comprobar_sesion("farmacia");
                         formMod.style.display = "none";
                         boton.style.display = "block";
                         aniadido.style.display = "block";
+                        aniadido.classList.add("verde");
                         aniadido.innerText = "<?= $lang['aniadir-nada'] ?>";
                         setTimeout(() => {
                             aniadido.style.display = "none";
+                            aniadido.classList.remove("verde");
                             aniadido.innerTEXT = '';
-
+                            location.reload();
                         }, 3000);
 
                     }

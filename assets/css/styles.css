@@ -121,7 +121,7 @@ div .form-login #login-form, div .form-register #register-form{
     z-index:2;
 }
 
-.form-boton, .Producto button, .productoSolo .fa-sharp,.vaciar,.comprar,.mostrarFormMod,#submit_actualizar,.botonPregunta button,.modificar,.botonEliminar,.botonForm button, .crearRespuesta button,.enviarRespuesta,.cancelar,.PreguntaRes button,.botonFactura,.botonEliminarUsuario{
+.form-boton, .Producto button, .productoSolo .fa-sharp,.vaciar,.comprar,.mostrarFormMod,#submit_actualizar,.botonPregunta button,.modificar,.botonEliminar,.botonForm button, .crearRespuesta button,.enviarRespuesta,.cancelar,.PreguntaRes button,.botonFactura,.botonEliminarUsuario,.botonReserva{
     font-size: .9em;
     background:#C8F4A4;
     color:white;
@@ -328,7 +328,7 @@ div.resultados-busqueda,#contenedor-respuestas{
     width:100%;
 }
 
-.Producto p, #contenedor-carrito p{
+.Producto p, #contenedor-carrito p,.datosreferencia, .respuestaReferencia{
     color:rgba(0,0,0,.6);
     font-weight: 600;
 }
@@ -378,7 +378,7 @@ div.resultados-busqueda,#contenedor-respuestas{
     box-shadow: 0 0 2px 2px #C4E5A9;
 }
 
-#contenedor-producto,#contenedor-carrito>div,.articulo,#contenedorUsuario,#update-form,#contenedorModificar,.formPregunta,.botonPregunta,.botonForm, #modificar-form input.form-boton,#contenedor-formulario,div#WidgetTutiempo>div,.pregunta,.crearRespuesta,.enviarRespuesta,.cancelar{
+#contenedor-producto,#contenedor-carrito>div,.articulo,#contenedorUsuario,#update-form,#contenedorModificar,.formPregunta,.botonPregunta,.botonForm, #modificar-form input.form-boton,#contenedor-formulario,div#WidgetTutiempo>div,.pregunta,.crearRespuesta,.enviarRespuesta,.cancelar,#contenedorProductos,#reservas, #contenedorPedidos{
     width:90%;
 }
 
@@ -414,6 +414,7 @@ div#WidgetTutiempo>div:first-child{
 .verde,.gracias{
     color:rgba(6, 92, 58,.5) ;
 }
+
 
 .vaciar,.botonEliminar,.cancelar,.botonEliminarUsuario{
     background:rgba(255,0,0,.5);
@@ -462,11 +463,11 @@ div#WidgetTutiempo>div:first-child{
     border-bottom-left-radius: 15px;
 }
 
-#contendorPedidos thead tr,#reservas thead tr, #medicamentos thead tr,#datos-usuario thead tr{
+#contenedorPedidos thead tr,#reservas thead tr, #medicamentos thead tr,#datos-usuario thead tr,#contenedorProductos thead tr{
     background: rgba(6, 92, 58,.5) ;
 }
 
-#contendorPedidos tbody tr:nth-child(even),#reservas tbody tr:nth-child(even),#medicamentos tbody tr:nth-child(even),#datos-usuario tbody tr:nth-child(even){
+#contenedorPedidos tbody tr:nth-child(even),#contenedorProductos tbody tr:nth-child(even), #reservas tbody tr:nth-child(even),#medicamentos tbody tr:nth-child(even),#datos-usuario tbody tr:nth-child(even){
     background: rgba(17, 163, 105,.5) ;
 }
 
@@ -474,7 +475,7 @@ div#WidgetTutiempo>div:first-child{
     cursor:pointer;
 }
 
-#contendorPedidos th:nth-child(2),#contendorPedidos th:nth-child(3), #contendorPedidos td:nth-child(3),#contendorPedidos td:nth-child(2),#datos-usuario th:nth-child(n+2):nth-child(-n+4),#datos-usuario th:nth-child(n+6):nth-child(-n+7),#datos-usuario th:nth-child(n+11):nth-child(-n+12),#datos-usuario th:nth-child(9),#datos-usuario td:nth-child(n+2):nth-child(-n+4),#datos-usuario td:nth-child(n+6):nth-child(-n+7),#datos-usuario td:nth-child(n+11):nth-child(-n+12),#datos-usuario td:nth-child(9){
+#contenedorPedidos th:nth-child(2),#contenedorPedidos th:nth-child(3), #contenedorPedidos td:nth-child(3),#contenedorPedidos td:nth-child(2),#datos-usuario th:nth-child(n+2):nth-child(-n+4),#datos-usuario th:nth-child(n+6):nth-child(-n+7),#datos-usuario th:nth-child(n+11):nth-child(-n+12),#datos-usuario th:nth-child(9),#datos-usuario td:nth-child(n+2):nth-child(-n+4),#datos-usuario td:nth-child(n+6):nth-child(-n+7),#datos-usuario td:nth-child(n+11):nth-child(-n+12),#datos-usuario td:nth-child(9){
     display:none;
 }
 
@@ -498,23 +499,17 @@ div#WidgetTutiempo>div:first-child{
     height:37px;
 }
 
-
+.preguntaRes>div{
+    width:80%;
+}
 
 @media screen and (min-width:768px) {
     .head-principal .burguer,.logoTitulo-Movil{
         display:none;
     }
 
-    #contendorPedidos th:nth-child(2),#contendorPedidos th:nth-child(3), #contendorPedidos td:nth-child(3),#contendorPedidos td:nth-child(2),#reservas th:nth-child(2),#reservas td:nth-child(2),#datos-usuario th:nth-child(n+11):nth-child(-n+12),#datos-usuario th:nth-child(9),#datos-usuario td:nth-child(n+11):nth-child(-n+12),#datos-usuario td:nth-child(9){
+    #contenedorPedidos th:nth-child(2),#contenedorPedidos th:nth-child(3), #contenedorPedidos td:nth-child(3),#contenedorPedidos td:nth-child(2),#reservas th:nth-child(2),#reservas td:nth-child(2),#datos-usuario th:nth-child(n+11):nth-child(-n+12),#datos-usuario th:nth-child(9),#datos-usuario td:nth-child(n+11):nth-child(-n+12),#datos-usuario td:nth-child(9){
         display:table-cell;
-    }
-
-    #contendorPedidos, #reservas{
-        width:90%;
-    }
-
-    #contendorPedidos th, #reservas th,#contendorPedidos td, #reservas td{
-        text-align: center;
     }
 
     .head-principal{
@@ -528,13 +523,15 @@ div#WidgetTutiempo>div:first-child{
     .dat{
         display:grid;
         grid-template-columns: 30% 1fr;
-        grid-template-rows: repeat(9, 1fr);
-        height:300px;
+        grid-template-rows: repeat(10, 1fr);
+        height:450px;
     }
 
     .dat img{
         grid-column:1;
         grid-row:1/-1;
+        width:max(100%,200px);
+        justify-self: center;
     }
 
     .head-principal .logoTitulo-PC{

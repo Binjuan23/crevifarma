@@ -1,9 +1,13 @@
 <?php
 
 function conexionBD() {
-    $dsn     = "mysql:host=localhost;port=3307;dbname=crevi_farma";
-    $usuario = "root";
-    $pass    = "";
+    //$dsn     = "mysql:host=localhost;port=3307;dbname=crevi_farma";
+    //$usuario = "root";
+    //$pass    = "";
+    
+    $dsn     = "mysql:host=localhost;dbname=crevi_farma";
+    $usuario = "juan";
+    $pass    = "crevifarma";
     try {
         $conexion = new PDO($dsn, $usuario, $pass);
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

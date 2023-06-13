@@ -1,5 +1,5 @@
 <?php
-
+//Añade objetos a la variable de sesión del carro donde la key es el identificador del producto y el valor es la cantidad
 session_start();
 $item     = htmlspecialchars($_POST["item"]);
 $cantidad = (isset($_POST["cantidad"])) ? htmlspecialchars($_POST["cantidad"]) : 0;
