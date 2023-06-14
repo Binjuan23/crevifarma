@@ -11,7 +11,7 @@ try {
         $val             = explode("=", $value);
         $datos1[$val[0]] = $val[1];
     }
-    
+
     $email      = urldecode($datos1['email']);
     $nick       = $datos1['user-register'];
     $contraseña = md5($datos1['password-register']);
@@ -34,7 +34,6 @@ try {
         $resul2->bindValue(':cod', "$codigo");
         $resul2->execute();
     }
-
 
 
     if ($tipo === "normal") {

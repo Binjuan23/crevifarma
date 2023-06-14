@@ -217,7 +217,7 @@ if (isset($_GET['respuestaGuardada']) && !$_GET['respuestaGuardada']) {
         let etiquetaInput = document.createElement("input");
         etiquetaInput.type = "hidden";
         etiquetaInput.name = "idUsuario";
-        etiquetaInput.value = '<?= $_SESSION['id'] ?>'; //HAY QUE PONER AQUI EL ID GUARDADO AL LOGUEARSE
+        etiquetaInput.value = '<?php if(isset($_SESSION['id'])){ echo $_SESSION['id'];}else{ echo 0;} ?>'; //HAY QUE PONER AQUI EL ID GUARDADO AL LOGUEARSE
         let etiquetaInput2 = document.createElement("input");
         let etiquetaP2 = document.createElement("p");
         if (idMensaje !== 0) {

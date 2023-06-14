@@ -5,7 +5,7 @@ include_once '../utiles/funciones.php';
 try {
     $conexion = conexionBD();
     $foro_id  = $_GET['pregunta'];
-    $sql      = "SELECT foro.foro, foro.pregunta, foro.fecha, usuarios.usuario FROM foro foro INNER JOIN usuarios usuarios on foro.foro=usuarios.ID WHERE FORO=" . $foro_id;
+    $sql      = "SELECT foro.foro, foro.pregunta, foro.fecha, usuarios.usuario FROM foro foro INNER JOIN usuarios usuarios on foro.usuario_id=usuarios.ID WHERE foro=" . $foro_id;
 
     $resul = $conexion->query($sql) or die(print($conexion->errorInfo()));
 

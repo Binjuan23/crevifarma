@@ -16,6 +16,8 @@ if(registerLink){//Da movimiento cambiando las clases del css al register
     $("#register-form").validate().resetForm();
 }));
 }
+
+let tiempo = document.querySelector("#WidgetTutiempo");
 //Código utilizado para el despliegue de datos de la API del tiempo
 function DrawWeatherTutiempo(data)
 {
@@ -53,7 +55,10 @@ htmld += '<div class="header"><h2>El tiempo en '+data.locality.name+'</h2><p>Pro
                      */
 		}
 	}
-document.getElementById("WidgetTutiempo").innerHTML = htmld+'<p class="linkTT"><a href="'+data.locality.url_weather_forecast_15_days+'" target="_blank" rel="nofollow">Predicción 15 días</a></p>'+htmlh+'<p class="linkTT"><a href="'+data.locality.url_hourly_forecast+'" target="_blank" rel="nofollow">Ver pronóstico por horas 14 días</a></p>';
+        if(tiempo){
+            document.getElementById("WidgetTutiempo").innerHTML = htmld+'<p class="linkTT"><a href="'+data.locality.url_weather_forecast_15_days+'" target="_blank" rel="nofollow">Predicción 15 días</a></p>'+htmlh+'<p class="linkTT"><a href="'+data.locality.url_hourly_forecast+'" target="_blank" rel="nofollow">Ver pronóstico por horas 14 días</a></p>';
+        }
+
 }
 
 function LoadJSONTuTiempo()

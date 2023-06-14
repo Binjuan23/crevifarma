@@ -8,8 +8,6 @@ $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : ''; //Obtiene el id d
 include_once "./utiles/rutas.php"; //Contiene todas las rutas de la página
 include_once "./paginas/encabezado.php"; //Template del header
 
-header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
-header("Expires: Sat, 1 Jul 2000 05:00:00 GMT"); // Fecha en el pasado
 
 ?>
 <!-- Mediante este sistema se modifica tan solo este contenido -->

@@ -4,7 +4,7 @@ function conexionBD() {
     //$dsn     = "mysql:host=localhost;port=3307;dbname=crevi_farma";
     //$usuario = "root";
     //$pass    = "";
-    
+
     $dsn     = "mysql:host=localhost;dbname=crevi_farma";
     $usuario = "juan";
     $pass    = "crevifarma";
@@ -51,4 +51,3 @@ function comprobar_sesion($tipo) {
         header("Location: ./index.php?id=login&aviso=1");
     }
 }
-
